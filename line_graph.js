@@ -128,4 +128,4 @@ funcCreateLineGraph = function(margin, height, width, data, tag) {
   };
 
   return LineGraph;
-}
+};

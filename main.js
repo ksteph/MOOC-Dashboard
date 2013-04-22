@@ -5,7 +5,8 @@ var height = 500 - margin.top - margin.bottom;
 var gradedItem0 = funcCreateLineGraph(margin, height, width,
                                       data.GradedItems[0].graph, "graded0");
 gradedItem0.Scale.x.domain([0,100]);
-gradedItem0.DrawGraph();
+var svg = d3.select("body").append("svg");
+gradedItem0.DrawGraph(svg);
 
 var weekLineGraph = funcCreateLineGraph(margin, height, width,
                                         data.WeekActivity, "week-activity");
@@ -13,7 +14,8 @@ weekLineGraph.XAxis.ticks(data.WeekActivity.length)
   .tickFormat(function(d,i){
     return data.WeekActivity[i].label;
   });
-weekLineGraph.DrawGraph();
+svg = d3.select("body").append("svg");
+weekLineGraph.DrawGraph(svg);
 
 
 var overallLineGraph = funcCreateLineGraph(margin, height, width,
@@ -21,4 +23,5 @@ var overallLineGraph = funcCreateLineGraph(margin, height, width,
                                            "overall-activity");
 overallLineGraph.Scale.x.domain(
   d3.extent(data.OverallActivity, function(d) { return d.x; }));
-overallLineGraph.DrawGraph();
+svg = d3.select("body").append("svg");
+overallLineGraph.DrawGraph(svg);

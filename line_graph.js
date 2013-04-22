@@ -58,11 +58,11 @@ funcCreateLineGraph = function(margin, height, width, data, tag) {
     .x(function(d) { return LineGraph.Scale.x(d.x); })
     .y(function(d) { return LineGraph.Scale.y(d.y); });
 
-  LineGraph.DrawGraph = function() {
+  LineGraph.DrawGraph = function(svg) {
     LineGraph = this;
+    LineGraph.Svg = svg;
 
-    // Add SVG
-    LineGraph.Svg = d3.select("body").append("svg")
+    LineGraph.SvgGroup = LineGraph.Svg
       .attr("id", tag+"-line-graph")
       .attr("width", LineGraph.Width + LineGraph.Margin.left + 
             LineGraph.Margin.right)
@@ -73,13 +73,13 @@ funcCreateLineGraph = function(margin, height, width, data, tag) {
             LineGraph.Margin.top + ")");
 
     // Draw Graph
-    LineGraph.Svg.append("g")
+    LineGraph.SvgGroup.append("g")
       .attr("class", "axis")
       .attr("id", tag+"-x-axis")
       .attr("transform", "translate(0," + LineGraph.Height + ")")
       .call(LineGraph.XAxis);
     
-    LineGraph.Svg.append("g")
+    LineGraph.SvgGroup.append("g")
       .attr("class", "axis")
       .attr("id", tag+"-y-axis")
       .call(LineGraph.YAxis)
@@ -91,7 +91,7 @@ funcCreateLineGraph = function(margin, height, width, data, tag) {
       .style("text-anchor", "end")
       .text("Y-Unit");
     
-    LineGraph.Svg.append("path")
+    LineGraph.SvgGroup.append("path")
       .datum(LineGraph.Data)
       .attr("class", "line-graph")
       .attr("id", tag+"-line")
@@ -103,7 +103,7 @@ funcCreateLineGraph = function(margin, height, width, data, tag) {
       .style("z-index", "10")
       .style("visibility", "hidden");
     
-    LineGraph.Points = LineGraph.Svg.selectAll("point")
+    LineGraph.Points = LineGraph.SvgGroup.selectAll("point")
       .data(LineGraph.Data)
       .enter().append("g:circle")
       .attr("fill", "#6495ED")

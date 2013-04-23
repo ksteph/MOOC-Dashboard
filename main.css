@@ -18,6 +18,10 @@ body {
     stroke-width: 0px;
 }
 
+.point {
+    fill: #6495ED;
+}
+
 .line-graph {
     fill: none;
     stroke: #6495ED;

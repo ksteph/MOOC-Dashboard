@@ -62,9 +62,10 @@ funcCreateLineGraph = function(margin, height, width, data, tag) {
   LineGraph.DrawGraph = function(svg) {
     LineGraph = this;
     LineGraph.Svg = svg;
+    console.log(LineGraph);
 
     LineGraph.SvgGroup = LineGraph.Svg
-      .attr("id", LineGraph.tag+"-line-graph")
+      .attr("id", LineGraph.Tag+"-line-graph")
       .attr("width", LineGraph.Width + LineGraph.Margin.left + 
             LineGraph.Margin.right)
       .attr("height", LineGraph.Height + LineGraph.Margin.top + 
@@ -76,13 +77,13 @@ funcCreateLineGraph = function(margin, height, width, data, tag) {
     // Draw Graph
     LineGraph.SvgGroup.append("g")
       .attr("class", "axis")
-      .attr("id", LineGraph.tag+"-x-axis")
+      .attr("id", LineGraph.Tag+"-x-axis")
       .attr("transform", "translate(0," + LineGraph.Height + ")")
       .call(LineGraph.XAxis);
     
     LineGraph.SvgGroup.append("g")
       .attr("class", "axis")
-      .attr("id", LineGraph.tag+"-y-axis")
+      .attr("id", LineGraph.Tag+"-y-axis")
       .call(LineGraph.YAxis)
       .append("text")
       .attr("class", "axis-label")
@@ -95,7 +96,7 @@ funcCreateLineGraph = function(margin, height, width, data, tag) {
     LineGraph.SvgGroup.append("path")
       .datum(LineGraph.Data)
       .attr("class", "line-graph")
-      .attr("id", LineGraph.tag+"-line")
+      .attr("id", LineGraph.Tag+"-line")
       .attr("d", LineGraph.Line);
 
     LineGraph.Tooltip = d3.select("body")
@@ -106,6 +107,8 @@ funcCreateLineGraph = function(margin, height, width, data, tag) {
     
     LineGraph.Points = LineGraph.SvgGroup.selectAll("point")
       .data(LineGraph.Data)
+      .attr("class", "point")
+      .attr("id", LineGraph.Tag+"-point")
       .enter().append("g:circle")
       .attr("fill", "#6495ED")
       .attr("cx", function(d,i){

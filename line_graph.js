@@ -24,6 +24,7 @@ funcCreateLineGraph = function(margin, height, width, data, tag) {
   LineGraph.Height = height;
   LineGraph.Width = width;
   LineGraph.Data = data;
+  LineGraph.Tag = tag;
 
   // Making the scales
   LineGraph.Scale = {
@@ -63,7 +64,7 @@ funcCreateLineGraph = function(margin, height, width, data, tag) {
     LineGraph.Svg = svg;
 
     LineGraph.SvgGroup = LineGraph.Svg
-      .attr("id", tag+"-line-graph")
+      .attr("id", LineGraph.tag+"-line-graph")
       .attr("width", LineGraph.Width + LineGraph.Margin.left + 
             LineGraph.Margin.right)
       .attr("height", LineGraph.Height + LineGraph.Margin.top + 
@@ -75,13 +76,13 @@ funcCreateLineGraph = function(margin, height, width, data, tag) {
     // Draw Graph
     LineGraph.SvgGroup.append("g")
       .attr("class", "axis")
-      .attr("id", tag+"-x-axis")
+      .attr("id", LineGraph.tag+"-x-axis")
       .attr("transform", "translate(0," + LineGraph.Height + ")")
       .call(LineGraph.XAxis);
     
     LineGraph.SvgGroup.append("g")
       .attr("class", "axis")
-      .attr("id", tag+"-y-axis")
+      .attr("id", LineGraph.tag+"-y-axis")
       .call(LineGraph.YAxis)
       .append("text")
       .attr("class", "axis-label")
@@ -94,7 +95,7 @@ funcCreateLineGraph = function(margin, height, width, data, tag) {
     LineGraph.SvgGroup.append("path")
       .datum(LineGraph.Data)
       .attr("class", "line-graph")
-      .attr("id", tag+"-line")
+      .attr("id", LineGraph.tag+"-line")
       .attr("d", LineGraph.Line);
 
     LineGraph.Tooltip = d3.select("body")

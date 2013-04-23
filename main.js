@@ -2,6 +2,12 @@ var margin = {top: 20, right: 20, bottom: 30, left: 50};
 var width = 960 - margin.left - margin.right;
 var height = 500 - margin.top - margin.bottom;
 
+var pieChart0 = funcCreatePieChart(margin, height, width,
+                                      data.GradedItems[0].groups, "groups0");
+var svg = d3.select("body").append("svg");
+pieChart0.DrawGraph(svg);
+
+
 var gradedItem0 = funcCreateLineGraph(margin, height, width,
                                       data.GradedItems[0].graph, "graded0");
 gradedItem0.Scale.x.domain([0,100]);

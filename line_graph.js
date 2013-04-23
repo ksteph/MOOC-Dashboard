@@ -62,7 +62,6 @@ funcCreateLineGraph = function(margin, height, width, data, tag) {
   LineGraph.DrawGraph = function(svg) {
     LineGraph = this;
     LineGraph.Svg = svg;
-    console.log(LineGraph);
 
     LineGraph.SvgGroup = LineGraph.Svg
       .attr("id", LineGraph.Tag+"-line-graph")
@@ -107,10 +106,9 @@ funcCreateLineGraph = function(margin, height, width, data, tag) {
     
     LineGraph.Points = LineGraph.SvgGroup.selectAll("point")
       .data(LineGraph.Data)
+      .enter().append("g:circle")
       .attr("class", "point")
       .attr("id", LineGraph.Tag+"-point")
-      .enter().append("g:circle")
-      .attr("fill", "#6495ED")
       .attr("cx", function(d,i){
         return LineGraph.Scale.x(d.x);
       })

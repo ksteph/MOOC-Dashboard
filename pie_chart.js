@@ -27,10 +27,6 @@ funcCreatePieChart = function(margin, height, width, data, tag) {
 
   PieChart.Radius = Math.min(PieChart.Width, PieChart.Height) / 2;
 
-  PieChart.Scale = {
-    Color : d3.scale.ordinal().range(["#ff0000", "#00ff00", "#0000ff"])
-  };
-
   PieChart.Arc = d3.svg.arc()
     .outerRadius(PieChart.Radius - 10)
     .innerRadius(0);
@@ -61,7 +57,6 @@ funcCreatePieChart = function(margin, height, width, data, tag) {
     PieChart.ArcGroups.append("path")
       .attr("class", function(d) {return "arc-path-"+d.data.label;})
       .attr("id", function(d) {return PieChart.Tag+"-arc-path-"+d.data.label;})
-      .style("fill", function(d) { return PieChart.Scale.Color(d.data.label); })
       .attr("d", PieChart.Arc);
 
     PieChart.ArcGroups.append("text")

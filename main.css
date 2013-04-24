@@ -19,12 +19,12 @@ body {
 }
 
 .point {
-    fill: #6495ED;
+    fill: #3D9AD1;
 }
 
 .line-graph {
     fill: none;
-    stroke: #6495ED;
+    stroke: #3D9AD1;
     stroke-width: 2px;
 }
 
@@ -32,6 +32,7 @@ body {
     stroke: black;
 }
 
+/* DIVs */
 #container {
     background-color: #FFFF00;
     width: 100%;
@@ -50,6 +51,26 @@ body {
     padding: 10px;
 }
 
+div.multiples {
+    background-color: #EEE;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #AAA;
+    margin: 0 0 20 20;
+    overflow: hidden;
+    padding-top: 30px;
+}
+div.multiples-pie {
+    float: left;
+    width: 45%;
+    padding-top: 20px;
+}
+div.multiples-line {
+    float: left;
+    width: 50%;
+}
+
+/* SVGs */
 svg#week-activity-line-graph {
     background-color: #EEE;
     border-style: solid;
@@ -63,4 +84,14 @@ svg#overall-activity-line-graph {
     border-style: solid;
     border-width: 1px;
     border-color: #AAA;
+}
+
+svg g.arc path.arc-path-Submitted {
+    fill: #3D9AD1 !important;
+}
+svg g.arc path.arc-path-Attempted {
+    fill: #FFCC40 !important;
+}
+svg g.arc path.arc-path-Non-started {
+    fill: #FF6E40 !important;
 }

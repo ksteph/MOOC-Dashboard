@@ -5,19 +5,28 @@ var height = window.outerWidth/4.2 - margin.top - margin.bottom;
 
 /* Graded Items */
 for (var i=0; i<5; i++) {
+  /* Add divs */
+  var divMultiples = d3.select("body div#container-multiples").append("div")
+    .attr("id", "multiples"+i)
+    .attr("class", "multiples");
+  divMultiples.append("div").attr("id", "multiples-pie"+i).attr("class", "multiples-pie");
+  divMultiples.append("div").attr("id", "multiples-line"+i).attr("class", "multiples-line");
 
-  var gradedItem0 = funcCreateLineGraph(margin, height, width,
+  /* Add pie chart */
+  var pieChart0 = funcCreatePieChart(margin, height/2, width/2,
+                                      data.GradedItems[0].groups, "groups0");
+  var svg = d3.select("body div#multiples-pie"+i).append("svg");
+  pieChart0.DrawGraph(svg);
+  
+  /* Add line chart */
+  var gradedItem0 = funcCreateLineGraph(margin, height/2, width/2,
                                         data.GradedItems[0].graph, "graded0");
   gradedItem0.Scale.x.domain([0,100]);
-  var svg = d3.select("body div#container-multiples").append("svg");
+  var svg = d3.select("body div#multiples-line"+i).append("svg");
   gradedItem0.DrawGraph(svg);
 
 };
 
-var pieChart0 = funcCreatePieChart(margin, height, width,
-                                      data.GradedItems[0].groups, "groups0");
-var svg = d3.select("body").append("svg");
-pieChart0.DrawGraph(svg);
 
 
 /* Week Activity */

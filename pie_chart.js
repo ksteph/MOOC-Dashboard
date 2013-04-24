@@ -43,8 +43,6 @@ funcCreatePieChart = function(margin, height, width, data, tag) {
     PieChart = this;
     PieChart.Svg = svg;
 
-    console.log(PieChart);
-
     PieChart.SvgGroup = PieChart.Svg
       .attr("id", PieChart.Tag+"-pie-chart")
       .attr("width", PieChart.Width + PieChart.Margin.left + 
@@ -55,7 +53,6 @@ funcCreatePieChart = function(margin, height, width, data, tag) {
       .attr("transform", "translate(" + PieChart.Width/2 + "," + 
             PieChart.Height/2 + ")");
 
-    console.log(PieChart.Layout(PieChart.Data));
     PieChart.SvgGroup.selectAll(".arc")
       .data(PieChart.Layout(PieChart.Data))
       .enter().append("g")
@@ -63,16 +60,18 @@ funcCreatePieChart = function(margin, height, width, data, tag) {
 
     console.log("here");
     console.log(PieChart.Arc);
-    PieChart.SvgGroup.append("path")
+    
+    PieChart.SvgGroup.selectAll(".arc").append("path")
       .attr("d", PieChart.Arc)
       .style("fill", "blue");
 
-    PieChart.SvgGround.append("text")
+    PieChart.SvgGroup.selectAll(".arc").append("text")
       .attr("transform", function(d) {return "translate(" +
                                       PieChart.Arc.centroid(d) + ")"; })
       .attr("dy",".35em")
       .style("text-anchor", "middle")
       .text(function(d) { return d.label; });
+      
   };
   
   return PieChart;

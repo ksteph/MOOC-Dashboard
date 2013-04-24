@@ -28,7 +28,7 @@ funcCreatePieChart = function(margin, height, width, data, tag) {
   PieChart.Radius = Math.min(PieChart.Width, PieChart.Height) / 2;
 
   PieChart.Scale = {
-    Color : d3.scale.ordinal().range(["#98abc5", "#8a89a6", "#7b6888"])
+    Color : d3.scale.ordinal().range(["#ff0000", "#00ff00", "#0000ff"])
   };
 
   PieChart.Arc = d3.svg.arc()
@@ -53,24 +53,23 @@ funcCreatePieChart = function(margin, height, width, data, tag) {
       .attr("transform", "translate(" + PieChart.Width/2 + "," + 
             PieChart.Height/2 + ")");
 
-    PieChart.SvgGroup.selectAll(".arc")
+    PieChart.ArcGroups = PieChart.SvgGroup.selectAll(".arc")
       .data(PieChart.Layout(PieChart.Data))
       .enter().append("g")
-      .attr("class", function(d){console.log(d); return "arc";});
+      .attr("class", "arc");
 
-    console.log("here");
-    console.log(PieChart.Arc);
-    
-    PieChart.SvgGroup.selectAll(".arc").append("path")
-      .attr("d", PieChart.Arc)
-      .style("fill", "blue");
+    PieChart.ArcGroups.append("path")
+      .attr("class", function(d) {return "arc-path-"+d.data.label;})
+      .attr("id", function(d) {return PieChart.Tag+"-arc-path-"+d.data.label;})
+      .style("fill", function(d) { return PieChart.Scale.Color(d.data.label); })
+      .attr("d", PieChart.Arc);
 
-    PieChart.SvgGroup.selectAll(".arc").append("text")
-      .attr("transform", function(d) {return "translate(" +
+    PieChart.ArcGroups.append("text")
+      .attr("transform", function(d) { return "translate(" +
                                       PieChart.Arc.centroid(d) + ")"; })
       .attr("dy",".35em")
       .style("text-anchor", "middle")
-      .text(function(d) { return d.label; });
+      .text(function(d) { return d.data.label; });
       
   };
   

@@ -12,19 +12,27 @@ for (var i=0; i<2; i++) {
   divMultiples.append("div").attr("id", "multiples-title"+i).attr("class", "multiples-title").text(data.GradedItems[i].title);
   divMultiples.append("div").attr("id", "multiples-pie"+i).attr("class", "multiples-pie");
   divMultiples.append("div").attr("id", "multiples-line"+i).attr("class", "multiples-line");
-
+  divMultiples.append("div").attr("id", "multiples-bar"+i).attr("class", "multiples-bar");
+  
   /* Add pie chart */
   var pieChart0 = funcCreatePieChart(margin, height/2, width/2,
-                                      data.GradedItems[i].groups, "groups0");
+                                      data.GradedItems[i].groups, "groups"+i);
   var svg = d3.select("body div#multiples-pie"+i).append("svg");
   pieChart0.DrawGraph(svg);
   
   /* Add line chart */
   var gradedItem0 = funcCreateLineGraph(margin, height/2, width/2,
-                                        data.GradedItems[i].graph, "graded0");
+                                        data.GradedItems[i].graph, "graded"+i);
   gradedItem0.Scale.x.domain([0,100]);
   var svg = d3.select("body div#multiples-line"+i).append("svg");
   gradedItem0.DrawGraph(svg);
+
+  /* Add stacked bar chart */
+  d3.select("body div#container-multiples").append("div").attr("class", "stackedbar-title").text("Grade");
+  var stackedBar0 = funcCreateStackedBar(margin, height/4, width,
+                                        data.GradedItems[i].attempts, "stackedbar"+i, data.CurrentActiveStudents, data.MaxAttempts);
+  var svg = d3.select("body div#multiples-bar"+i).append("svg");
+  stackedBar0.DrawGraph(svg);
 
 };
 

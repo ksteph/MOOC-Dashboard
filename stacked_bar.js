@@ -41,7 +41,7 @@ funcCreateStackedBar = function(margin, height, width, data, tag,
       .domain([0,StackedBar.XMax]),
 
     y: d3.scale.linear()
-      .range(["#0000ff","#eeeeee"])
+      .range(["#0000ff","#aaa"])
       .domain([1,StackedBar.YMax])
   }
 

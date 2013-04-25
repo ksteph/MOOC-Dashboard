@@ -97,6 +97,9 @@ div.multiples-line {
     float: left;
     width: 50%;
 }
+div.multiples-bar {
+    width: 100%;
+}
 
 /* SVGs */
 svg#week-activity-line-graph {

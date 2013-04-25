@@ -10,12 +10,13 @@ for (var i=0; i<2; i++) {
     .attr("id", "multiples"+i)
     .attr("class", "multiples");
   divMultiples.append("div").attr("id", "multiples-title"+i).attr("class", "multiples-title").text(data.GradedItems[i].title);
+  divMultiples.append("div").attr("id", "line-title"+i).attr("class", "line-title").text("Grade Distribution (Submitted)");  
   divMultiples.append("div").attr("id", "multiples-pie"+i).attr("class", "multiples-pie");
   divMultiples.append("div").attr("id", "multiples-line"+i).attr("class", "multiples-line");
   divMultiples.append("div").attr("id", "multiples-bar"+i).attr("class", "multiples-bar");
   
   /* Add pie chart */
-  var pieChart0 = funcCreatePieChart(margin, height/2, width/2,
+  var pieChart0 = funcCreatePieChart(margin, height/1.5, width/2,
                                       data.GradedItems[i].groups, "groups"+i);
   var svg = d3.select("body div#multiples-pie"+i).append("svg");
   pieChart0.DrawGraph(svg);
@@ -28,8 +29,8 @@ for (var i=0; i<2; i++) {
   gradedItem0.DrawGraph(svg);
 
   /* Add stacked bar chart */
-  d3.select("body div#container-multiples").append("div").attr("class", "stackedbar-title").text("Grade");
-  var stackedBar0 = funcCreateStackedBar(margin, height/4, width,
+  d3.select("body div#multiples-bar"+i).append("div").attr("id", "stackedbar-title"+i).attr("class", "stackedbar-title").text("Number of Attempts");
+  var stackedBar0 = funcCreateStackedBar(margin, height/6, width/1.1,
                                         data.GradedItems[i].attempts, "stackedbar"+i, data.CurrentActiveStudents, data.MaxAttempts);
   var svg = d3.select("body div#multiples-bar"+i).append("svg");
   stackedBar0.DrawGraph(svg);
@@ -58,8 +59,11 @@ overallLineGraph.Scale.x.domain(
   d3.extent(data.OverallActivity, function(d) { return d.x; }));
 overallLineGraph.XAxis.ticks(data.OverallActivity.length)
   .tickFormat(function(d,i){
+    //console.log(d);
     var format = d3.time.format("%Y-%m-%d");
-    return new Date(data.WeekActivity[i].x); /*not working yet*/
+    //console.log(i + ":" + format(new Date(data.OverallActivity[i].x)))
+    var date = format(new Date(data.OverallActivity[i].x));
+    return date; /*not working yet*/
   });
 
 svg = d3.select("body div#container-activity").append("svg");

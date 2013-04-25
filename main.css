@@ -68,6 +68,16 @@ body {
     text-align: center;
     margin-bottom: 10px;
 }
+.line-title {
+    font-size: 1.5em;
+    text-align: right;
+    margin: 30 50 0 0;
+}
+.stackedbar-title {
+    font-size: 1.5em;
+    display: inline;
+    margin-left: 50px;
+}
 
 #container-activity,
 #container-multiples {
@@ -92,13 +102,16 @@ div.multiples-pie {
     float: left;
     width: 45%;
     padding-top: 20px;
+    margin-bottom: -50px; /*dirty*/
 }
 div.multiples-line {
     float: left;
     width: 50%;
+    padding-top: 30px;
 }
 div.multiples-bar {
-    width: 100%;
+    margin-bottom: 10px;
+    margin-left: 10px;
 }
 
 /* SVGs */

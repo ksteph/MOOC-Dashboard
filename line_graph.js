@@ -90,7 +90,7 @@ funcCreateLineGraph = function(margin, height, width, data, tag) {
       .attr("y", 6)
       .attr("dy", ".71em")
       .style("text-anchor", "end")
-      .text("Y-Unit");
+      .text("Number of students");
     
     LineGraph.SvgGroup.append("path")
       .datum(LineGraph.Data)

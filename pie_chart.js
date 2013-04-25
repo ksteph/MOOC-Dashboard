@@ -71,7 +71,7 @@ funcCreatePieChart = function(margin, height, width, data, tag) {
         PieChart.Tooltip.style("visibility","visible")
           .style("top",(event.pageY-10)+"px")
           .style("left",(event.pageX+10)+"px")
-          .text(d.data.label+": "+d.data.count+" students");
+          .text(d.data.label+": "+d.data.count+" ("+(100*d.data.percentage)+"%)");
       })
       .on("mouseout", function(d) {
         PieChart.Tooltip.style("visibility","hidden");

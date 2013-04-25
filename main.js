@@ -4,7 +4,7 @@ var width = window.innerWidth/2.1 - margin.left - margin.right;
 var height = window.outerWidth/4.2 - margin.top - margin.bottom;
 
 /* Graded Items */
-for (var i=0; i<2; i++) {
+for (var i=0; i<data.GradedItems.length; i++) {
   /* Add divs */
   var divMultiples = d3.select("body div#container-multiples").append("div")
     .attr("id", "multiples"+i)

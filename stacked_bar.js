@@ -70,6 +70,7 @@ funcCreateStackedBar = function(margin, height, width, data, tag,
     // Tooltip
     StackedBar.Tooltip = d3.select("body")
       .append("div")
+      .attr("class","stacked-bar-tooltip")
       .style("position","absolute")
       .style("z-index","10")
       .style("visibility","hidden");
@@ -89,8 +90,14 @@ funcCreateStackedBar = function(margin, height, width, data, tag,
         .attr("width", function(d) { return StackedBar.Scale.x(d.x); })
         .attr("height", StackedBar.Height)
         .on("mouseover", function(d) {
-        
-        });
+          StackedBar.Tooltip.style("visibility","visible")
+            .style("top",(event.pageY-10)+"px")
+            .style("left",(event.pageX+10)+"px")
+            .text(d.label);
+        })
+      .on("mouseout", function(d) {
+        StackedBar.Tooltip.style("visibility","hidden");
+      });
 
     StackedBar.Bars.append("text")
       .attr("class", "stacked-bar-text")

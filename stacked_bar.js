@@ -75,18 +75,30 @@ funcCreateStackedBar = function(margin, height, width, data, tag,
       .style("visibility","hidden");
     
     // Draw Graph
-    StackedBar.SvgGroup.selectAll("rect")
+    StackedBar.Bars = StackedBar.SvgGroup.selectAll(".stacked-bar")
       .data(StackedBar.Data)
-      .enter().append("rect")
-      .attr("class", function(d) {return "stacked-bar-"+d.y;})
-      .attr("id", function(d) {return StackedBar.Tag+"stacked-bar-"+d.y;})
-      .style("fill", function(d) {return StackedBar.Scale.y(d.y);})
-      .attr("x", function(d) {return StackedBar.Scale.x(d.dx);})
-      .attr("width", function(d) {return StackedBar.Scale.x(d.x);})
-      .attr("height", StackedBar.Width)
-      .on("mouseover", function(d) {
+      .enter().append("g")
+        .attr("class","stacked-bar")
+      .attr("id", function(d) { return StackedBar.Tag+"stacked-bar-"+d.y;} );
+
+    StackedBar.Bars.append("rect")
+        .attr("class", function(d) { return "stacked-rect-"+d.y; })
+        .attr("id", function(d) { return StackedBar.Tag+"stacked-rect-"+d.y;} )
+        .style("fill", function(d) { return StackedBar.Scale.y(d.y);} )
+        .attr("x", function(d) { return StackedBar.Scale.x(d.dx); })
+        .attr("width", function(d) { return StackedBar.Scale.x(d.x); })
+        .attr("height", StackedBar.Height)
+        .on("mouseover", function(d) {
         
-      }
+        });
+
+    StackedBar.Bars.append("text")
+      .attr("class", "stacked-bar-text")
+      .attr("id", StackedBar.Tag+"-stacked-bar-text")
+      .attr("x", function(d) {return StackedBar.Scale.x(d.dx+(d.x/2));})
+      .attr("y",StackedBar.Height/2)
+      .attr("dy", "0.5em")
+      .text(function(d) { return d.y; });
   };
 
   return StackedBar;

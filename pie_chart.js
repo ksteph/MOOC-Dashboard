@@ -49,6 +49,15 @@ funcCreatePieChart = function(margin, height, width, data, tag) {
       .attr("transform", "translate(" + PieChart.Width/2 + "," + 
             PieChart.Height/2 + ")");
 
+    // Tooltip
+    PieChart.Tooltip = d3.select("body")
+      .append("div")
+      .attr("class","pie-chart-tooltip")
+      .attr("id",PieChart.Tag+"pie-chart-tooltip")
+      .style("position","absolute")
+      .style("z-index","10")
+      .style("visibility","hidden");
+
     PieChart.ArcGroups = PieChart.SvgGroup.selectAll(".arc")
       .data(PieChart.Layout(PieChart.Data))
       .enter().append("g")
@@ -57,7 +66,17 @@ funcCreatePieChart = function(margin, height, width, data, tag) {
     PieChart.ArcGroups.append("path")
       .attr("class", function(d) {return "arc-path-"+d.data.label;})
       .attr("id", function(d) {return PieChart.Tag+"-arc-path-"+d.data.label;})
-      .attr("d", PieChart.Arc);
+      .attr("d", PieChart.Arc)
+      .on("mouseover", function(d) {
+        PieChart.Tooltip.style("visibility","visible")
+          .style("top",(event.pageY-10)+"px")
+          .style("left",(event.pageX+10)+"px")
+          .text(d.data.label+": "+d.data.count+" ("+(100*d.data.percentage)+"%)");
+      })
+      .on("mouseout", function(d) {
+        PieChart.Tooltip.style("visibility","hidden");
+      });
+
 
     PieChart.ArcGroups.append("text")
       .attr("transform", function(d) { return "translate(" +

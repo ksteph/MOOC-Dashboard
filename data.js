@@ -1,4 +1,6 @@
 var data = {
+  CurrentActiveStudents: 523,
+  MaxAttempts: 4, 
   GradedItems:[
     {
       title: "Assignment 1",
@@ -22,16 +24,41 @@ var data = {
       groups:[
 	{
 	  label: "Submitted",
-	  count: 405
+	  count: 405,
+    percentage: 0.4
 	},
 	{
 	  label: "Attempted",
-	  count: 556
+	  count: 556,
+    percentage: 0.5
 	},
 	{
 	  label: "Non-started",
-	  count: 320
+	  count: 320,
+    percentage: 0.1
 	}
+      ],
+      attempts:[
+  {
+    x: 100,
+    y: 1,
+    label: "1: 100"
+  },
+  {
+    x: 200,
+    y: 2,
+    label: "2: 200"
+  },
+  {
+    x: 100,
+    y: 3,
+    label: "3: 100"
+  },
+  {
+    x: 123,
+    y: 4,
+    label: "4: 123"
+  }  
       ]
     },
     {
@@ -56,15 +83,35 @@ var data = {
       groups:[
   {
     label: "Submitted",
-    count: 10
+    count: 10,
+    percentage: 0.05
   },
   {
     label: "Attempted",
-    count: 550
+    count: 550,
+    percentage: 0.8
   },
   {
     label: "Non-started",
-    count: 104
+    count: 104,
+    percentage: 0.15
+  }
+      ],
+      attempts:[
+  {
+    x: 100,
+    y: 1,
+    label: "1: 100"
+  },
+  {
+    x: 200,
+    y: 2,
+    label: "2: 200"
+  },
+  {
+    x: 100,
+    y: 3,
+    label: "3: 223"
   }
       ]
     }

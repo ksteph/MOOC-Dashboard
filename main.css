@@ -1,6 +1,7 @@
 body {
     font: 10px sans-serif;
     background-color: #DDD;
+    margin: 0;
 }
 
 .axis path,
@@ -37,26 +38,27 @@ body {
 .divider {
     height: 1px;
     background-color: #AAA;
-    margin: 30 0 20 0;
 }
 
 #container {
     width: 100%;
+    height: 100%;
     overflow: hidden;
 }
 #title-top {
-    /*background-color: #8EC6E8;*/
+    background-color: #8EC6E8;
     color: #145D88;
     width: 100%;
-    font-size: 7em;
+    height: 6%;
+    font-size: 3em;
     display: block;
-    margin: 10 0 0 10;
+    /*margin: 10 0 0 10;*/
     /*position: fixed;*/
 }
+/*
 #title-weekActivity,
 #title-overallActivity,
 #title-multiples {
-    /*background-color: #8EC6E8;*/
     color: #3D9AD1;
     width: 100%;
     font-size: 3em;
@@ -78,17 +80,69 @@ body {
     display: inline;
     margin-left: 50px;
 }
+*/
 
-#container-activity,
-#container-multiples {
+/* Activity */
+#container-activity {
+    background-color: #ccc;
+    width: 100%;
+    height: 47%;
+}
+#container-multiple {
+    background-color: #333;
+    width: 100%;
+    height: 47%;
+}
+#activity-week {
+    background-color: #222;
     float: left;
-    width: 48%;
-    padding: 10px;
-    /*margin-top: 100px;*/
-    /*position: fixed;*/
+    width: 50%;
+    height: 100%;
+}
+#activity-overall {
+    background-color: #333;
+    float: left;
+    width: 50%;
+    height: 100%;
+}
+.activity-title {
+    background-color: #ccc;
+}
+#activity-week-container {
+    background-color: #111;
+    height: 100%;
+}
+#activity-overall-container {
+    background-color: #222;
+    height: 100%;
 }
 
+/* Multiples */
+.small-multiple {
+    background-color: #fff;
+    float: left;
+    width: 30%;
+    height: 100%;
+}
+.top-multiple {
+    background-color: #a3a3a3;
+    height: 70%;
+}
+.down-multiple {
+    background-color: #555;
+    height: 30%;
+}
+.down-multiple .down {
+    background-color: #c3c3c3;
+    float: left;
+    width: 30%;
+    height: 100%;
+}
+/*.down-multiple .down:hover {
+    background-color: #000;
+}*/
 
+/*
 div.multiples {
     background-color: #EEE;
     border-style: solid;
@@ -102,7 +156,7 @@ div.multiples-pie {
     float: left;
     width: 45%;
     padding-top: 20px;
-    margin-bottom: -50px; /*dirty*/
+    margin-bottom: -50px;
 }
 div.multiples-line {
     float: left;
@@ -113,6 +167,7 @@ div.multiples-bar {
     margin-bottom: 10px;
     margin-left: 10px;
 }
+*/
 
 /* SVGs */
 svg#week-activity-line-graph {
@@ -129,7 +184,7 @@ svg#overall-activity-line-graph {
     border-width: 1px;
     border-color: #AAA;
 }
-
+/*
 svg g.arc path.arc-path-Submitted {
     fill: #3D9AD1 !important;
 }
@@ -138,4 +193,4 @@ svg g.arc path.arc-path-Attempted {
 }
 svg g.arc path.arc-path-Non-started {
     fill: #FF6E40 !important;
-}
+}*/

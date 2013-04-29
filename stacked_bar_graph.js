@@ -124,6 +124,16 @@ funcCreateStackedBarGraph = function(margin, height, width, data, tag,
       .attr("transform","translate("+ graph.Margin.axisLeft + "," +
             graph.Margin.top + ")");
 
+    graph.Tooltip = d3.select("#special-tooltip");
+    if (graph.Tooltip[0][0] == null) { // "[0][0]" Hacky but it works :-/
+      graph.Tooltip = d3.select("body")
+        .append("div")
+        .attr("id","special-tooltip")
+        .style("position", "absolute")
+        .style("z-index", "10")
+        .style("visibility", "hidden");
+    }
+
     // Draw Graph
     graph.SvgGroup.append("g")
       .attr("class","axis")
@@ -168,7 +178,17 @@ funcCreateStackedBarGraph = function(margin, height, width, data, tag,
       .attr("height", function(d) {
         return graph.Scale.y(d.y0) - graph.Scale.y(d.y1);
       })
-      .style("fill", function(d) { return graph.Scale.stackColor(d.color); });
+      .style("fill", function(d) { return graph.Scale.stackColor(d.color); })
+      .on("mouseover", function(d) {
+        graph.Tooltip.style("visibility", "visible")
+    	  .style("top", (event.pageY-10)+"px")
+          .style("left",(event.pageX+10)+"px")
+    	  .text(d.tooltip);
+      })
+      .on("mouseout", function(d){
+        graph.Tooltip.style("visibility", "hidden")
+      });
+
   }
 
   return graph;

@@ -26,10 +26,16 @@ funcCreateLineGraph = function(margin, height, width, data, tag) {
   LineGraph.Data = data;
   LineGraph.Tag = tag;
 
+  LineGraph.Margin.axisLeft = LineGraph.Margin.left + 50;
+  LineGraph.Margin.axisBottom = LineGraph.Margin.bottom + 50;
+
   // Making the scales
   LineGraph.Scale = {
     x: d3.scale.linear()
-      .range([0, LineGraph.Width])
+      .range([
+        0,
+        LineGraph.Width-LineGraph.Margin.axisLeft-LineGraph.Margin.right
+      ])
       .domain([
         0,
         d3.max(
@@ -37,7 +43,7 @@ funcCreateLineGraph = function(margin, height, width, data, tag) {
       ]),
 
     y: d3.scale.linear()
-      .range([LineGraph.Height, 0])
+      .range([LineGraph.Height-LineGraph.Margin.axisBottom, 0])
       .domain([
         0,
         d3.max(
@@ -65,19 +71,18 @@ funcCreateLineGraph = function(margin, height, width, data, tag) {
 
     LineGraph.SvgGroup = LineGraph.Svg
       .attr("id", LineGraph.Tag+"-line-graph")
-      .attr("width", LineGraph.Width + LineGraph.Margin.left + 
-            LineGraph.Margin.right)
-      .attr("height", LineGraph.Height + LineGraph.Margin.top + 
-            LineGraph.Margin.bottom + 50)
+      .attr("width", LineGraph.Width)
+      .attr("height", LineGraph.Height)
       .append("g")
-      .attr("transform", "translate(" + LineGraph.Margin.left + "," + 
+      .attr("transform", "translate(" + LineGraph.Margin.axisLeft + "," + 
             LineGraph.Margin.top + ")");
 
     // Draw Graph
     LineGraph.SvgGroup.append("g")
       .attr("class", "axis")
       .attr("id", LineGraph.Tag+"-x-axis")
-      .attr("transform", "translate(0," + LineGraph.Height + ")")
+      .attr("transform", "translate(0," +
+            (LineGraph.Height-LineGraph.Margin.axisBottom) + ")")
       .call(LineGraph.XAxis);
     
     LineGraph.SvgGroup.append("g")

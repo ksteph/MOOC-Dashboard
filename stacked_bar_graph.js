@@ -72,13 +72,6 @@ funcCreateStackedBarGraph = function(margin, height, width, data, tag,
 
       d.bars.push(b);
 
-      // e_j.sbg_x = i;
-      // e_j.sbg_y0 = currTotal;
-      // currTotal = currTotal + e_j.x;
-      // e_j.sbg_y1  = currTotal;
-      // e_j.sbg_label  = e_j.y;
-      // e_j.sbg_tooltip  = e_j.label;
-
       if($.inArray(b.color, graph.StackColorDomain) == -1) {
         graph.StackColorDomain.push(b.color);
       }
@@ -173,8 +166,6 @@ funcCreateStackedBarGraph = function(margin, height, width, data, tag,
       .attr("width", graph.Scale.x.rangeBand())
       .attr("y", function(d) { return graph.Scale.y(d.y1); })
       .attr("height", function(d) {
-        console.log("y0="+d.y0+" y1="+d.y1);
-        console.log("Scale(y0)="+graph.Scale.y(d.y0)+" Scale(y1)="+graph.Scale.y(d.y1));
         return graph.Scale.y(d.y0) - graph.Scale.y(d.y1);
       })
       .style("fill", function(d) { return graph.Scale.stackColor(d.color); });

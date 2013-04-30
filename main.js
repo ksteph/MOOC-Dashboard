@@ -61,12 +61,13 @@ smallMultiples.append("div")
     return "top-multiple"+i;
   });
 
+var storage_matrix = []; //dirty code
 
 /* Draw line/status/attempt graph, but set display to block/none */
 for (var i=0; i<data.GradedItems.length; i++) { 
 
   // line graph  
-  var top1 = funcCreateMultiLineGraph(margin_multiple_top, height_multiple_top, width_multiple_top, data.GradedItems[i].gradeDistroGraph.data, "top_line"+i, data.GradedItems[i].gradeDistroGraph.x_range, data.GradedItems[i].gradeDistroGraph.y_range);
+  var top1 = funcCreateMultiLineGraph(margin_multiple_top, height_multiple_top, width_multiple_top, data.GradedItems[i].gradeDistroGraph.data, "top_line"+i, [0,1], data.GradedItems[i].gradeDistroGraph.y_range);
   top1.XAxis.ticks(data.WeekActivity.length);
   // TODO
   // .tickFormat(function(d,i){
@@ -74,6 +75,7 @@ for (var i=0; i<data.GradedItems.length; i++) {
   // });
   svg = d3.select("#top-multiple"+i).append("svg").attr("class","top-svg");
   top1.DrawGraph(svg);
+  storage_matrix.push(top1);
 
   //status graph 
   var status_data = [];
@@ -95,6 +97,7 @@ for (var i=0; i<data.GradedItems.length; i++) {
   var top2 = funcCreateStackedBarGraph(margin_multiple_top, height_multiple_top, width_multiple_top, status_data, "top_status"+i, data.GradedItems[i].itemTitles, data.GradedItems[i].statusGraph.y_range)
   svg = d3.select("#top-multiple"+i).append("svg").attr("display","none").attr("class","top-svg");
   top2.DrawGraph(svg);
+  storage_matrix.push(top2);
 
   // attempt graph 
   attempt_data = [];
@@ -116,6 +119,7 @@ for (var i=0; i<data.GradedItems.length; i++) {
   var top3 = funcCreateStackedBarGraph(margin_multiple_top, height_multiple_top, width_multiple_top, attempt_data, "top_attempt"+i, data.GradedItems[i].itemTitles, data.GradedItems[i].attemptsGraph.y_range)
   svg = d3.select("#top-multiple"+i).append("svg").attr("display","none").attr("class","top-svg");
   top3.DrawGraph(svg);
+  storage_matrix.push(top3);
 
 }
   
@@ -133,7 +137,10 @@ d3.selectAll('.down-multiple').each(function(parantD) {
     .attr("id", function(d,i) {
       return "down"+i;
     })
-    .text("click me")
+    .append("svg")
+    .attr("id", function(d,i) {
+      return "down-svg"+i;
+    })
     .on("click", function(d,i) {
       console.log(parantD);
       if (i==0) {
@@ -156,5 +163,11 @@ d3.selectAll('.down-multiple').each(function(parantD) {
       }
     });
 });
-  
+
+for (var i=0; i<3; i++) {
+  for (var k=0; k<3; k++) {
+    svg = d3.select("#down-multiple"+i+" #down"+k+" svg");
+    storage_matrix[i*3+k].DrawMiniGraph(svg, height_multiple_down, width_multiple_down, margin_multiple_down);
+  }
+}
 

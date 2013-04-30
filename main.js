@@ -1,8 +1,8 @@
-var margin_activity = {top: 0, right: 0, bottom: 0, left: 0};
-var width_activity = window.innerWidth/2;
+var margin_activity = {top: 20, right: 20, bottom: 0, left: 0};
+var width_activity = window.innerWidth/2.2;
 var height_activity = window.outerWidth/6;
 
-var margin_multiple_top = {top: 0, right: 0, bottom: 0, left: 0};
+var margin_multiple_top = {top: 20, right: 20, bottom: 0, left: 0};
 var width_multiple_top = window.innerWidth/3;
 var height_multiple_top = window.outerWidth/8;
 
@@ -45,66 +45,32 @@ overallLineGraph.DrawGraph(svg);
 
 ////////////
 
-function callBack(i) {
-  return function() {
-    alert('i is: '+ i);
-  }
-}
+/* Top 1 */
+var smallMultiples = d3.select("#container-multiple").selectAll(".small-multiple")
+  .data([0,1,2])
+  .enter().append("div")
+  .attr("class", "small-multiple")
+  .attr("id", function(d,i) {
+    return "small-multiple"+i;
+  })
+smallMultiples.append("div")
+  .attr("class", "top-multiple")
+  .attr("id", function(d,i) {
+    return "top-multiple"+i;
+  });
 
-/* Graded Items */
-
-// var smallMultiples = d3.select("#container-multiple")
-//   .data(data.GradedItems)
-//   .enter().append("div")
-//   .text("")
-
-for (var i=0; i<data.GradedItems.length; i++) {
-  /* Add top & down divs */
-  // top div
-  var smallMultiples = d3.select("#container-multiple").append("div")
-    .attr("id", "small-multiple"+i)
-    .attr("class", "small-multiple");
-  smallMultiples.append("div").attr("id", "top-multiple"+i).attr("class", "top-multiple");
-  smallMultiples.append("div").attr("id", "down-multiple"+i).attr("class", "down-multiple");
-  
-  // Add 3 down divs, class name 'down'
-  var downMultiples = d3.select("#down-multiple"+i);
-
-  downMultiples.append("div").attr("class","down").attr("id", "down"+i+"1")
-    .on("click", function(d){
-      //console.log("0: "+i);
-      callBack(i);
-      //console.log(d3.select("svg#top_line"+i+"-line-graph"));
-      d3.select("svg#top_line"+i+"-line-graph").attr("display","block");
-      d3.select("svg#top_status"+i+"-line-graph").attr("display","none");
-      d3.select("svg#top_attempt"+i+"-line-graph").attr("display","none");
-    });
-  downMultiples.append("div").attr("class","down").attr("id", "down"+i+"2")
-    .on("click", function(d){
-        console.log("1: "+i);
-        d3.select("svg#top_line"+i+"-line-graph").attr("display","none");
-        d3.select("svg#top_status"+i+"-line-graph").attr("display","block");
-        d3.select("svg#top_attempt"+i+"-line-graph").attr("display","none");
-    });
-  downMultiples.append("div").attr("class","down").attr("id", "down"+i+"3")
-    .on("click", function(d){
-        console.log("2: "+i);
-        d3.select("svg#top_line"+i+"-line-graph").attr("display","none");
-        d3.select("svg#top_status"+i+"-line-graph").attr("display","none");
-        d3.select("svg#top_attempt"+i+"-line-graph").attr("display","block");
-    });
-
-  /* Add top multiple */
-  // line graph 
+/* Draw line/status/attempt graph, but set display to block/none */
+for (var i=0; i<data.GradedItems.length; i++) { 
+  // line graph  
   var top1 = funcCreateLineGraph(margin_multiple_top, height_multiple_top, width_multiple_top, data.WeekActivity, "top_line"+i);
   top1.XAxis.ticks(data.WeekActivity.length)
   .tickFormat(function(d,i){
     return data.WeekActivity[i].label;
   });
-  svg = d3.select("#top-multiple"+i).append("svg");
+  svg = d3.select("#top-multiple"+i).append("svg").attr("class","top-svg");
   top1.DrawGraph(svg);
 
-  // status graph 
+  //status graph 
   var top2 = funcCreateLineGraph(margin_multiple_top, height_multiple_top, width_multiple_top, data.OverallActivity, "top_status"+i);
   top2.Scale.x.domain(
     d3.extent(data.OverallActivity, function(d) { return d.x; }));
@@ -114,7 +80,7 @@ for (var i=0; i<data.GradedItems.length; i++) {
     var date = format(new Date(data.OverallActivity[i].x));
     return date;
   });
-  svg = d3.select("#top-multiple"+i).append("svg").attr("display","none");
+  svg = d3.select("#top-multiple"+i).append("svg").attr("display","none").attr("class","top-svg");
   top2.DrawGraph(svg);
 
   // attempt graph 
@@ -127,46 +93,47 @@ for (var i=0; i<data.GradedItems.length; i++) {
     var date = format(new Date(data.OverallActivity[i].x));
     return date;
   });
-  svg = d3.select("#top-multiple"+i).append("svg").attr("display","none");
+  svg = d3.select("#top-multiple"+i).append("svg").attr("display","none").attr("class","top-svg");
   top3.DrawGraph(svg);
 
-  /* Add bottom multiple */ 
-  var down1 = funcCreateLineGraph(margin_multiple_down, height_multiple_down, width_multiple_down, data.WeekActivity, "down_line"+i);
-  down1.XAxis.ticks(data.WeekActivity.length)
-  .tickFormat(function(d,i){
-    return data.WeekActivity[i].label;
+}
+  
+/* Down 3 */
+var downMultiples = smallMultiples.append("div")
+  .attr("class", "down-multiple")
+  .attr("id", function(d,i) {
+    return "down-multiple"+i;
   });
-  svg = d3.select("#down-multiple"+i+" #down"+i+"1").append("svg");
-  down1.DrawGraph(svg);
-
-  var down2 = funcCreateLineGraph(margin_multiple_down, height_multiple_down, width_multiple_down, data.OverallActivity, "down_status"+i);
-  down2.Scale.x.domain(
-    d3.extent(data.OverallActivity, function(d) { return d.x; }));
-  down2.XAxis.ticks(data.OverallActivity.length)
-  .tickFormat(function(d,i){
-    var format = d3.time.format("%Y-%m-%d");
-    var date = format(new Date(data.OverallActivity[i].x));
-    return date;
-  });
-  svg = d3.select("#down-multiple"+i+" #down"+i+"2").append("svg");
-  down2.DrawGraph(svg);
-
-  var down3 = funcCreateLineGraph(margin_multiple_down, height_multiple_down, width_multiple_down, data.OverallActivity, "down_attempt"+i);
-  down3.Scale.x.domain(
-    d3.extent(data.OverallActivity, function(d) { return d.x; }));
-  down3.XAxis.ticks(data.OverallActivity.length)
-  .tickFormat(function(d,i){
-    var format = d3.time.format("%Y-%m-%d");
-    var date = format(new Date(data.OverallActivity[i].x));
-    return date;
-  });
-  svg = d3.select("#down-multiple"+i+" #down"+i+"3").append("svg");
-  down3.DrawGraph(svg);
-
-
-};
-
-
-
-
+d3.selectAll('.down-multiple').each(function(parantD) {
+  d3.select(this).selectAll(".down")
+    .data([400,500,600])
+    .enter().append("div")
+    .attr("class", "down")
+    .attr("id", function(d,i) {
+      return "down"+i;
+    })
+    .text("aa")
+    .on("click", function(d,i) {
+      console.log(parantD);
+      if (i==0) {
+        d3.select("svg#top_line"+parantD+"-line-graph").attr("display","block");
+        d3.select("svg#top_status"+parantD+"-line-graph").attr("display","none");
+        d3.select("svg#top_attempt"+parantD+"-line-graph").attr("display","none");
+      }
+      else if (i==1) {
+        d3.select("svg#top_line"+parantD+"-line-graph").attr("display","none");
+        d3.select("svg#top_status"+parantD+"-line-graph").attr("display","block");
+        d3.select("svg#top_attempt"+parantD+"-line-graph").attr("display","none");
+      }
+      else if (i==2) {
+        d3.select("svg#top_line"+parantD+"-line-graph").attr("display","none");
+        d3.select("svg#top_status"+parantD+"-line-graph").attr("display","none");
+        d3.select("svg#top_attempt"+parantD+"-line-graph").attr("display","block");
+      }
+      else {
+        console.log("something is wrong");
+      }
+    });
+});
+  
 

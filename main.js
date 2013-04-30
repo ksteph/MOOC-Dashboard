@@ -66,7 +66,7 @@ smallMultiples.append("div")
 for (var i=0; i<data.GradedItems.length; i++) { 
 
   // line graph  
-  var top1 = funcCreateLineGraph(margin_multiple_top, height_multiple_top, width_multiple_top, data.GradedItems[i].gradeDistroGraph.data, "top_line"+i);
+  var top1 = funcCreateMultiLineGraph(margin_multiple_top, height_multiple_top, width_multiple_top, data.GradedItems[i].gradeDistroGraph.data, "top_line"+i, data.GradedItems[i].gradeDistroGraph.x_range, data.GradedItems[i].gradeDistroGraph.y_range);
   top1.XAxis.ticks(data.WeekActivity.length);
   // TODO
   // .tickFormat(function(d,i){

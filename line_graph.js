@@ -103,11 +103,21 @@ funcCreateLineGraph = function(margin, height, width, data, tag) {
       .attr("id", LineGraph.Tag+"-line")
       .attr("d", LineGraph.Line);
 
-    LineGraph.Tooltip = d3.select("body")
-      .append("div")
-      .style("position", "absolute")
-      .style("z-index", "10")
-      .style("visibility", "hidden");
+    LineGraph.Tooltip = d3.select("#special-tooltip");
+    console.log(LineGraph.Tooltip);
+    if (LineGraph.Tooltip[0][0] == null) { // "[0][0]" Hacky but it works :-/
+      LineGraph.Tooltip = d3.select("body")
+        .append("div")
+        .attr("id","special-tooltip")
+        .style("position", "absolute")
+        .style("z-index", "10")
+        .style("visibility", "hidden");
+    }
+    // LineGraph.Tooltip = d3.select("body")
+    //   .append("div")
+    //   .style("position", "absolute")
+    //   .style("z-index", "10")
+    //   .style("visibility", "hidden");
     
     LineGraph.Points = LineGraph.SvgGroup.selectAll("point")
       .data(LineGraph.Data)

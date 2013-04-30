@@ -1,10 +1,10 @@
 var margin_activity = {top: 20, right: 20, bottom: 0, left: 0};
 var width_activity = window.innerWidth/2.2;
-var height_activity = window.outerWidth/5;
+var height_activity = window.outerWidth/4.5;
 
 var margin_multiple_top = {top: 20, right: 20, bottom: 0, left: 0};
 var width_multiple_top = window.innerWidth/3.3;
-var height_multiple_top = window.outerWidth/6;
+var height_multiple_top = window.outerWidth/5.5;
 
 var margin_multiple_down = {top: 0, right: 0, bottom: 0, left: 0};
 var width_multiple_down = window.innerWidth/12;
@@ -49,16 +49,24 @@ var smallMultiples = d3.select("#container-multiple").selectAll(".small-multiple
     return "small-multiple"+i;
   })
 smallMultiples.append("div")
+  .attr("class", "small-multiple-title")
+  .text(function(d,i){
+    if (i===0) return "Homework";
+    else if (i===1) return "Quizzes";
+    else return "Fake Homework"
+  });
+smallMultiples.append("div")
   .attr("class", "top-multiple")
   .attr("id", function(d,i) {
     return "top-multiple"+i;
   });
 
+
 /* Draw line/status/attempt graph, but set display to block/none */
 for (var i=0; i<data.GradedItems.length; i++) { 
 
   // line graph  
-  var top1 = funcCreateLineGraph(margin_multiple_top, height_multiple_top, width_multiple_top, data.WeekActivity, "top_line"+i);
+  var top1 = funcCreateLineGraph(margin_multiple_top, height_multiple_top, width_multiple_top, data.GradedItems[i].gradeDistroGraph.data, "top_line"+i);
   top1.XAxis.ticks(data.WeekActivity.length);
   // TODO
   // .tickFormat(function(d,i){
@@ -125,7 +133,7 @@ d3.selectAll('.down-multiple').each(function(parantD) {
     .attr("id", function(d,i) {
       return "down"+i;
     })
-    .text("aa")
+    .text("click me")
     .on("click", function(d,i) {
       console.log(parantD);
       if (i==0) {

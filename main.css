@@ -95,15 +95,15 @@ body {
 }
 #activity-week {
     float: left;
-    width: 48%;
+    width: 47%;
     height: 100%;
-    padding: 1%;
+    padding: 1.5%;
 }
 #activity-overall {
     float: left;
-    width: 48%;
+    width: 47%;
     height: 100%;
-    padding: 1%;
+    padding: 1.5%;
 }
 .activity-title {
     background-color: #ccc;
@@ -120,6 +120,8 @@ body {
     float: left;
     width: 30%;
     height: 100%;
+    padding-left: 1.5%;
+    padding-right: 1.5%;
 }
 .top-multiple {
     height: 70%;
@@ -181,9 +183,12 @@ svg#overall-activity-line-graph {
     border-color: #AAA;
 }
 
-svg.top-svg {
+svg.top-svg,
+svg.stacked-bar-graph  {
     background-color: #EEE;
     border-style: solid;
     border-width: 1px;
     border-color: #AAA;
 }
+
+

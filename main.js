@@ -8,7 +8,7 @@ var height_multiple_top = window.outerWidth/5.5;
 
 var margin_multiple_down = {top: 0, right: 0, bottom: 0, left: 0};
 var width_multiple_down = window.innerWidth/12;
-var height_multiple_down = window.outerWidth/24;
+var height_multiple_down = window.outerWidth/20;
 
 ///////////////////////
 

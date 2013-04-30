@@ -37,8 +37,16 @@ funcCreateStackedBarGraph = function(margin, height, width, data, tag,
   graph.xRange = x_axis_range;
   graph.yRange = y_axis_range;
 
+  graph.Mini = {
+    Data: graph.Data,
+    Tag: graph.Tag+"-mini",
+    xRange: graph.xRange,
+    yRange: graph.yRange,
+  };
+
   graph.Margin.axisLeft = graph.Margin.left + 50;
   graph.Margin.axisBottom = graph.Margin.bottom + 50;
+  graph.ZeroLineX2 = graph.Width-graph.Margin.axisLeft-graph.Margin.right;
 
   // Loop through data to get what want
   /* Creating data:
@@ -101,6 +109,17 @@ funcCreateStackedBarGraph = function(margin, height, width, data, tag,
       .range(["#111","#c00","#0c0","#00c","#cc0","#0cc","#c0c","#ccc"])
   };
 
+  graph.Mini.Scale = {
+    x: d3.scale.ordinal()
+      .domain(graph.xRange),
+
+    y: d3.scale.linear()
+      .domain(graph.yRange), // yRange is the range of the y-axis values
+
+    stackColor: graph.Scale.stackColor
+  };
+
+
   // Setup axis
   graph.XAxis = d3.svg.axis()
     .scale(graph.Scale.x)
@@ -109,6 +128,64 @@ funcCreateStackedBarGraph = function(margin, height, width, data, tag,
   graph.YAxis = d3.svg.axis()
     .scale(graph.Scale.y)
     .orient("left");
+
+  graph.DrawBars = function(graph, bInteractive) {
+    if (bInteractive) {
+      graph.Tooltip = d3.select("#special-tooltip");
+      if (graph.Tooltip[0][0] == null) { // "[0][0]" Hacky but it works :-/
+        graph.Tooltip = d3.select("body")
+          .append("div")
+          .attr("id","special-tooltip")
+          .style("position", "absolute")
+          .style("z-index", "10")
+          .style("visibility", "hidden");
+      }
+    }
+
+    // Draw Graph
+
+    // Add zero-line if needed
+    if (graph.yRange[0] < 0) {
+      graph.SvgGroup.append("line")
+        .attr("class","axis")
+        .attr("x1", 0)
+        .attr("x2", graph.ZeroLineX2)
+        .attr("y1", graph.Scale.y(0))
+        .attr("y2", graph.Scale.y(0))
+    }
+
+    graph.GStackedBars = graph.SvgGroup.selectAll(".stacked-bar")
+      .data(graph.Data)
+      .enter().append("g")
+      .attr("class", "stacked-bar")
+      .attr("transform", function(d) {
+        return "translate("+graph.Scale.x(d.x)+",0)";
+      });
+    
+    graph.Rects = graph.GStackedBars.selectAll("rect")
+      .data(function(d) { return d.bars; })
+      .enter().append("rect")
+      .attr("width", graph.Scale.x.rangeBand())
+      .attr("y", function(d) { return graph.Scale.y(d.y1); })
+      .attr("height", function(d) {
+        return graph.Scale.y(d.y0) - graph.Scale.y(d.y1);
+      })
+      .style("fill", function(d) { return graph.Scale.stackColor(d.color); });
+
+    if (bInteractive) {
+      graph.Rects
+        .on("mouseover", function(d) {
+          graph.Tooltip.style("visibility", "visible")
+    	    .style("top", (event.pageY-10)+"px")
+            .style("left",(event.pageX+10)+"px")
+    	    .text(d.tooltip);
+        })
+        .on("mouseout", function(d){
+          graph.Tooltip.style("visibility", "hidden")
+        });
+    }
+
+  };
 
   graph.DrawGraph = function(svg) {
     graph = this;
@@ -124,17 +201,6 @@ funcCreateStackedBarGraph = function(margin, height, width, data, tag,
       .attr("transform","translate("+ graph.Margin.axisLeft + "," +
             graph.Margin.top + ")");
 
-    graph.Tooltip = d3.select("#special-tooltip");
-    if (graph.Tooltip[0][0] == null) { // "[0][0]" Hacky but it works :-/
-      graph.Tooltip = d3.select("body")
-        .append("div")
-        .attr("id","special-tooltip")
-        .style("position", "absolute")
-        .style("z-index", "10")
-        .style("visibility", "hidden");
-    }
-
-    // Draw Graph
     graph.SvgGroup.append("g")
       .attr("class","axis")
       .attr("id",graph.Tag+"-x-axis")
@@ -152,44 +218,42 @@ funcCreateStackedBarGraph = function(margin, height, width, data, tag,
       .style("text-anchor","end")
       .text("Number of Students");
 
-    // Add zero-line if needed
-    if (graph.yRange[0] < 0) {
-      graph.SvgGroup.append("line")
-        .attr("class","axis")
-        .attr("x1", 0)
-        .attr("x2", graph.Width-graph.Margin.axisLeft-graph.Margin.right)
-        .attr("y1", graph.Scale.y(0))
-        .attr("y2", graph.Scale.y(0))
-    }
+    graph.DrawBars(graph,true);
+  };
+  
+  // This scaling is not quite right, but the best can do for now.
+  graph.DrawMiniGraph = function(svg, height, width, margin) {
+    graph = this;
+    graph.Mini.Svg = svg;
+    graph.Mini.Height = height;
+    graph.Mini.Width = width;
+    graph.Mini.Margin = margin;
 
-    graph.GStackedBars = graph.SvgGroup.selectAll(".stacked-bar")
-      .data(graph.Data)
-      .enter().append("g")
-      .attr("class", "stacked-bar")
-      .attr("transform", function(d) {
-        return "translate("+graph.Scale.x(d.x)+",0)";
-      });
-    
-    graph.GStackedBars.selectAll("rect")
-      .data(function(d) { return d.bars; })
-      .enter().append("rect")
-      .attr("width", graph.Scale.x.rangeBand())
-      .attr("y", function(d) { return graph.Scale.y(d.y1); })
-      .attr("height", function(d) {
-        return graph.Scale.y(d.y0) - graph.Scale.y(d.y1);
-      })
-      .style("fill", function(d) { return graph.Scale.stackColor(d.color); })
-      .on("mouseover", function(d) {
-        graph.Tooltip.style("visibility", "visible")
-    	  .style("top", (event.pageY-10)+"px")
-          .style("left",(event.pageX+10)+"px")
-    	  .text(d.tooltip);
-      })
-      .on("mouseout", function(d){
-        graph.Tooltip.style("visibility", "hidden")
-      });
+    graph.Mini.Margin.axisLeft = graph.Mini.Margin.left;
+    graph.Mini.Margin.axisBottom = graph.Mini.Margin.bottom;
 
-  }
+    var scaleX = graph.Mini.Width/graph.Width;
+    var scaleY = graph.Mini.Height/graph.Height;
+
+    graph.Mini.Scale.x.rangeRoundBands([
+      0,
+      graph.Width-((graph.Mini.Margin.left+graph.Mini.Margin.right)/scaleX),
+    ],
+                                      .1);
+    graph.Mini.Scale.y.range([graph.Height-((graph.Mini.Margin.bottom+graph.Mini.Margin.top)/scaleY), graph.Mini.Margin.top]),
+
+    graph.Mini.SvgGroup = graph.Mini.Svg
+      .attr("id", graph.Mini.Tag+"-line-graph")
+      .attr("width", graph.Mini.Width)
+      .attr("height", graph.Mini.Height)
+      .append("g")
+      .attr("transform", "translate(" + graph.Mini.Margin.left + "," + 
+            graph.Mini.Margin.top + ") scale("+scaleX+","+scaleY+")");
+
+    graph.Mini.ZeroLineX2 = graph.Width-graph.Margin.left-graph.Margin.right;
+
+    graph.DrawBars(graph.Mini, false);
+  };
 
   return graph;
 };

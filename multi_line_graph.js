@@ -222,86 +222,6 @@ funcCreateMultiLineGraph = function(margin, height, width, data, tag,
       .text("Number of students");
 
     graph.DrawLines(graph, true);
-    
-    //   Draw Lines
-    // graph.SvgLineGroups = graph.SvgGroup.selectAll(".g-single-line-graph")
-    //   .data(graph.Data)
-    //   .enter().append("g")
-    //   .attr("class","g-single-line-graph")
-    //   .attr("id",function(d,i) { return graph.Tag+"-g-single-line-graph-"+i; });
-
-    // graph.SvgLineGroups.append("path")
-    //   .attr("class", "line-graph")
-    //   .attr("id", function(d,i) { return graph.Tag+"-line-"+i; })
-    //   .style("stroke", function(d,i) { return graph.Scale.color(i); })
-    //   .attr("d", function(d) { return graph.Line(d); })
-    //   .on("mouseover", function(d) {
-    //     svg_id = "#"+d3.select(this).node().parentNode.parentNode.parentNode.id;
-
-    //     d3.select(svg_id).selectAll(".g-single-line-graph")
-    //       .style("opacity", 0.2);
-
-    //     g_id = "#"+d3.select(this).node().parentNode.id;
-
-    //     d3.select(g_id).style("opacity",1);
-    //   })
-    //   .on("mouseout", function(d) {
-    //     svg_id = "#"+d3.select(this).node().parentNode.parentNode.parentNode.id;
-
-    //     d3.select(svg_id).selectAll(".g-single-line-graph")
-    //       .style("opacity", 1);
-    //   });
-
-    // //   Find tooltip div or if not there create
-    // graph.Tooltip = d3.select("#special-tooltip");
-    // if (graph.Tooltip[0][0] == null) { // "[0][0]" Hacky but it works :-/
-    //   graph.Tooltip = d3.select("body")
-    //     .append("div")
-    //     .attr("id","special-tooltip")
-    //     .style("position", "absolute")
-    //     .style("z-index", "10")
-    //     .style("visibility", "hidden");
-    // }
-    
-    // //   Create points on line graph
-    // graph.SvgLineGroups.selectAll("point")
-    //   .data(function(d) { return d; })
-    //   .enter().append("g:circle")
-    //   .attr("class", "point")
-    //   .attr("id", graph.Tag+"-point")
-    //   .attr("cx", function(d,i){
-    //     return graph.Scale.x(d.x);
-    //   })
-    //   .attr("cy", function(d,i){
-    //     return graph.Scale.y(d.y);
-    //   })
-    //   .attr("r", 5)
-    //   .style("fill", function(d) { return graph.Scale.color(d.graph); })
-    //   .on("mouseover", function(d){
-    //     d3.select(this).attr("opacity", "0.6");
-    //     graph.Tooltip.style("visibility", "visible")
-    // 	  .style("top", (event.pageY-10)+"px")
-    //       .style("left",(event.pageX+10)+"px")
-    // 	  .text(d.label);
-
-    //     svg_id = "#"+d3.select(this).node().parentNode.parentNode.parentNode.id;
-
-    //     d3.select(svg_id).selectAll(".g-single-line-graph")
-    //       .style("opacity", 0.2);
-
-    //     g_id = "#"+d3.select(this).node().parentNode.id;
-
-    //     d3.select(g_id).style("opacity",1);
-    //   })
-    //   .on("mouseout", function(d){
-    //     d3.select(this).attr("opacity", "1.0");
-    //     graph.Tooltip.style("visibility", "hidden")
-
-    //     svg_id = "#"+d3.select(this).node().parentNode.parentNode.parentNode.id;
-
-    //     d3.select(svg_id).selectAll(".g-single-line-graph")
-    //       .style("opacity", 1);
-    //   });
   };
 
   // This scaling is not quite right, but the best I can do.
@@ -314,12 +234,7 @@ funcCreateMultiLineGraph = function(margin, height, width, data, tag,
 
     var scaleX = graph.Mini.Width/graph.Width;
     var scaleY = graph.Mini.Height/graph.Height;
-    console.log(scaleX);
-    console.log(scaleY);
 
-    // graph.Mini.Scale.x.range([0,graph.Mini.Width-graph.Mini.Margin.left-
-    //                           graph.Mini.Margin.right]);
-    // graph.Mini.Scale.y.range([graph.Mini.Height-graph.Mini.Margin.bottom,0]);
     graph.Mini.Scale.x.range([
       0,
       graph.Width-((graph.Mini.Margin.left+graph.Mini.Margin.right)/scaleX)

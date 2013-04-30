@@ -104,7 +104,6 @@ funcCreateLineGraph = function(margin, height, width, data, tag) {
       .attr("d", LineGraph.Line);
 
     LineGraph.Tooltip = d3.select("#special-tooltip");
-    console.log(LineGraph.Tooltip);
     if (LineGraph.Tooltip[0][0] == null) { // "[0][0]" Hacky but it works :-/
       LineGraph.Tooltip = d3.select("body")
         .append("div")

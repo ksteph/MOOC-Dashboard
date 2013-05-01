@@ -2,7 +2,7 @@ var margin_activity = {top: 20, right: 0, bottom: 25, left: 0};
 var width_activity = window.innerWidth/2.2;
 var height_activity = window.innerHeight/2.8;
 
-var margin_multiple_top = {top: 20, right: 20, bottom: 0, left: 0};
+var margin_multiple_top = {top: 10, right: 20, bottom: 0, left: 0};
 var width_multiple_top = window.innerWidth/3.3;
 var height_multiple_top = window.innerHeight/3.5;
 
@@ -111,18 +111,22 @@ for (var i=0; i<data.GradedItems.length; i++) {
   var status_data = [];
   var max = 0;
   var min = 0;
+  var xLabel = [];
+  // var parantI = i;
+
   $.each(data.GradedItems[i].statusGraph.data, function(i,e_i) {
     var d = [];
     var pos = 0;
     var neg = 0;
-    
+    xLabel.push(data.GradedItems[parantI].itemTitles[i].slice(0,2));
+
     $.each(e_i, function(j, e_j) {
       var b = {};
       b.x = e_j.count;
       b.y = e_j.label;
       b.percentage = e_j.percentage;
       f = d3.format("2f");
-      b.label = e_j.count + " (" + f(e_j.percentage*100) + "%)";
+      b.label = data.GradedItems[parantI].itemTitles[i] + " "+ e_j.label + " (" + f(e_j.percentage*100) + "%: "+e_j.count+" Students)";
 
       if ((b.y == "Not Started") && (b.x > 0))
         b.x = b.x*-1;
@@ -142,25 +146,28 @@ for (var i=0; i<data.GradedItems.length; i++) {
 
     status_data.push(d);
   });
-  var top2 = funcCreateStackedBarGraph({top: 20, right: 20, bottom: 50, left: 0}, height_multiple_top, width_multiple_top, status_data, "top_status"+i, data.GradedItems[i].itemTitles, [min,max])
-  top2.Scale.stackColor.range(["#8EC6E8","#ff9b8e","#FFE796"]);
+  var top2 = funcCreateStackedBarGraph({top: 10, right: 20, bottom: 0, left: 0}, height_multiple_top, width_multiple_top, status_data, "top_status"+i, data.GradedItems[i].itemTitles, [min,max])
+  top2.Scale.stackColor.range(["#ff9b8e","#8EC6E8","#FFE796"]);
+  top2.XAxis.tickFormat(function(d,i){
+    return xLabel[i];
+  });
   svg = d3.select("#top-multiple"+i).append("svg").attr("display","none").attr("class","top-svg");
   top2.DrawGraph(svg);
+  top2.Rects.attr("opacity",0.8);
   storage_matrix.push(top2);
-  d3.select("#top_status"+i+"-x-axis").selectAll("text")
-  .attr("transform", function(d){
-    return "rotate(-30) translate(-20,20)"
-  });
+  d3.select("#top_status"+i+"-x-axis").selectAll("text");
 
 
   // attempt graph 
   var attempt_data = [];
   var xMax = 0;
   var xSum = 0;
+  xLabel = [];
 
   $.each(data.GradedItems[i].attemptsGraph.data, function(i,e_i) {
     var d = [];
     xSum = 0;
+    xLabel.push(data.GradedItems[parantI].itemTitles[i].slice(0,2));
 
     $.each(e_i, function(j, e_j) {
       var b = {};
@@ -173,25 +180,25 @@ for (var i=0; i<data.GradedItems.length; i++) {
       b.y = e_j.y;
       b.percentage = e_j.percentage;
       f = d3.format("2f");
-      if (e_j.y>10) b.label = "10+ (" + f(e_j.percentage*100) + "%)";
-      else b.label = e_j.y + " (" + f(e_j.percentage*100) + "%)";
+      if (e_j.y>10) b.label = data.GradedItems[parantI].itemTitles[i]+ " (10+ attempts:" + f(e_j.percentage*100) + "%)";
+      else if (e_j.y==1) b.label = data.GradedItems[parantI].itemTitles[i] + " (" + e_j.y + " attempt: " + f(e_j.percentage*100) + "%)";
+      else b.label = data.GradedItems[parantI].itemTitles[i] + " (" + e_j.y + " attempts: " + f(e_j.percentage*100) + "%)";
       d.push(b);
     });
 
     attempt_data.push(d);
   });
 
-  var top3 = funcCreateStackedBarGraph({top: 20, right: 20, bottom: 50, left: 0}, height_multiple_top, width_multiple_top, attempt_data, "top_attempt"+i, data.GradedItems[i].itemTitles, [0, xMax])
+  var top3 = funcCreateStackedBarGraph({top: 10, right: 20, bottom: 0, left: 0}, height_multiple_top, width_multiple_top, attempt_data, "top_attempt"+i, data.GradedItems[i].itemTitles, [0, xMax])
   svg = d3.select("#top-multiple"+i).append("svg").attr("display","none").attr("class","top-svg");
-  //top3.Scale.stackColor.range(["#dcedf7","#bcdcef","#9ccce8","#7cbbe0","#5dabd9","#ffe1dd","#ffbeb6","#ff9b8e","#ff7967","#ff5640","#ff3319"]);
-  top3.Scale.stackColor.range(["#5dabd9","#7cbbe0","#9ccce8","#bcdcef","#dcedf7","#ffe1dd","#ffbeb6","#ff9b8e","#ff7967","#ff5640","#ff3319"]);
-  top3.DrawGraph(svg);
-  top3.Rects.attr("opacity",0.6);
-  storage_matrix.push(top3);
-  d3.select("#top_attempt"+i+"-x-axis").selectAll("text")
-  .attr("transform", function(d){
-    return "rotate(-30) translate(-20,20)"
+  top3.Scale.stackColor.range(["#ffebeb","#ffd6d6","#ffc2c2","#ffadad","#ff9999","#ff8585","#ff7070","#ff5c5c","#ff4747","#ff3333","#ff1f1f"]);
+  top3.XAxis.tickFormat(function(d,i){
+    return xLabel[i];
   });
+  top3.DrawGraph(svg);
+  top3.Rects.attr("opacity",0.8);
+  storage_matrix.push(top3);
+  d3.select("#top_attempt"+i+"-x-axis").selectAll("text");
 
 }
   
@@ -253,7 +260,7 @@ for (var i=0; i<3; i++) {
   for (var k=0; k<3; k++) {
     svg = d3.select("#down-multiple"+i+" #down"+i+k+" svg");
     storage_matrix[i*3+k].DrawMiniGraph(svg, height_multiple_down, width_multiple_down, margin_multiple_down);
-    if (k==2) svg.selectAll("rect").attr("opacity", 0.6);
+    if (k==1 || k==2) svg.selectAll("rect").attr("opacity", 0.8);
   }
 }
 

@@ -220,6 +220,7 @@ svg.stacked-bar-graph {
 
 /* Tooltip */
 #special-tooltip {
+    width: 150px;
     background-color: #8EC6E8;
     opacity: 0.8;
     padding: 5px;

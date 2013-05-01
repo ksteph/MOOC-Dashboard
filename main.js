@@ -54,24 +54,49 @@ var smallMultiples = d3.select("#container-multiple").selectAll(".small-multiple
   })
 smallMultiples.append("div")
   .attr("class", "small-multiple-title")
-  .text(function(d,i){
-    if (i===0) return "Homework";
-    else if (i===1) return "Quizzes";
-    else return "Fake Homework"
-  });
+  .attr("id", function(d,i) {
+    return "small-multiple-title"+i;
+  })
 smallMultiples.append("div")
   .attr("class", "top-multiple")
   .attr("id", function(d,i) {
     return "top-multiple"+i;
   });
 
+d3.select("#small-multiple-title0").append("div").attr("class","left").text("Homework:");
+d3.select("#small-multiple-title0").append("div").attr("class","right").text("Grade Distribution");
+d3.select("#small-multiple-title1").append("div").attr("class","left").text("Quiz:");
+d3.select("#small-multiple-title1").append("div").attr("class","right").text("Grade Distribution");
+d3.select("#small-multiple-title2").append("div").attr("class","left").text("Homework Practice:");
+d3.select("#small-multiple-title2").append("div").attr("class","right").text("Grade Distribution");
+
+
+
 var storage_matrix = []; //dirty code
 
 /* Draw line/status/attempt graph, but set display to block/none */
 for (var i=0; i<data.GradedItems.length; i++) { 
-
   // line graph  
-  var top1 = funcCreateMultiLineGraph(margin_multiple_top, height_multiple_top, width_multiple_top, data.GradedItems[i].gradeDistroGraph.data, "top_line"+i, data.GradedItems[i].gradeDistroGraph.x_range, data.GradedItems[i].gradeDistroGraph.y_range);
+  var line_data = [];
+  var titles = data.GradedItems[i].itemTitles;
+  var parantI = i;
+
+  $.each(data.GradedItems[i].gradeDistroGraph.data, function(i,e_i) {
+    var d = [];
+
+    $.each(e_i, function(j, e_j) {
+      var b = {};
+      b.x = e_j.x;
+      b.y = e_j.y;
+      b.percentage = e_j.percentage;
+      b.label = data.GradedItems[parantI].itemTitles[i] + " (" + e_j.label + ")";
+      d.push(b);
+    });
+
+    line_data.push(d);
+  });
+
+  var top1 = funcCreateMultiLineGraph(margin_multiple_top, height_multiple_top, width_multiple_top, line_data, "top_line"+i, data.GradedItems[i].gradeDistroGraph.x_range, data.GradedItems[i].gradeDistroGraph.y_range);
   top1.XAxis.ticks(data.WeekActivity.length);
   svg = d3.select("#top-multiple"+i).append("svg").attr("class","top-svg");
   top1.DrawGraph(svg);
@@ -87,40 +112,60 @@ for (var i=0; i<data.GradedItems.length; i++) {
       b.x = e_j.count;
       b.y = e_j.label;
       b.percentage = e_j.percentage;
-      b.label = e_j.count + " (" + e_j.percentage + ")";
+      b.label = e_j.count + " (" + e_j.percentage*100 + "%)";
       d.push(b);
     });
 
     status_data.push(d);
   });
 
-  var top2 = funcCreateStackedBarGraph(margin_multiple_top, height_multiple_top, width_multiple_top, status_data, "top_status"+i, data.GradedItems[i].itemTitles, data.GradedItems[i].statusGraph.y_range)
+  var top2 = funcCreateStackedBarGraph({top: 20, right: 20, bottom: 50, left: 0}, height_multiple_top, width_multiple_top, status_data, "top_status"+i, data.GradedItems[i].itemTitles, data.GradedItems[i].statusGraph.y_range)
   top2.Scale.stackColor.range(["#3D9AD1","#FFD340","#FF5640"]);
   svg = d3.select("#top-multiple"+i).append("svg").attr("display","none").attr("class","top-svg");
   top2.DrawGraph(svg);
   storage_matrix.push(top2);
+  d3.select("#top_status"+i+"-x-axis").selectAll("text")
+  .attr("transform", function(d){
+    return "rotate(-30) translate(-20,20)"
+  });
+
 
   // attempt graph 
-  attempt_data = [];
+  var attempt_data = [];
+  var xMax = 0;
+  var xSum = 0;
+
   $.each(data.GradedItems[i].attemptsGraph.data, function(i,e_i) {
     var d = [];
+    xSum = 0;
 
     $.each(e_i, function(j, e_j) {
       var b = {};
       b.x = e_j.x;
+
+      //Calculate x_range manually
+      xSum = xSum + b.x;
+      if (xSum>xMax) xMax = xSum;
+
       b.y = e_j.y;
       b.percentage = e_j.percentage;
-      b.label = e_j.y + " (" + e_j.percentage + ")";
+      if (e_j.y>10) b.label = "10+ (" + e_j.percentage*100 + "%)";
+      else b.label = e_j.y + " (" + e_j.percentage*100 + "%)";
       d.push(b);
     });
+    console.log(xMax);
 
     attempt_data.push(d);
   });
 
-  var top3 = funcCreateStackedBarGraph(margin_multiple_top, height_multiple_top, width_multiple_top, attempt_data, "top_attempt"+i, data.GradedItems[i].itemTitles, data.GradedItems[i].attemptsGraph.y_range)
+  var top3 = funcCreateStackedBarGraph({top: 20, right: 20, bottom: 50, left: 0}, height_multiple_top, width_multiple_top, attempt_data, "top_attempt"+i, data.GradedItems[i].itemTitles, [0, xMax])
   svg = d3.select("#top-multiple"+i).append("svg").attr("display","none").attr("class","top-svg");
   top3.DrawGraph(svg);
   storage_matrix.push(top3);
+  d3.select("#top_attempt"+i+"-x-axis").selectAll("text")
+  .attr("transform", function(d){
+    return "rotate(-30) translate(-20,20)"
+  });
 
 }
   
@@ -145,19 +190,28 @@ d3.selectAll('.down-multiple').each(function(parantD) {
     .on("click", function(d,i) {
       console.log(parantD);
       if (i==0) {
+        $("#down-multiple"+parantD+" .down").removeClass("active");
+        $("#down-multiple"+parantD+" #down"+i).addClass("active");
         d3.select("svg#top_line"+parantD+"-line-graph").attr("display","block");
         d3.select("svg#top_status"+parantD+"-stacked-bar-graph").attr("display","none");
         d3.select("svg#top_attempt"+parantD+"-stacked-bar-graph").attr("display","none");
+        d3.select("#small-multiple"+parantD+" .small-multiple-title .right").text("Grade Distribution");  
       }
       else if (i==1) {
+        $("#down-multiple"+parantD+" .down").removeClass("active");
+        $("#down-multiple"+parantD+" #down"+i).addClass("active");
         d3.select("svg#top_line"+parantD+"-line-graph").attr("display","none");
         d3.select("svg#top_status"+parantD+"-stacked-bar-graph").attr("display","block");
         d3.select("svg#top_attempt"+parantD+"-stacked-bar-graph").attr("display","none");
+        d3.select("#small-multiple"+parantD+" .small-multiple-title .right").text("Student Status");
       }
       else if (i==2) {
+        $("#down-multiple"+parantD+" .down").removeClass("active");
+        $("#down-multiple"+parantD+" #down"+i).addClass("active");
         d3.select("svg#top_line"+parantD+"-line-graph").attr("display","none");
         d3.select("svg#top_status"+parantD+"-stacked-bar-graph").attr("display","none");
         d3.select("svg#top_attempt"+parantD+"-stacked-bar-graph").attr("display","block");
+        d3.select("#small-multiple"+parantD+" .small-multiple-title .right").text("Student Attempt");
       }
       else {
         console.log("something is wrong");

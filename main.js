@@ -1,42 +1,46 @@
 var margin_activity = {top: 20, right: 20, bottom: 0, left: 0};
 var width_activity = window.innerWidth/2.2;
-var height_activity = window.outerWidth/4.5;
+var height_activity = window.innerHeight/2.8;
 
 var margin_multiple_top = {top: 20, right: 20, bottom: 0, left: 0};
 var width_multiple_top = window.innerWidth/3.3;
-var height_multiple_top = window.outerWidth/5.5;
+var height_multiple_top = window.innerHeight/3.5;
 
 var margin_multiple_down = {top: 0, right: 0, bottom: 0, left: 0};
 var width_multiple_down = window.innerWidth/12;
-var height_multiple_down = window.outerWidth/20;
+var height_multiple_down = window.innerHeight/12;
 
 ///////////////////////
 
 /* Week Activity */
 var weekLineGraph = funcCreateLineGraph(margin_activity, height_activity, width_activity, data.WeekActivity, "week-activity");
-weekLineGraph.XAxis.ticks(data.WeekActivity.length);
-  // TODO
-  // .tickFormat(function(d,i){ 
-  //   return data.WeekActivity[i].label;
-  // });
+weekLineGraph.XAxis.ticks(data.WeekActivity.length)
+  .tickFormat(function(d,i){ 
+    return data.WeekActivity[i].x_label;
+  });
 svg = d3.select("#activity-week-container").append("svg");
 weekLineGraph.DrawGraph(svg);
+d3.select("#week-activity-x-axis").selectAll("text")
+  .attr("transform", function(d){
+    return "rotate(-10)"
+  });
 
 /* Overall Activity */
 var overallLineGraph = funcCreateLineGraph(margin_activity, height_activity, width_activity, data.OverallActivity, "overall-activity");
 overallLineGraph.Scale.x.domain(
   d3.extent(data.OverallActivity, function(d) { return d.x; }));
-overallLineGraph.XAxis.ticks(data.OverallActivity.length)
+overallLineGraph.XAxis.ticks(10)
   .tickFormat(function(d,i){
-    //console.log(d);
     var format = d3.time.format("%Y-%m-%d");
-    //console.log(i + ":" + format(new Date(data.OverallActivity[i].x)))
-    var date = format(new Date(data.OverallActivity[i].x));
-    return date; /*not working yet*/
+    return format(new Date(d*1000));
   });
 
 svg = d3.select("#activity-overall-container").append("svg");
 overallLineGraph.DrawGraph(svg);
+d3.select("#overall-activity-x-axis").selectAll("text")
+  .attr("transform", function(d){
+    return "rotate(-10)"
+  });
 
 /////////////////////
 
@@ -67,12 +71,8 @@ var storage_matrix = []; //dirty code
 for (var i=0; i<data.GradedItems.length; i++) { 
 
   // line graph  
-  var top1 = funcCreateMultiLineGraph(margin_multiple_top, height_multiple_top, width_multiple_top, data.GradedItems[i].gradeDistroGraph.data, "top_line"+i, [0,1], data.GradedItems[i].gradeDistroGraph.y_range);
+  var top1 = funcCreateMultiLineGraph(margin_multiple_top, height_multiple_top, width_multiple_top, data.GradedItems[i].gradeDistroGraph.data, "top_line"+i, data.GradedItems[i].gradeDistroGraph.x_range, data.GradedItems[i].gradeDistroGraph.y_range);
   top1.XAxis.ticks(data.WeekActivity.length);
-  // TODO
-  // .tickFormat(function(d,i){
-  //   return data.WeekActivity[i].label;
-  // });
   svg = d3.select("#top-multiple"+i).append("svg").attr("class","top-svg");
   top1.DrawGraph(svg);
   storage_matrix.push(top1);
@@ -95,6 +95,7 @@ for (var i=0; i<data.GradedItems.length; i++) {
   });
 
   var top2 = funcCreateStackedBarGraph(margin_multiple_top, height_multiple_top, width_multiple_top, status_data, "top_status"+i, data.GradedItems[i].itemTitles, data.GradedItems[i].statusGraph.y_range)
+  top2.Scale.stackColor.range(["#3D9AD1","#FFD340","#FF5640"]);
   svg = d3.select("#top-multiple"+i).append("svg").attr("display","none").attr("class","top-svg");
   top2.DrawGraph(svg);
   storage_matrix.push(top2);

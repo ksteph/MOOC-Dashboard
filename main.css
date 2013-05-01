@@ -44,7 +44,7 @@ body {
 #container {
     width: 100%;
     height: 100%;
-    overflow: hidden;
+    /*overflow: hidden;*/
 }
 
 
@@ -78,8 +78,9 @@ body {
 .activity-title,
 .small-multiple-title {
     padding-top: 1%;
-    padding-left: 2%;
-    width: 98%;
+    /*padding-left: 2%;*/
+    padding-left: 35%;
+    width: 65%;
     background-color: #EEE;
     border: 1px solid #aaa;
     border-bottom: 0px; 

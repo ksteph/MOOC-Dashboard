@@ -106,7 +106,7 @@ funcCreateStackedBarGraph = function(margin, height, width, data, tag,
     
     stackColor: d3.scale.ordinal()
       .domain(graph.StackColorDomain)
-      .range(["#111","#c00","#0c0","#00c","#cc0","#0cc","#c0c","#ccc"])
+      .range(["#ffeeee","#ffebeb","#ffd8d8","#ffc4c4","#ffb1b1","#ff9d9d","#ff8989","#ff7676","#ff6262","#ff4e4e","#ff3b3b"])
   };
 
   graph.Mini.Scale = {

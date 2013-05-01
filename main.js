@@ -11,6 +11,10 @@ var width_multiple_down = window.innerWidth/12;
 var height_multiple_down = window.innerHeight/12;
 
 ///////////////////////
+window.onresize = function(event) {
+  console.log("bkj:" + event);
+}
+///////////////////////
 
 /* Week Activity */
 var weekLineGraph = funcCreateLineGraph(margin_activity, height_activity, width_activity, data.WeekActivity, "week-activity");

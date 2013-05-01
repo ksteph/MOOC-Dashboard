@@ -48,11 +48,11 @@ var Container = (function(Container) {
     //   .attr("x", 100)
     //   .attr("y", 100);
 
-    Container.update();
+    //Container.update();
   }
 
-  Container.update = function() {
-  }
+  // Container.update = function() {
+  // }
 
   Container.pan = function(dx,dy) {
     if (Container.SvgG == null)
@@ -164,7 +164,7 @@ var Container = (function(Container) {
   return Container;
 })({});
 
-var test = (function() {})();
+// var test = (function() {})();
 
 // ===== What run after define everything ====
   // Map.setup();

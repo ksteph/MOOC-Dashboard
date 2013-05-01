@@ -432,7 +432,83 @@ var data = {
 
                     "statusGraph": {
                         "y_range": [0, 3756],
-                        "data": []
+                        "data": [
+					  [{
+					                                    "label": "Submitted",
+					                                    "count": 0,
+					                                    "percentage": 0.0
+					                                }, {
+					                                    "label": "In Progress",
+					                                    "count": 0,
+					                                    "percentage": 0.0
+					                                }, {
+					                                    "label": "Not Started",
+					                                    "count": 7637,
+					                                    "percentage": 1.0
+					                                }
+					                            ],
+
+					  [{
+					                                    "label": "Submitted",
+					                                    "count": 0,
+					                                    "percentage": 0.0
+					                                }, {
+					                                    "label": "In Progress",
+					                                    "count": 0,
+					                                    "percentage": 0.0
+					                                }, {
+					                                    "label": "Not Started",
+					                                    "count": 7637,
+					                                    "percentage": 1.0
+					                                }
+					                            ],
+
+					  [{
+					                                    "label": "Submitted",
+					                                    "count": 0,
+					                                    "percentage": 0.0
+					                                }, {
+					                                    "label": "In Progress",
+					                                    "count": 0,
+					                                    "percentage": 0.0
+					                                }, {
+					                                    "label": "Not Started",
+					                                    "count": 7637,
+					                                    "percentage": 1.0
+					                                }
+					                            ],
+
+					  [{
+					                                    "label": "Submitted",
+					                                    "count": 0,
+					                                    "percentage": 0.0
+					                                }, {
+					                                    "label": "In Progress",
+					                                    "count": 0,
+					                                    "percentage": 0.0
+					                                }, {
+					                                    "label": "Not Started",
+					                                    "count": 7637,
+					                                    "percentage": 1.0
+					                                }
+					                            ],
+
+					  [{
+					                                    "label": "Submitted",
+					                                    "count": 0,
+					                                    "percentage": 0.0
+					                                }, {
+					                                    "label": "In Progress",
+					                                    "count": 0,
+					                                    "percentage": 0.0
+					                                }, {
+					                                    "label": "Not Started",
+					                                    "count": 7637,
+					                                    "percentage": 1.0
+					                                }
+					                            ],
+
+]
                     },
 
                     "attemptsGraph": {

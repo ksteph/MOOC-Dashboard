@@ -17,6 +17,8 @@ window.onresize = function(event) {
 ///////////////////////
 
 /* Week Activity */
+// Make sure draw line in right order
+data.WeekActivity.sort(function(a,b){ return a.x-b.x; });
 var weekLineGraph = funcCreateLineGraph(margin_activity, height_activity, width_activity, data.WeekActivity, "week-activity");
 weekLineGraph.XAxis.ticks(data.WeekActivity.length)
   .tickFormat(function(d,i){ 
@@ -109,8 +111,12 @@ for (var i=0; i<data.GradedItems.length; i++) {
 
   //status graph 
   var status_data = [];
+  var max = 0;
+  var min = 0;
   $.each(data.GradedItems[i].statusGraph.data, function(i,e_i) {
     var d = [];
+    var pos = 0;
+    var neg = 0;
     
     $.each(e_i, function(j, e_j) {
       var b = {};
@@ -118,13 +124,26 @@ for (var i=0; i<data.GradedItems.length; i++) {
       b.y = e_j.label;
       b.percentage = e_j.percentage;
       b.label = e_j.count + " (" + e_j.percentage*100 + "%)";
+
+      if ((b.y == "Not Started") && (b.x > 0))
+        b.x = b.x*-1;
+
+      if (b.x > 0)
+        pos = pos + b.x;
+      if (b.x < 0)
+        neg = neg + b.x;
+
       d.push(b);
     });
 
+    if (pos > max)
+      max = pos;
+    if (neg < min)
+      min = neg;
+
     status_data.push(d);
   });
-
-  var top2 = funcCreateStackedBarGraph({top: 20, right: 20, bottom: 50, left: 0}, height_multiple_top, width_multiple_top, status_data, "top_status"+i, data.GradedItems[i].itemTitles, data.GradedItems[i].statusGraph.y_range)
+  var top2 = funcCreateStackedBarGraph({top: 20, right: 20, bottom: 50, left: 0}, height_multiple_top, width_multiple_top, status_data, "top_status"+i, data.GradedItems[i].itemTitles, [min,max])
   top2.Scale.stackColor.range(["#8EC6E8","#ff9b8e","#FFE796"]);
   svg = d3.select("#top-multiple"+i).append("svg").attr("display","none").attr("class","top-svg");
   top2.DrawGraph(svg);

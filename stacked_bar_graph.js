@@ -95,8 +95,6 @@ funcCreateStackedBarGraph = function(margin, height, width, data, tag,
       }
     });
 
-//    d.bars = negAry.concat(posAry);
-
     graph.Data.push(d);
   });
 

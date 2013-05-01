@@ -13,10 +13,10 @@ body {
     shape-rendering: crispEdges;
 }
 .axis-label {
-    font: 10px sans-serif;
+    font-size: 10px;
 }
 .axis text {
-    font: 10px sans-serif;
+    font-size: 10px;
     fill: #000;
     stroke-width: 0px;
 }
@@ -75,12 +75,12 @@ body {
     margin: 17 0 0 50;
 }
 
-.activity-title,
-.small-multiple-title {
-    padding-top: 1%;
-    /*padding-left: 2%;*/
-    padding-left: 35%;
-    width: 65%;
+.activity-title {
+    width: 100%;
+    text-align: center;
+    color: #333;
+    padding-top: 10px;
+
     background-color: #EEE;
     border: 1px solid #aaa;
     border-bottom: 0px; 
@@ -88,10 +88,44 @@ body {
     -moz-box-shadow: 0 1px 2px rgba(0,0,0,0.1);
     box-shadow: 0 1px 2px rgba(0,0,0,0.1);
 }
+
 .small-multiple-title {
     padding-top: 2%;
     padding-left: 4%;
     width: 96%;
+    overflow: hidden;
+
+    background-color: #EEE;
+    border: 1px solid #aaa;
+    border-bottom: 0px; 
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    -moz-box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+.small-multiple-title .left {
+    float: left;
+    color: #666;
+
+    padding: 5px;
+    background-color: #ddd;
+    /*border: 1px solid #aaa;*/
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    -moz-box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+
+/*    transform:rotate(-20deg);
+    -ms-transform:rotate(-20deg);
+    -webkit-transform:rotate(-20deg);*/
+}
+.small-multiple-title .right {
+    float: left;
+    position: absolute;
+    padding-top: 5px;
+    padding-left: 8%;
+    color: #333;
 }
 
 /* Activity */
@@ -134,27 +168,18 @@ body {
     padding-left: 1.5%;
     padding-right: 1.5%;
 }
-.small-multiple-title {
-    overflow: hidden;
-}
-.small-multiple-title .left {
-    float: left;
-}
-.small-multiple-title .right {
-    float: left;
-    padding-left: 20px;
-}
 .top-multiple {
     height: 60%;
 }
 .down-multiple {
     /*background-color: #555;*/
     height: 30%;
+    padding-left: 3%;
 }
 .down {
     background-color: #c3c3c3;
     float: left;
-    width: 29%;
+    width: 30%;
     height: 58%;
     padding: 1% 0 1% 1%;
     margin: 1%;
@@ -162,7 +187,7 @@ body {
 
 .down.active,
 .down.active:hover {
-    background-color: #3D9AD1;
+    background-color: #8EC6E8;
 }
 .down:hover {
     background-color: #cccccc;

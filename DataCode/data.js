@@ -1,5 +1,4 @@
 var data = {
-    [{
             "GradedItems": [{
                     "name": "homework",
                     "itemTitles": ["Q3: 4-Queens", "Q1: Campus CSP", "Q2: CSP Properties", "Q4: Tree-Structured CSPs", "Q5: Solving Tree-Structured CSPs"],
@@ -1712,6 +1711,4 @@ var data = {
                     "label": "Date 2012-10-14 23:59:59 - 10377 Students Active"
                 }
             ]
-        }
-    ]
-}
+ }

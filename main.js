@@ -1,4 +1,4 @@
-var margin_activity = {top: 20, right: 20, bottom: 0, left: 0};
+var margin_activity = {top: 20, right: 0, bottom: 25, left: 0};
 var width_activity = window.innerWidth/2.2;
 var height_activity = window.innerHeight/2.8;
 
@@ -28,8 +28,10 @@ svg = d3.select("#activity-week-container").append("svg");
 weekLineGraph.DrawGraph(svg);
 d3.select("#week-activity-x-axis").selectAll("text")
   .attr("transform", function(d){
-    return "rotate(-10)"
-  });
+    return "rotate(-90) translate(-10,-12)"
+  })
+  .style("text-anchor", "end")
+  .style("font-size", "8px");
 
 /* Overall Activity */
 var overallLineGraph = funcCreateLineGraph(margin_activity, height_activity, width_activity, data.OverallActivity, "overall-activity");
@@ -69,11 +71,11 @@ smallMultiples.append("div")
     return "top-multiple"+i;
   });
 
-d3.select("#small-multiple-title0").append("div").attr("class","left").text("Homework");
+d3.select("#small-multiple-title0").append("div").attr("class","left").text("Homework: ");
 d3.select("#small-multiple-title0").append("div").attr("class","right").text("Grade Distribution");
-d3.select("#small-multiple-title1").append("div").attr("class","left").text("Quiz");
+d3.select("#small-multiple-title1").append("div").attr("class","left").text("HW Practice: ");
 d3.select("#small-multiple-title1").append("div").attr("class","right").text("Grade Distribution");
-d3.select("#small-multiple-title2").append("div").attr("class","left").text("HW Practice");
+d3.select("#small-multiple-title2").append("div").attr("class","left").text("Quiz: ");
 d3.select("#small-multiple-title2").append("div").attr("class","right").text("Grade Distribution");
 
 
@@ -92,7 +94,7 @@ for (var i=0; i<data.GradedItems.length; i++) {
 
     $.each(e_i, function(j, e_j) {
       var b = {};
-      b.x = e_j.x;
+      b.x = e_j.x*100;
       b.y = e_j.y;
       b.percentage = e_j.percentage;
       b.label = data.GradedItems[parantI].itemTitles[i] + " (" + e_j.label + ")";
@@ -103,11 +105,13 @@ for (var i=0; i<data.GradedItems.length; i++) {
   });
 
   var top1 = funcCreateMultiLineGraph(margin_multiple_top, height_multiple_top, width_multiple_top, line_data, "top_line"+i, data.GradedItems[i].gradeDistroGraph.x_range, data.GradedItems[i].gradeDistroGraph.y_range);
-  top1.XAxis.ticks(data.WeekActivity.length);
+  top1.XAxis.ticks(10); // data.WeekActivity.length
   top1.Scale.color.range(["#3D9AD1","#3D51D1","#733DD1","#3DD1BE","#3DD173","#E9BBA0","#D1BE3D","#D13D51","#D1733D","#A0CEE9","#D13D9B"]);
   svg = d3.select("#top-multiple"+i).append("svg").attr("class","top-svg");
   top1.DrawGraph(svg);
   storage_matrix.push(top1);
+  d3.select("#top_line"+i+"-x-axis").selectAll("text")
+  .style("font-size", "8px");
 
   //status graph 
   var status_data = [];
@@ -123,7 +127,8 @@ for (var i=0; i<data.GradedItems.length; i++) {
       b.x = e_j.count;
       b.y = e_j.label;
       b.percentage = e_j.percentage;
-      b.label = e_j.count + " (" + e_j.percentage*100 + "%)";
+      f = d3.format("2f");
+      b.label = e_j.count + " (" + f(e_j.percentage*100) + "%)";
 
       if ((b.y == "Not Started") && (b.x > 0))
         b.x = b.x*-1;
@@ -173,8 +178,9 @@ for (var i=0; i<data.GradedItems.length; i++) {
 
       b.y = e_j.y;
       b.percentage = e_j.percentage;
-      if (e_j.y>10) b.label = "10+ (" + e_j.percentage*100 + "%)";
-      else b.label = e_j.y + " (" + e_j.percentage*100 + "%)";
+      f = d3.format("2f");
+      if (e_j.y>10) b.label = "10+ (" + f(e_j.percentage*100) + "%)";
+      else b.label = e_j.y + " (" + f(e_j.percentage*100) + "%)";
       d.push(b);
     });
     console.log(xMax);

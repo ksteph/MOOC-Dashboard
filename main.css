@@ -105,16 +105,17 @@ body {
 .small-multiple-title .left {
     float: left;
     color: #666;
+    /*font-size: 10px;*/
 
     padding: 5px;
-    background-color: #ddd;
+/*    background-color: #ddd;*/
     /*border: 1px solid #aaa;*/
-    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+/*    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.1);
     -moz-box-shadow: 0 1px 2px rgba(0,0,0,0.1);
     box-shadow: 0 1px 2px rgba(0,0,0,0.1);
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
-    border-radius: 3px;
+    border-radius: 3px;*/
 
 /*    transform:rotate(-20deg);
     -ms-transform:rotate(-20deg);
@@ -122,9 +123,9 @@ body {
 }
 .small-multiple-title .right {
     float: left;
-    position: absolute;
+    /*position: absolute;*/
     padding-top: 5px;
-    padding-left: 8%;
+    padding-left: 0;
     color: #333;
 }
 

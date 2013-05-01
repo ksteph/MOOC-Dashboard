@@ -126,7 +126,7 @@ for (var i=0; i<data.GradedItems.length; i++) {
       b.y = e_j.label;
       b.percentage = e_j.percentage;
       f = d3.format("2f");
-      b.label = data.GradedItems[parantI].itemTitles[i] + " "+ e_j.label + " (" + f(e_j.percentage*100) + "%: "+e_j.count+" Students)";
+      b.label = data.GradedItems[parantI].itemTitles[i] + " - "+ e_j.label + " (" + f(e_j.percentage*100) + "%: "+e_j.count+" Students)";
 
       if ((b.y == "Not Started") && (b.x > 0))
         b.x = b.x*-1;
@@ -268,28 +268,63 @@ for (var i=0; i<3; i++) {
 
 ///////////////////////
 
-var ratioX = 1;
-var ratioY = 1;
-var transMatrix = [1,0,0,1,0,0];
-var prevWidth = window.innerWidth;
-var prevHeight = window.innerHeight;
+// var CONSTANTS = {
+//     zoom_scale : 1.1,
+//     zoom_in_limit : 30.0,
+//     zoom_out_limit : 0.3,
+//     pan_step : 10,
+// };
 
-var allGs = d3.selectAll("svg");
-allGs.attr("transform", "matrix("+transMatrix.join(' ')+")");
+// var ratioX = 1;
+// var ratioY = 1;
+// var transMatrix = [1,0,0,1,0,0];
+// var prevWidth = window.innerWidth;
+// var prevHeight = window.innerHeight;
 
-window.onresize = function(event) {
+// //var allGs = d3.selectAll("svg").select("g");
+// //allGs.attr("transform", "matrix("+transMatrix.join(' ')+")");
 
-  //console.log("bkj:" + event);
-  //console.log("width: "+window.innerWidth);
-  //console.log("height: "+window.innerHeight);
-  ratioX = window.innerWidth / prevWidth;
-  ratioY = window.innerHeight / prevHeight;
-  //console.log("rX: "+ratioX);
-  //console.log("rY: "+ratioY);
-  //transMatrix = [ratioX,0,0,ratioY,0,0];
-  //allGs.attr("transform", "matrix("+transMatrix.join(' ')+")");
-  prevWidth = window.innerWidth;
-  prevHeight = window.innerHeight;
-}
-///////////////////////
+// window.onresize = function(event) {
+
+//   //console.log("bkj:" + event);
+//   //console.log("width: "+window.innerWidth);
+//   //console.log("height: "+window.innerHeight);
+//   ratioX = window.innerWidth / prevWidth;
+//   ratioY = window.innerHeight / prevHeight;
+//   //console.log("rX: "+ratioX);
+//   //console.log("rY: "+ratioY);
+//   //transMatrix = [ratioX,0,0,ratioY,0,0];
+//   //allGs.attr("transform", "matrix("+transMatrix.join(' ')+")");
+//   prevWidth = window.innerWidth;
+//   prevHeight = window.innerHeight;
+
+//   //if (ratioX<1 || ratioY<1) zoom(1.0/CONSTANTS.zoom_scale);
+//   //else zoom(CONSTANTS.zoom_scale);
+//   //
+//   //Container.zoomIn = function() { Container.zoom(CONSTANTS.zoom_scale); }
+//   //Container.zoomOut = function() { Container.zoom(1.0/CONSTANTS.zoom_scale); }
+// }
+
+// var MousePos = [0,0];
+
+// zoom = function(scale) {
+//   //console.log(scale);
+//   if (allGs == null)
+//     return;
+    
+//   if (transMatrix[0]*scale > CONSTANTS.zoom_in_limit || 
+//       transMatrix[0]*scale < CONSTANTS.zoom_out_limit)
+//     return;
+
+//   for(var i = 0; i < transMatrix.length; i++) {
+//     transMatrix[i] *= scale;
+//   }
+
+//   transMatrix[4] += (1-scale)*MousePos[0];
+//   transMatrix[5] += (1-scale)*MousePos[1];
+
+//   var matrix = "matrix("+transMatrix.join(' ')+")";
+//   allGs.attr("transform", matrix);
+// }
+  ///////////////////////
 

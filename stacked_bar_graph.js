@@ -60,13 +60,23 @@ funcCreateStackedBarGraph = function(margin, height, width, data, tag,
   $.each(data, function(i,e_i) {
     var d = {};
 
-    var currTotal = e_i[0].x;
-    if (currTotal > 0) currTotal = 0;
+    var currTotal = 0;
+    var negAry = [];
+    var posAry = [];
+    $.each(e_i,function(j,e_j) {
+      if (e_j.x < 0)
+        currTotal += e_j.x;
+
+      if (e_j.x < 0)
+        negAry.push(e_j);
+      else 
+        posAry.push(e_j);
+    });
 
     d.x = graph.xRange[i];
     d.bars = [];
 
-    $.each(e_i, function(j,e_j) {
+    $.each(negAry.concat(posAry), function(j,e_j) {
       var b = {};
       b.y0 = currTotal;
       if (e_j.x > 0) {
@@ -84,6 +94,8 @@ funcCreateStackedBarGraph = function(margin, height, width, data, tag,
         graph.StackColorDomain.push(b.color);
       }
     });
+
+//    d.bars = negAry.concat(posAry);
 
     graph.Data.push(d);
   });

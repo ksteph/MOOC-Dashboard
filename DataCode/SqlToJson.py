@@ -8,6 +8,11 @@ import collections
 cnx = mysql.connector.connect(user='root', password='root', host='localhost',port='8889', database='info247')
 cur = cnx.cursor()
 
+# Find the number of active students for this week
+cur.execute("select count(distinct anon_student_id) from week3")
+act_rows = cur.fetchall()
+act_student_count = act_rows[0][0]
+
 
 cur.execute("select gitemtype,name, module_id, count(distinct anon_student_id) from week3 where module_type = 'problem'  group by gitemtype,module_id")
 base_rows = cur.fetchall()
@@ -84,16 +89,25 @@ for row in base_rows:
 		cur.execute(status_query)
 		statusrow = cur.fetchall()
 		status_student_count = 0
+		flag_count = 0
 		for s_row in statusrow:
+			flag_count = flag_count + 1
 			dstatus_ind = collections.OrderedDict()
 			dstatus_ind['label'] = attempt_dict[str(s_row[1])]
 			dstatus_ind['count'] = s_row[0]
-			dstatus_ind['percentage'] = 0
+			dstatus_ind['percentage'] = round(float(s_row[0]) / act_student_count,2)
 			dstatus['data'][k].append(dstatus_ind)
 			status_student_count = status_student_count + s_row[0]   # For Percentage
+			if flag_count == 2:
+				dstatus_ind = collections.OrderedDict()
+				dstatus_ind['label'] = attempt_dict['3']
+				dstatus_ind['count'] = act_student_count - status_student_count
+				dstatus_ind['percentage'] = round((float(act_student_count - status_student_count)/act_student_count),2)
+				dstatus['data'][k].append(dstatus_ind)
+				
 			
-		for entry_s in dstatus['data'][k]:
-			entry_s['percentage'] = round(float(entry_s['count']) / status_student_count,2)
+		#for entry_s in dstatus['data'][k]:
+		#	entry_s['percentage'] = round(float(entry_s['count']) / status_student_count,2)
 		
 		#******************************************************************************************************************************************************
 		# Attempt Graph
@@ -171,16 +185,24 @@ for row in base_rows:
 		cur.execute(status_query)
 		statusrow = cur.fetchall()
 		status_student_count = 0
+		flag_count = 0
 		for s_row in statusrow:
+			flag_count = flag_count + 1
 			dstatus_ind = collections.OrderedDict()
 			dstatus_ind['label'] = attempt_dict[str(s_row[1])]
 			dstatus_ind['count'] = s_row[0]
-			dstatus_ind['percentage'] = 0
+			dstatus_ind['percentage'] = round(float(s_row[0]) / act_student_count,2)
 			dstatus['data'][k].append(dstatus_ind)
 			status_student_count = status_student_count + s_row[0]   # For Percentage
+			if flag_count == 2:
+				dstatus_ind = collections.OrderedDict()
+				dstatus_ind['label'] = attempt_dict['3']
+				dstatus_ind['count'] = -(act_student_count - status_student_count)
+				dstatus_ind['percentage'] = round((float(act_student_count - status_student_count)/act_student_count),2)
+				dstatus['data'][k].append(dstatus_ind)
 			
-		for entry_s in dstatus['data'][k]:
-			entry_s['percentage'] = round(float(entry_s['count']) / status_student_count,2)
+		#for entry_s in dstatus['data'][k]:
+		#	entry_s['percentage'] = round(float(entry_s['count']) / status_student_count,2)
 			
 		#******************************************************************************************************************************************************
 		#Attempt Distribution
@@ -218,21 +240,21 @@ for row in base_rows:
 # Weekly Activity
 #******************************************************************************************************************************************************
 
-cur.execute("select count(distinct anon_student_id),position, module_id from week3 where module_type = 'chapter' group by module_id,position")
+cur.execute("select count(distinct anon_student_id),seqnumber, seqname, seqlabel from week3 where module_type = 'sequential' group by module_id,position")
 week_activity = cur.fetchall()
 week3_dict = {'1':'Lecture 4: CSPs','2':'Lecture 4: CSPs (continued)','3':'Lecture 5: CSPs II','4':'Lecture 5: CSPs II (continued)','5':'Homework 2: CSPs','6':'Homework 2: CSPs (practice)'}
 for w_row in week_activity:
 	dweekact = collections.OrderedDict()
-	dweekact['x'] = w_row[1]
+	dweekact['x'] = w_row[1]-1
 	dweekact['y'] = w_row[0]
-	dweekact['x_label'] = week3_dict[str(int(w_row[1]))]
-	dweekact['label'] = 'Constraint Satisfaction Problems'
+	dweekact['x_label'] = w_row[2]
+	dweekact['label'] = w_row[3]
 	rowweek_list.append(dweekact)
 
 #******************************************************************************************************************************************************
 # Overall Activity
 #******************************************************************************************************************************************************
-cur.execute("select * from overall_activity")
+cur.execute("select * from ov_activity")
 over_activity = cur.fetchall()
 for o_row in over_activity:
 	dweekover = collections.OrderedDict()
@@ -259,8 +281,6 @@ j = json.dumps(basearray_list)
 
 f = open('data.js', 'w')
 print >> f, j
-	
-
 
 
 # Connection Close

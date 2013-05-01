@@ -10,12 +10,6 @@ var margin_multiple_down = {top: 0, right: 0, bottom: 0, left: 0};
 var width_multiple_down = window.innerWidth/12;
 var height_multiple_down = window.innerHeight/12;
 
-///////////////////////
-window.onresize = function(event) {
-  console.log("bkj:" + event);
-}
-///////////////////////
-
 /* Week Activity */
 // Make sure draw line in right order
 data.WeekActivity.sort(function(a,b){ return a.x-b.x; });
@@ -183,7 +177,6 @@ for (var i=0; i<data.GradedItems.length; i++) {
       else b.label = e_j.y + " (" + f(e_j.percentage*100) + "%)";
       d.push(b);
     });
-    console.log(xMax);
 
     attempt_data.push(d);
   });
@@ -263,4 +256,33 @@ for (var i=0; i<3; i++) {
     if (k==2) svg.selectAll("rect").attr("opacity", 0.6);
   }
 }
+
+
+
+///////////////////////
+
+var ratioX = 1;
+var ratioY = 1;
+var transMatrix = [1,0,0,1,0,0];
+var prevWidth = window.innerWidth;
+var prevHeight = window.innerHeight;
+
+var allGs = d3.selectAll("svg");
+allGs.attr("transform", "matrix("+transMatrix.join(' ')+")");
+
+window.onresize = function(event) {
+
+  //console.log("bkj:" + event);
+  //console.log("width: "+window.innerWidth);
+  //console.log("height: "+window.innerHeight);
+  ratioX = window.innerWidth / prevWidth;
+  ratioY = window.innerHeight / prevHeight;
+  //console.log("rX: "+ratioX);
+  //console.log("rY: "+ratioY);
+  //transMatrix = [ratioX,0,0,ratioY,0,0];
+  //allGs.attr("transform", "matrix("+transMatrix.join(' ')+")");
+  prevWidth = window.innerWidth;
+  prevHeight = window.innerHeight;
+}
+///////////////////////
 

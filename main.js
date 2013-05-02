@@ -1,6 +1,6 @@
 var margin_activity = {top: 20, right: 0, bottom: 25, left: 0};
-var width_activity = window.innerWidth/2.2;
-var height_activity = window.innerHeight/2.8;
+var width_activity = window.innerWidth/2.8;
+var height_activity = window.innerHeight/3.5;
 
 var margin_multiple_top = {top: 10, right: 20, bottom: 0, left: 0};
 var width_multiple_top = window.innerWidth/3.3;
@@ -10,6 +10,8 @@ var margin_multiple_down = {top: 0, right: 0, bottom: 0, left: 0};
 var width_multiple_down = window.innerWidth/12;
 var height_multiple_down = window.innerHeight/12;
 
+///////////////////////
+
 /* Week Activity */
 // Make sure draw line in right order
 data.WeekActivity.sort(function(a,b){ return a.x-b.x; });
@@ -18,7 +20,8 @@ weekLineGraph.XAxis.ticks(data.WeekActivity.length)
   .tickFormat(function(d,i){ 
     return data.WeekActivity[i].x_label;
   });
-svg = d3.select("#activity-week-container").append("svg");
+svg = d3.select("#activity-week-container").append("svg")
+  .attr("viewBox", "0 0 "+width_activity+" "+height_activity);
 weekLineGraph.DrawGraph(svg);
 d3.select("#week-activity-x-axis").selectAll("text")
   .attr("transform", function(d){
@@ -37,11 +40,12 @@ overallLineGraph.XAxis.ticks(10)
     return format(new Date(d*1000));
   });
 
-svg = d3.select("#activity-overall-container").append("svg");
+svg = d3.select("#activity-overall-container").append("svg")
+  .attr("viewBox", "0 0 "+width_activity+" "+height_activity);
 overallLineGraph.DrawGraph(svg);
 d3.select("#overall-activity-x-axis").selectAll("text")
   .attr("transform", function(d){
-    return "rotate(-10)"
+    return "rotate(-20) translate(-12,0)"
   });
 
 /////////////////////
@@ -101,7 +105,8 @@ for (var i=0; i<data.GradedItems.length; i++) {
   var top1 = funcCreateMultiLineGraph(margin_multiple_top, height_multiple_top, width_multiple_top, line_data, "top_line"+i, data.GradedItems[i].gradeDistroGraph.x_range, data.GradedItems[i].gradeDistroGraph.y_range);
   top1.XAxis.ticks(10); // data.WeekActivity.length
   top1.Scale.color.range(["#3D9AD1","#3D51D1","#733DD1","#3DD1BE","#3DD173","#E9BBA0","#D1BE3D","#D13D51","#D1733D","#A0CEE9","#D13D9B"]);
-  svg = d3.select("#top-multiple"+i).append("svg").attr("class","top-svg");
+  svg = d3.select("#top-multiple"+i).append("svg").attr("class","top-svg")
+    .attr("viewBox", "0 0 "+width_multiple_top+" "+height_multiple_top);
   top1.DrawGraph(svg);
   storage_matrix.push(top1);
   d3.select("#top_line"+i+"-x-axis").selectAll("text")
@@ -151,7 +156,8 @@ for (var i=0; i<data.GradedItems.length; i++) {
   top2.XAxis.tickFormat(function(d,i){
     return xLabel[i];
   });
-  svg = d3.select("#top-multiple"+i).append("svg").attr("display","none").attr("class","top-svg");
+  svg = d3.select("#top-multiple"+i).append("svg").attr("display","none").attr("class","top-svg")
+    .attr("viewBox", "0 0 "+width_multiple_top+" "+height_multiple_top);
   top2.DrawGraph(svg);
   top2.Rects.attr("opacity",0.8);
   storage_matrix.push(top2);
@@ -190,7 +196,8 @@ for (var i=0; i<data.GradedItems.length; i++) {
   });
 
   var top3 = funcCreateStackedBarGraph({top: 10, right: 20, bottom: 0, left: 0}, height_multiple_top, width_multiple_top, attempt_data, "top_attempt"+i, data.GradedItems[i].itemTitles, [0, xMax])
-  svg = d3.select("#top-multiple"+i).append("svg").attr("display","none").attr("class","top-svg");
+  svg = d3.select("#top-multiple"+i).append("svg").attr("display","none").attr("class","top-svg")
+    .attr("viewBox", "0 0 "+width_multiple_top+" "+height_multiple_top);
   top3.Scale.stackColor.range(["#ffebeb","#ffd6d6","#ffc2c2","#ffadad","#ff9999","#ff8585","#ff7070","#ff5c5c","#ff4747","#ff3333","#ff1f1f"]);
   top3.XAxis.tickFormat(function(d,i){
     return xLabel[i];
@@ -221,7 +228,6 @@ d3.selectAll('.down-multiple').each(function(parantD) {
       return "down-svg"+i;
     })
     .on("click", function(d,i) {
-      console.log(parantD);
       if (i==0) {
         $("#down-multiple"+parantD+" .down").removeClass("active");
         $("#down-multiple"+parantD+" #down"+parantD+i).addClass("active");
@@ -244,7 +250,7 @@ d3.selectAll('.down-multiple').each(function(parantD) {
         d3.select("svg#top_line"+parantD+"-line-graph").attr("display","none");
         d3.select("svg#top_status"+parantD+"-stacked-bar-graph").attr("display","none");
         d3.select("svg#top_attempt"+parantD+"-stacked-bar-graph").attr("display","block");
-        d3.select("#small-multiple"+parantD+" .small-multiple-title .right").text("Student Attempt");
+        d3.select("#small-multiple"+parantD+" .small-multiple-title .right").text("Student Attempts");
       }
       else {
         console.log("something is wrong");
@@ -258,7 +264,9 @@ $("#down20").addClass("active");
 
 for (var i=0; i<3; i++) {
   for (var k=0; k<3; k++) {
-    svg = d3.select("#down-multiple"+i+" #down"+i+k+" svg");
+    svg = d3.select("#down-multiple"+i+" #down"+i+k+" svg")
+      .attr("viewBox", "0 0 "+width_multiple_down+" "+height_multiple_down)
+      .attr("display","block");
     storage_matrix[i*3+k].DrawMiniGraph(svg, height_multiple_down, width_multiple_down, margin_multiple_down);
     if (k==1 || k==2) svg.selectAll("rect").attr("opacity", 0.8);
   }
@@ -266,65 +274,5 @@ for (var i=0; i<3; i++) {
 
 
 
-///////////////////////
 
-// var CONSTANTS = {
-//     zoom_scale : 1.1,
-//     zoom_in_limit : 30.0,
-//     zoom_out_limit : 0.3,
-//     pan_step : 10,
-// };
-
-// var ratioX = 1;
-// var ratioY = 1;
-// var transMatrix = [1,0,0,1,0,0];
-// var prevWidth = window.innerWidth;
-// var prevHeight = window.innerHeight;
-
-// //var allGs = d3.selectAll("svg").select("g");
-// //allGs.attr("transform", "matrix("+transMatrix.join(' ')+")");
-
-// window.onresize = function(event) {
-
-//   //console.log("bkj:" + event);
-//   //console.log("width: "+window.innerWidth);
-//   //console.log("height: "+window.innerHeight);
-//   ratioX = window.innerWidth / prevWidth;
-//   ratioY = window.innerHeight / prevHeight;
-//   //console.log("rX: "+ratioX);
-//   //console.log("rY: "+ratioY);
-//   //transMatrix = [ratioX,0,0,ratioY,0,0];
-//   //allGs.attr("transform", "matrix("+transMatrix.join(' ')+")");
-//   prevWidth = window.innerWidth;
-//   prevHeight = window.innerHeight;
-
-//   //if (ratioX<1 || ratioY<1) zoom(1.0/CONSTANTS.zoom_scale);
-//   //else zoom(CONSTANTS.zoom_scale);
-//   //
-//   //Container.zoomIn = function() { Container.zoom(CONSTANTS.zoom_scale); }
-//   //Container.zoomOut = function() { Container.zoom(1.0/CONSTANTS.zoom_scale); }
-// }
-
-// var MousePos = [0,0];
-
-// zoom = function(scale) {
-//   //console.log(scale);
-//   if (allGs == null)
-//     return;
-    
-//   if (transMatrix[0]*scale > CONSTANTS.zoom_in_limit || 
-//       transMatrix[0]*scale < CONSTANTS.zoom_out_limit)
-//     return;
-
-//   for(var i = 0; i < transMatrix.length; i++) {
-//     transMatrix[i] *= scale;
-//   }
-
-//   transMatrix[4] += (1-scale)*MousePos[0];
-//   transMatrix[5] += (1-scale)*MousePos[1];
-
-//   var matrix = "matrix("+transMatrix.join(' ')+")";
-//   allGs.attr("transform", matrix);
-// }
-  ///////////////////////
 

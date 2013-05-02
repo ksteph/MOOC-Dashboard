@@ -48,7 +48,7 @@ update week3 set gitemtype = 'quiz' where module_id in
 'i4x://BerkeleyX/CS188.1x/problem/Lecture_4:quiz_6_consistency',
 'i4x://BerkeleyX/CS188.1x/problem/Lecture_4:quiz_7_arc_consistency',
 'i4x://BerkeleyX/CS188.1x/problem/Lecture_4:quiz_8_arc_consistency_backtracking',
-'i4x://BerkeleyX/CS188.1x/problem/Lecture_4:quiz_10_lcv',
+'i4x://BerkeleyX/CS188.1x/problem/Lecture_4:quiz_910_lcv',
 'i4x://BerkeleyX/CS188.1x/problem/Lecture_5:quiz_1_tree',
 'i4x://BerkeleyX/CS188.1x/problem/Lecture_5:quiz_2_cutset',
 'i4x://BerkeleyX/CS188.1x/problem/Lecture_5:quiz_3_min',
@@ -62,29 +62,29 @@ update week3 set name = 'Lecture 5: CSPs II' where module_id = 'i4x://BerkeleyX/
 update week3 set name = 'Lecture 5: CSPs II (continued)' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_5_CSPs_II_continued';
 update week3 set name = 'Homework 2: CSPs' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Homework_2_CSPs';
 update week3 set name = 'Homework 2: CSPs (practice)' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Homework_2_CSPs_Practice';
-update week3 set name = 'Quiz 1: Constraints' where module_id = 'i4x://BerkeleyX/CS188.1x/problem/Lecture_4:quiz_1_constraints';
-update week3 set name = 'Quiz 2: Constraint Graphs' where module_id = 'i4x://BerkeleyX/CS188.1x/problem/Lecture_4:quiz_2_constraint_graph';
-update week3 set name = 'Quiz 3: Constraints' where module_id = 'i4x://BerkeleyX/CS188.1x/problem/Lecture_4:quiz_3_constraints';
-update week3 set name = 'Quiz 4: Backtracking Search' where module_id = 'i4x://BerkeleyX/CS188.1x/problem/Lecture_4:quiz_4_backtracking';
-update week3 set name = 'Quiz 5: Forward Checking' where module_id = 'i4x://BerkeleyX/CS188.1x/problem/Lecture_4:quiz_5_forward_checking';
-update week3 set name = 'Quiz 6: Arc Consistency' where module_id = 'i4x://BerkeleyX/CS188.1x/problem/Lecture_4:quiz_6_consistency';
-update week3 set name = 'Quiz 7: Arc Consistency' where module_id = 'i4x://BerkeleyX/CS188.1x/problem/Lecture_4:quiz_7_arc_consistency';
-update week3 set name = 'Quiz 8: Arc Consistency and Backtracking Search' where module_id = 'i4x://BerkeleyX/CS188.1x/problem/Lecture_4:quiz_8_arc_consistency_backtracking';
-update week3 set name = 'Quiz 9: Least Constraining Value' where module_id = 'i4x://BerkeleyX/CS188.1x/problem/Lecture_4:quiz_10_lcv';
-update week3 set name = 'Quiz 1: Tree-Structured CSPs' where module_id = 'i4x://BerkeleyX/CS188.1x/problem/Lecture_5:quiz_1_tree';
-update week3 set name = 'Quiz 2: Smallest Cutset' where module_id = 'i4x://BerkeleyX/CS188.1x/problem/Lecture_5:quiz_2_cutset';
-update week3 set name = 'Quiz 3: Min-Conflicts' where module_id = 'i4x://BerkeleyX/CS188.1x/problem/Lecture_5:quiz_3_min';
-update week3 set name = 'Quiz 4: Hill Climbing' where module_id = 'i4x://BerkeleyX/CS188.1x/problem/Lecture_5:quiz_4_hill';
-update week3 set name = 'Q1: Campus CSP' where module_id = 'i4x://BerkeleyX/CS188.1x/problem/csp_campus';
-update week3 set name = 'Q2: CSP Properties' where module_id = 'i4x://BerkeleyX/CS188.1x/problem/csp_facts';
-update week3 set name = 'Q3: 4-Queens' where module_id = 'i4x://BerkeleyX/CS188.1x/problem/4_queens';
-update week3 set name = 'Q4: Tree-Structured CSPs' where module_id = 'i4x://BerkeleyX/CS188.1x/problem/csp_tree';
-update week3 set name = 'Q5: Solving Tree-Structured CSPs' where module_id = 'i4x://BerkeleyX/CS188.1x/problem/csp_tree_solve';
-update week3 set name = 'Practice - Q1: Campus CSP' where module_id = 'i4x://BerkeleyX/CS188.1x/problem/practice:csp_campus';
-update week3 set name = 'Practice - Q2: CSP Properties' where module_id = 'i4x://BerkeleyX/CS188.1x/problem/practice:csp_facts';
-update week3 set name = 'Practice - Q3: 4-Queens' where module_id = 'i4x://BerkeleyX/CS188.1x/problem/practice:4_queens';
-update week3 set name = 'Practice - Q4: Tree-Structured CSPs' where module_id = 'i4x://BerkeleyX/CS188.1x/problem/practice:csp_tree';
-update week3 set name = 'Practice - Q5: Solving Tree-Structured CSPs' where module_id = 'i4x://BerkeleyX/CS188.1x/problem/practice:csp_tree_solve';
+update week3 set name = 'L4 Q1: Constraints' where module_id = 'i4x://BerkeleyX/CS188.1x/problem/Lecture_4:quiz_1_constraints';
+update week3 set name = 'L4 Q2: Constraint Graphs' where module_id = 'i4x://BerkeleyX/CS188.1x/problem/Lecture_4:quiz_2_constraint_graph';
+update week3 set name = 'L4 Q3: Constraints' where module_id = 'i4x://BerkeleyX/CS188.1x/problem/Lecture_4:quiz_3_constraints';
+update week3 set name = 'L4 Q4: Backtracking Search' where module_id = 'i4x://BerkeleyX/CS188.1x/problem/Lecture_4:quiz_4_backtracking';
+update week3 set name = 'L4 Q5: Forward Checking' where module_id = 'i4x://BerkeleyX/CS188.1x/problem/Lecture_4:quiz_5_forward_checking';
+update week3 set name = 'L4 Q6: Arc Consistency' where module_id = 'i4x://BerkeleyX/CS188.1x/problem/Lecture_4:quiz_6_consistency';
+update week3 set name = 'L4 Q7: Arc Consistency' where module_id = 'i4x://BerkeleyX/CS188.1x/problem/Lecture_4:quiz_7_arc_consistency';
+update week3 set name = 'L4 Q8: Arc Consistency and Backtracking Search' where module_id = 'i4x://BerkeleyX/CS188.1x/problem/Lecture_4:quiz_8_arc_consistency_backtracking';
+update week3 set name = 'L4 Q9: Least Constraining Value' where module_id = 'i4x://BerkeleyX/CS188.1x/problem/Lecture_4:quiz_910_lcv';
+update week3 set name = 'L5 Q1: Tree-Structured CSPs' where module_id = 'i4x://BerkeleyX/CS188.1x/problem/Lecture_5:quiz_1_tree';
+update week3 set name = 'L5 Q2: Smallest Cutset' where module_id = 'i4x://BerkeleyX/CS188.1x/problem/Lecture_5:quiz_2_cutset';
+update week3 set name = 'L5 Q3: Min-Conflicts' where module_id = 'i4x://BerkeleyX/CS188.1x/problem/Lecture_5:quiz_3_min';
+update week3 set name = 'L5 Q4: Hill Climbing' where module_id = 'i4x://BerkeleyX/CS188.1x/problem/Lecture_5:quiz_4_hill';
+update week3 set name = 'P1: Campus CSP' where module_id = 'i4x://BerkeleyX/CS188.1x/problem/csp_campus';
+update week3 set name = 'P2: CSP Properties' where module_id = 'i4x://BerkeleyX/CS188.1x/problem/csp_facts';
+update week3 set name = 'P3: 4-Queens' where module_id = 'i4x://BerkeleyX/CS188.1x/problem/4_queens';
+update week3 set name = 'P4: Tree-Structured CSPs' where module_id = 'i4x://BerkeleyX/CS188.1x/problem/csp_tree';
+update week3 set name = 'P5: Solving Tree-Structured CSPs' where module_id = 'i4x://BerkeleyX/CS188.1x/problem/csp_tree_solve';
+update week3 set name = 'Pr1: Campus CSP' where module_id = 'i4x://BerkeleyX/CS188.1x/problem/practice:csp_campus';
+update week3 set name = 'Pr2: CSP Properties' where module_id = 'i4x://BerkeleyX/CS188.1x/problem/practice:csp_facts';
+update week3 set name = 'Pr3: 4-Queens' where module_id = 'i4x://BerkeleyX/CS188.1x/problem/practice:4_queens';
+update week3 set name = 'Pr4: Tree-Structured CSPs' where module_id = 'i4x://BerkeleyX/CS188.1x/problem/practice:csp_tree';
+update week3 set name = 'Pr5: Solving Tree-Structured CSPs' where module_id = 'i4x://BerkeleyX/CS188.1x/problem/practice:csp_tree_solve';
 update week3 set name = 'CS188.1x Artificial Intelligence' where module_id = 'i4x://BerkeleyX/CS188.1x/course/2012_Fall';
 
 /*   END STEP 4 */
@@ -102,61 +102,61 @@ create table ov_activity select * from overall_activity where date > '2012-09-24
 
 # Adding Sequence names for Sequential Flattening of Weekly Activity
 
-update week3 set seqname ='HW Q1',seqlabel='Q1: Campus CSP' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Homework_2_CSPs' and position = 1;
-update week3 set seqname ='HW Q2',seqlabel='Q2: CSP Properties' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Homework_2_CSPs' and position = 2;
-update week3 set seqname ='HW Q3',seqlabel='Q3: 4-Queens' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Homework_2_CSPs' and position = 3;
-update week3 set seqname ='HW Q4',seqlabel='Q4: Tree-Structured CSPs' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Homework_2_CSPs' and position = 4;
-update week3 set seqname ='HW Q5',seqlabel='Q5: Solving Tree-Structured CSPs' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Homework_2_CSPs' and position = 5;
+update week3 set seqname ='HW:P1',seqlabel='HW P1: Campus CSP' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Homework_2_CSPs' and position = 1;
+update week3 set seqname ='HW:P2',seqlabel='HW P2: CSP Properties' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Homework_2_CSPs' and position = 2;
+update week3 set seqname ='HW:P3',seqlabel='HW P3: 4-Queens' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Homework_2_CSPs' and position = 3;
+update week3 set seqname ='HW:P4',seqlabel='HW P4: Tree-Structured CSPs' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Homework_2_CSPs' and position = 4;
+update week3 set seqname ='HW:P5',seqlabel='HW P5: Solving Tree-Structured CSPs' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Homework_2_CSPs' and position = 5;
 update week3 set seqname ='INFO',seqlabel='Exam Practice Handout' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Homework_2_CSPs' and position = 6;
-update week3 set seqname ='L4:V1',seqlabel='Part 1: Today' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_4_CSPs' and position = 1;
-update week3 set seqname ='L4:V2',seqlabel='Part 2: CSPs: Definition' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_4_CSPs' and position = 2;
-update week3 set seqname ='L4:V3',seqlabel='Part 3: CSP Examples: Map Coloring and N-Queens' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_4_CSPs' and position = 3;
-update week3 set seqname ='L4:Qz 1',seqlabel='Quiz 1: Constraints' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_4_CSPs' and position = 4;
-update week3 set seqname ='L4:V4',seqlabel='Part 4: Constraint Graphs' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_4_CSPs' and position = 5;
-update week3 set seqname ='L4:Qz 2',seqlabel='Quiz 2: Constraint Graphs' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_4_CSPs' and position = 6;
-update week3 set seqname ='L4:V5',seqlabel='Part 5: CSP Examples: Cryptarithmetic, Sudoku, and Waltz' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_4_CSPs' and position = 7;
-update week3 set seqname ='L4:Qz 3',seqlabel='Quiz 3: Constraints' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_4_CSPs' and position = 8;
-update week3 set seqname ='L4:V6',seqlabel='Part 6: Varieties of CSPs and Constraints' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_4_CSPs' and position = 9;
-update week3 set seqname ='L4:V7',seqlabel='Part 7: Real-World CSPs' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_4_CSPs' and position = 10;
-update week3 set seqname ='L4:V8',seqlabel='Part 8: Solving CSPs with Standard Search' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_4_CSPs' and position = 11;
-update week3 set seqname ='L4:V9',seqlabel='Part 9: Backtracking Search' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_4_CSPs' and position = 12;
-update week3 set seqname ='L4:Qz 4',seqlabel='Quiz 4: Backtracking Search' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_4_CSPs' and position = 13;
-update week3 set seqname ='L4 II:V10',seqlabel='Part 10: Improving Backtracking: Overview' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_4_CSPs_continued' and position = 1;
-update week3 set seqname ='L4 II:V11',seqlabel='Part 11: Filtering: Forward Checking' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_4_CSPs_continued' and position = 2;
-update week3 set seqname ='L4 II:Qz 5',seqlabel='Quiz 5: Forward Checking' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_4_CSPs_continued' and position = 3;
-update week3 set seqname ='L4 II:V12',seqlabel='Part 12: Filtering: Constraint Propagation' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_4_CSPs_continued' and position = 4;
-update week3 set seqname ='L4 II:V13',seqlabel='Part 13: Consistency of a Single Arc' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_4_CSPs_continued' and position = 5;
-update week3 set seqname ='L4 II:Qz 6',seqlabel='Quiz 6: Arc Consistency' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_4_CSPs_continued' and position = 6;
-update week3 set seqname ='L4 II:V14',seqlabel='Part 14: Arc Consistency of an Entire CSP' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_4_CSPs_continued' and position = 7;
-update week3 set seqname ='L4 II:Qz 7',seqlabel='Quiz 7: Arc Consistency' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_4_CSPs_continued' and position = 8;
-update week3 set seqname ='L4 II:V15',seqlabel='Part 15: Limitations of Arc Consistency' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_4_CSPs_continued' and position = 9;
-update week3 set seqname ='L4 II:Qz 8',seqlabel='Quiz 8: Arc Consistency and Backtracking Search' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_4_CSPs_continued' and position = 10;
-update week3 set seqname ='L4 II:V16',seqlabel='Part 16: Demo of Forward Checking and Arc Consistency' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_4_CSPs_continued' and position = 11;
-update week3 set seqname ='L4 II:V17',seqlabel='Part 17: Variable Ordering: Minimum Remaining Values' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_4_CSPs_continued' and position = 12;
-update week3 set seqname ='L4 II:V18',seqlabel='Part 18: Value Ordering: Least Constraining Value' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_4_CSPs_continued' and position = 13;
-update week3 set seqname ='L4 II:Qz 9',seqlabel='Quiz 9: Least Constraining Value' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_4_CSPs_continued' and position = 14;
-update week3 set seqname ='L4 II:V19',seqlabel='Part 19: Demo' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_4_CSPs_continued' and position = 15;
-update week3 set seqname ='L5:V1',seqlabel='Part 1: Today' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_5_CSPs_II' and position = 1;
-update week3 set seqname ='L5:V2',seqlabel='Part 2: Refresher: CSPs, Backtracking Search, Ordering, Filtering' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_5_CSPs_II' and position = 2;
-update week3 set seqname ='L5:V3',seqlabel='Part 3: Arc Consistency, Limitations, K-Consistency' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_5_CSPs_II' and position = 3;
-update week3 set seqname ='L5:V4',seqlabel='Part 4: Problem Structure' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_5_CSPs_II' and position = 4;
-update week3 set seqname ='L5:V5',seqlabel='Part 5: Tree-Structured CSPs' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_5_CSPs_II' and position = 5;
-update week3 set seqname ='L5:Qz 1',seqlabel='Quiz 1: Tree-Structured CSPs' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_5_CSPs_II' and position = 6;
-update week3 set seqname ='L5:V6',seqlabel='Part 6: Algorithm for Tree-Structured CSPs' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_5_CSPs_II' and position = 7;
-update week3 set seqname ='L5:V7',seqlabel='Part 7: Properties of Algorithm for Tree-Structured CSPs' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_5_CSPs_II' and position = 8;
-update week3 set seqname ='L5:V8',seqlabel='Part 8: Improving Structure: Cutset Conditioning' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_5_CSPs_II' and position = 9;
-update week3 set seqname ='L5:Qz 2',seqlabel='Quiz 2: Smallest Cutset' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_5_CSPs_II' and position = 10;
-update week3 set seqname ='L5:V9',seqlabel='Part 9: Tree Decomposition' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_5_CSPs_II' and position = 11;
-update week3 set seqname ='L5:V10',seqlabel='Part 10: Iterative Algorithms: Min-Conflicts' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_5_CSPs_II' and position = 12;
-update week3 set seqname ='L5:Qz 3',seqlabel='Quiz 3: Min-Conflicts' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_5_CSPs_II' and position = 13;
-update week3 set seqname ='L5:V11',seqlabel='Part 11: Performance of Min-Conflicts' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_5_CSPs_II' and position = 14;
-update week3 set seqname ='L5:V12',seqlabel='Part 12: Summary of CSPs' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_5_CSPs_II' and position = 15;
-update week3 set seqname ='L5 II:V13',seqlabel='Part 13: Local Search' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_5_CSPs_II_continued' and position = 1;
-update week3 set seqname ='L5 II:V14',seqlabel='Part 14: Hill Climbing' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_5_CSPs_II_continued' and position = 2;
-update week3 set seqname ='L5 II:Qz 4',seqlabel='Quiz 4: Hill Climbing' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_5_CSPs_II_continued' and position = 3;
-update week3 set seqname ='L5 II:V15',seqlabel='Part 15: Simulated Annealing' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_5_CSPs_II_continued' and position = 4;
-update week3 set seqname ='L5 II:V16',seqlabel='Part 16: Genetic Algorithms' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_5_CSPs_II_continued' and position = 5;
-update week3 set seqname ='L5 II:V17',seqlabel='Part 17: Next Time' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_5_CSPs_II_continued' and position = 6;
+update week3 set seqname ='L4:V1',seqlabel='L4 Part 1: Today' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_4_CSPs' and position = 1;
+update week3 set seqname ='L4:V2',seqlabel='L4 Part 2: CSPs: Definition' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_4_CSPs' and position = 2;
+update week3 set seqname ='L4:V3',seqlabel='L4 Part 3: CSP Examples: Map Coloring and N-Queens' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_4_CSPs' and position = 3;
+update week3 set seqname ='L4:Q1',seqlabel='L4 Quiz 1: Constraints' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_4_CSPs' and position = 4;
+update week3 set seqname ='L4:V4',seqlabel='L4 Part 4: Constraint Graphs' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_4_CSPs' and position = 5;
+update week3 set seqname ='L4:Q2',seqlabel='L4 Quiz 2: Constraint Graphs' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_4_CSPs' and position = 6;
+update week3 set seqname ='L4:V5',seqlabel='L4 Part 5: CSP Examples: Cryptarithmetic, Sudoku, and Waltz' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_4_CSPs' and position = 7;
+update week3 set seqname ='L4:Q3',seqlabel='L4 Quiz 3: Constraints' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_4_CSPs' and position = 8;
+update week3 set seqname ='L4:V6',seqlabel='L4 Part 6: Varieties of CSPs and Constraints' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_4_CSPs' and position = 9;
+update week3 set seqname ='L4:V7',seqlabel='L4 Part 7: Real-World CSPs' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_4_CSPs' and position = 10;
+update week3 set seqname ='L4:V8',seqlabel='L4 Part 8: Solving CSPs with Standard Search' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_4_CSPs' and position = 11;
+update week3 set seqname ='L4:V9',seqlabel='L4 Part 9: Backtracking Search' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_4_CSPs' and position = 12;
+update week3 set seqname ='L4:Q4',seqlabel='L4 Quiz 4: Backtracking Search' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_4_CSPs' and position = 13;
+update week3 set seqname ='L4:V10',seqlabel='L4 Part 10: Improving Backtracking: Overview' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_4_CSPs_continued' and position = 1;
+update week3 set seqname ='L4:V11',seqlabel='L4 Part 11: Filtering: Forward Checking' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_4_CSPs_continued' and position = 2;
+update week3 set seqname ='L4:Q5',seqlabel='L4 Quiz 5: Forward Checking' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_4_CSPs_continued' and position = 3;
+update week3 set seqname ='L4:V12',seqlabel='L4 Part 12: Filtering: Constraint Propagation' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_4_CSPs_continued' and position = 4;
+update week3 set seqname ='L4:V13',seqlabel='L4 Part 13: Consistency of a Single Arc' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_4_CSPs_continued' and position = 5;
+update week3 set seqname ='L4:Q6',seqlabel='L4 Quiz 6: Arc Consistency' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_4_CSPs_continued' and position = 6;
+update week3 set seqname ='L4:V14',seqlabel='L4 Part 14: Arc Consistency of an Entire CSP' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_4_CSPs_continued' and position = 7;
+update week3 set seqname ='L4:Q7',seqlabel='L4 Quiz 7: Arc Consistency' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_4_CSPs_continued' and position = 8;
+update week3 set seqname ='L4:V15',seqlabel='L4 Part 15: Limitations of Arc Consistency' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_4_CSPs_continued' and position = 9;
+update week3 set seqname ='L4:Q8',seqlabel='L4 Quiz 8: Arc Consistency and Backtracking Search' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_4_CSPs_continued' and position = 10;
+update week3 set seqname ='L4:V16',seqlabel='L4 Part 16: Demo of Forward Checking and Arc Consistency' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_4_CSPs_continued' and position = 11;
+update week3 set seqname ='L4:V17',seqlabel='L4 Part 17: Variable Ordering: Minimum Remaining Values' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_4_CSPs_continued' and position = 12;
+update week3 set seqname ='L4:V18',seqlabel='L4 Part 18: Value Ordering: Least Constraining Value' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_4_CSPs_continued' and position = 13;
+update week3 set seqname ='L4:Q9',seqlabel='L4 Quiz 9: Least Constraining Value' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_4_CSPs_continued' and position = 14;
+update week3 set seqname ='L4:V19',seqlabel='L4 Part 19: Demo' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_4_CSPs_continued' and position = 15;
+update week3 set seqname ='L5:V1',seqlabel='L5 Part 1: Today' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_5_CSPs_II' and position = 1;
+update week3 set seqname ='L5:V2',seqlabel='L5 Part 2: Refresher: CSPs, Backtracking Search, Ordering, Filtering' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_5_CSPs_II' and position = 2;
+update week3 set seqname ='L5:V3',seqlabel='L5 Part 3: Arc Consistency, Limitations, K-Consistency' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_5_CSPs_II' and position = 3;
+update week3 set seqname ='L5:V4',seqlabel='L5 Part 4: Problem Structure' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_5_CSPs_II' and position = 4;
+update week3 set seqname ='L5:V5',seqlabel='L5 Part 5: Tree-Structured CSPs' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_5_CSPs_II' and position = 5;
+update week3 set seqname ='L5:Q1',seqlabel='L5 Quiz 1: Tree-Structured CSPs' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_5_CSPs_II' and position = 6;
+update week3 set seqname ='L5:V6',seqlabel='L5 Part 6: Algorithm for Tree-Structured CSPs' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_5_CSPs_II' and position = 7;
+update week3 set seqname ='L5:V7',seqlabel='L5 Part 7: Properties of Algorithm for Tree-Structured CSPs' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_5_CSPs_II' and position = 8;
+update week3 set seqname ='L5:V8',seqlabel='L5 Part 8: Improving Structure: Cutset Conditioning' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_5_CSPs_II' and position = 9;
+update week3 set seqname ='L5:Q2',seqlabel='L5 Quiz 2: Smallest Cutset' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_5_CSPs_II' and position = 10;
+update week3 set seqname ='L5:V9',seqlabel='L5 Part 9: Tree Decomposition' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_5_CSPs_II' and position = 11;
+update week3 set seqname ='L5:V10',seqlabel='L5 Part 10: Iterative Algorithms: Min-Conflicts' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_5_CSPs_II' and position = 12;
+update week3 set seqname ='L5:Q3',seqlabel='L5 Quiz 3: Min-Conflicts' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_5_CSPs_II' and position = 13;
+update week3 set seqname ='L5:V11',seqlabel='L5 Part 11: Performance of Min-Conflicts' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_5_CSPs_II' and position = 14;
+update week3 set seqname ='L5:V12',seqlabel='L5 Part 12: Summary of CSPs' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_5_CSPs_II' and position = 15;
+update week3 set seqname ='L5:V13',seqlabel='L5 Part 13: Local Search' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_5_CSPs_II_continued' and position = 1;
+update week3 set seqname ='L5:V14',seqlabel='L5 Part 14: Hill Climbing' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_5_CSPs_II_continued' and position = 2;
+update week3 set seqname ='L5:Q4',seqlabel='L5 Quiz 4: Hill Climbing' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_5_CSPs_II_continued' and position = 3;
+update week3 set seqname ='L5:V15',seqlabel='L5 Part 15: Simulated Annealing' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_5_CSPs_II_continued' and position = 4;
+update week3 set seqname ='L5:V16',seqlabel='L5 Part 16: Genetic Algorithms' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_5_CSPs_II_continued' and position = 5;
+update week3 set seqname ='L5:V17',seqlabel='L5 Part 17: Next Time' where module_id = 'i4x://BerkeleyX/CS188.1x/sequential/Lecture_5_CSPs_II_continued' and position = 6;
 
 
 

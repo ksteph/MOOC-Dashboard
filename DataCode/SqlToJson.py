@@ -14,7 +14,9 @@ act_rows = cur.fetchall()
 act_student_count = act_rows[0][0]
 
 
-cur.execute("select gitemtype,name, module_id, count(distinct anon_student_id) from week3 where module_type = 'problem'  group by gitemtype,module_id")
+#cur.execute("select gitemtype,name, module_id, count(distinct anon_student_id) from week3 where module_type = 'problem'  group by gitemtype,module_id")
+cur.execute("select gitemtype,name, module_id, count(distinct anon_student_id) from week3 where module_type = 'problem'  group by gitemtype,name")
+
 base_rows = cur.fetchall()
 
 # Intializations
@@ -139,6 +141,12 @@ for row in base_rows:
 			dattempt_ind['y'] = y_extra
 			dattempt_ind['percentage'] = 0
 			dattempt['data'][k].append(dattempt_ind)
+			# Attempts = 0
+			dattempt_ind = collections.OrderedDict()
+			dattempt_ind['x'] = 0
+			dattempt_ind['y'] = 0
+			dattempt_ind['percentage'] = 0
+			dattempt['data'][k].append(dattempt_ind)
 			
 		for entry_a in dattempt['data'][k]:
 			entry_a['percentage'] = round(float(entry_a['x']) / attempt_student_count,2)
@@ -229,6 +237,12 @@ for row in base_rows:
 		if y_extra == 999:
 			dattempt_ind['x'] = x_extra
 			dattempt_ind['y'] = y_extra
+			dattempt_ind['percentage'] = 0
+			dattempt['data'][k].append(dattempt_ind)
+			# Attempts = 0
+			dattempt_ind = collections.OrderedDict()
+			dattempt_ind['x'] = 0
+			dattempt_ind['y'] = 0
 			dattempt_ind['percentage'] = 0
 			dattempt['data'][k].append(dattempt_ind)
 			

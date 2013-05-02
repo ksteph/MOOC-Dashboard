@@ -105,7 +105,7 @@ funcCreateStackedBarGraph = function(margin, height, width, data, tag,
       .rangeRoundBands([
         0,
         (graph.Width-graph.Margin.axisLeft-graph.Margin.right)],
-                       .1),
+                       .2),
 
     y: d3.scale.linear()
       .domain(graph.yRange) // yRange is the range of the y-axis values

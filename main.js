@@ -70,11 +70,11 @@ smallMultiples.append("div")
   });
 
 d3.select("#small-multiple-title0").append("div").attr("class","left").text("Homework: ");
-d3.select("#small-multiple-title0").append("div").attr("class","right").text("Grade Distribution");
+d3.select("#small-multiple-title0").append("div").attr("class","right").text("Grade Distribution (Submitted)");
 d3.select("#small-multiple-title1").append("div").attr("class","left").text("HW Practice: ");
-d3.select("#small-multiple-title1").append("div").attr("class","right").text("Grade Distribution");
+d3.select("#small-multiple-title1").append("div").attr("class","right").text("Grade Distribution (Submitted)");
 d3.select("#small-multiple-title2").append("div").attr("class","left").text("Quiz: ");
-d3.select("#small-multiple-title2").append("div").attr("class","right").text("Grade Distribution");
+d3.select("#small-multiple-title2").append("div").attr("class","right").text("Grade Distribution (Submitted)");
 
 
 
@@ -234,7 +234,7 @@ d3.selectAll('.down-multiple').each(function(parantD) {
         d3.select("svg#top_line"+parantD+"-line-graph").attr("display","block");
         d3.select("svg#top_status"+parantD+"-stacked-bar-graph").attr("display","none");
         d3.select("svg#top_attempt"+parantD+"-stacked-bar-graph").attr("display","none");
-        d3.select("#small-multiple"+parantD+" .small-multiple-title .right").text("Grade Distribution");  
+        d3.select("#small-multiple"+parantD+" .small-multiple-title .right").text("Grade Distribution (Submitted)");  
       }
       else if (i==1) {
         $("#down-multiple"+parantD+" .down").removeClass("active");
@@ -250,7 +250,7 @@ d3.selectAll('.down-multiple').each(function(parantD) {
         d3.select("svg#top_line"+parantD+"-line-graph").attr("display","none");
         d3.select("svg#top_status"+parantD+"-stacked-bar-graph").attr("display","none");
         d3.select("svg#top_attempt"+parantD+"-stacked-bar-graph").attr("display","block");
-        d3.select("#small-multiple"+parantD+" .small-multiple-title .right").text("Student Attempts");
+        d3.select("#small-multiple"+parantD+" .small-multiple-title .right").text("Student Attempts (Submitted, In Progress)");
       }
       else {
         console.log("something is wrong");

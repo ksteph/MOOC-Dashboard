@@ -132,6 +132,7 @@ body {
     padding-top: 5px;
     padding-left: 0;
     color: #333;
+    font-size: 11pt;
 }
 
 /* Activity */
@@ -171,9 +172,8 @@ body {
 /* Multiples */
 .small-multiple {
     float: left;
-    width: 30%;
-    padding-left: 1.5%;
-    padding-right: 1.5%;
+    width: 32%;
+    padding-left: 1%;
 }
 .top-multiple {
     height: 60%;

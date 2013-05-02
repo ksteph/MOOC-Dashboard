@@ -141,6 +141,12 @@ for row in base_rows:
 			dattempt_ind['y'] = y_extra
 			dattempt_ind['percentage'] = 0
 			dattempt['data'][k].append(dattempt_ind)
+			# Attempts = 0
+			dattempt_ind = collections.OrderedDict()
+			dattempt_ind['x'] = 0
+			dattempt_ind['y'] = 0
+			dattempt_ind['percentage'] = 0
+			dattempt['data'][k].append(dattempt_ind)
 			
 		for entry_a in dattempt['data'][k]:
 			entry_a['percentage'] = round(float(entry_a['x']) / attempt_student_count,2)
@@ -233,6 +239,12 @@ for row in base_rows:
 			dattempt_ind['y'] = y_extra
 			dattempt_ind['percentage'] = 0
 			dattempt['data'][k].append(dattempt_ind)
+			# Attempts = 0
+			dattempt_ind = collections.OrderedDict()
+			dattempt_ind['x'] = 0
+			dattempt_ind['y'] = 0
+			dattempt_ind['percentage'] = 0
+			dattempt['data'][k].append(dattempt_ind)
 			
 		for entry_a in dattempt['data'][k]:
 			entry_a['percentage'] = round(float(entry_a['x']) / attempt_student_count,2)
@@ -278,11 +290,11 @@ cur.close()
 
 	
 j = json.dumps(basearray_list)
-print j
+#print j
 
 
-#f = open('data.js', 'w')
-#print >> f, j
+f = open('data.js', 'w')
+print >> f, j
 
 
 # Connection Close

@@ -14,7 +14,9 @@ act_rows = cur.fetchall()
 act_student_count = act_rows[0][0]
 
 
-cur.execute("select gitemtype,name, module_id, count(distinct anon_student_id) from week3 where module_type = 'problem'  group by gitemtype,module_id")
+#cur.execute("select gitemtype,name, module_id, count(distinct anon_student_id) from week3 where module_type = 'problem'  group by gitemtype,module_id")
+cur.execute("select gitemtype,name, module_id, count(distinct anon_student_id) from week3 where module_type = 'problem'  group by gitemtype,name")
+
 base_rows = cur.fetchall()
 
 # Intializations
@@ -276,11 +278,11 @@ cur.close()
 
 	
 j = json.dumps(basearray_list)
-#print j
+print j
 
 
-f = open('data.js', 'w')
-print >> f, j
+#f = open('data.js', 'w')
+#print >> f, j
 
 
 # Connection Close

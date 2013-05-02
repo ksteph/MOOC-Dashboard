@@ -535,7 +535,41 @@ var data = {
 
             "attemptsGraph": {
                 "y_range": [0, 2666],
-                "data": []
+                "data": [
+                                      [{
+                    "x": 0,
+                    "y": 0.0,
+                    "percentage": 0.0
+                  }
+                  ],
+
+                  [{
+                    "x": 0,
+                    "y": 0.0,
+                    "percentage": 0.0
+                  }
+                  ],
+
+                  [{
+                    "x": 0,
+                    "y": 0.0,
+                    "percentage": 0.0
+                  }
+                  ],
+
+                  [{
+                    "x": 0,
+                    "y": 0.0,
+                    "percentage": 0.0
+                  }
+                  ],
+                  [{
+                    "x": 0,
+                    "y": 0.0,
+                    "percentage": 0.0
+                  }
+                  ]
+                    ]
             }
 
         },

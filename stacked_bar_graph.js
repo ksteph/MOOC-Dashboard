@@ -44,7 +44,7 @@ funcCreateStackedBarGraph = function(margin, height, width, data, tag,
     yRange: graph.yRange,
   };
 
-  graph.Margin.axisLeft = graph.Margin.left + 50;
+  graph.Margin.axisLeft = graph.Margin.left + 60;
   graph.Margin.axisBottom = graph.Margin.bottom + 50;
   graph.ZeroLineX2 = graph.Width-graph.Margin.axisLeft-graph.Margin.right;
 
@@ -57,6 +57,7 @@ funcCreateStackedBarGraph = function(margin, height, width, data, tag,
      tooltip - text for tooltip
   */
   graph.StackColorDomain = [];
+  bHasNumbers = false;
   $.each(data, function(i,e_i) {
     var d = {};
 
@@ -90,6 +91,9 @@ funcCreateStackedBarGraph = function(margin, height, width, data, tag,
 
       d.bars.push(b);
 
+      if (typeof b.color == "number")
+        bHasNumbers = true;
+
       if($.inArray(b.color, graph.StackColorDomain) == -1) {
         graph.StackColorDomain.push(b.color);
       }
@@ -97,6 +101,18 @@ funcCreateStackedBarGraph = function(margin, height, width, data, tag,
 
     graph.Data.push(d);
   });
+
+  // Hacky but will do for now
+  if (bHasNumbers) {
+    graph.StackColorDomain.sort(function(a,b) {
+      if ((typeof a == "number") && (typeof b == "number"))
+        return a-b;
+      else if (typeof a == "number")
+        return -1;
+      else
+        return 1;
+    });
+  }
 
   // Making the scales
   graph.Scale = {
@@ -193,6 +209,46 @@ funcCreateStackedBarGraph = function(margin, height, width, data, tag,
         .on("mouseout", function(d){
           graph.Tooltip.style("visibility", "hidden")
         });
+
+      // Add Legend
+      var legendMarginLeft = 5;
+      var legendHeight = (graph.Height-graph.Margin.axisBottom-graph.Margin.top)/
+        graph.StackColorDomain.length;
+      var legendWidth = (graph.Margin.axisLeft-legendMarginLeft)/3.5;
+      var isNumber = (typeof graph.StackColorDomain[0]) == "number";
+
+      graph.Legend = graph.SvgGroup.append("g")
+        .attr("class","g-legend")
+        .attr("transform","translate(-"+(graph.Margin.axisLeft)+",0)")
+        .selectAll(".legend")
+        .data(graph.StackColorDomain)
+        .enter().append("g")
+        .attr("class","legend")
+        .attr("id",function(d,i) { return graph.Tag+"-legend-"+i; })
+        .attr("transform", function(d,i) {
+          return "translate(" + legendMarginLeft + ","+
+            (graph.Height-graph.Margin.axisBottom-((i+1)*(legendHeight))) + ")";
+        });
+      
+      graph.Legend.append("rect")
+        .attr("class","stacked-bar-graph-legend")
+        .attr("height", legendHeight)
+        .attr("width", legendWidth)
+        .style("fill", graph.Scale.stackColor);
+
+      graph.Legend.append("text")
+        .attr("class","axis-label")
+        .attr("transform", function(d) {
+          var str = "translate("+(legendWidth/2)+","+(legendHeight/2)+")";
+          if (isNumber)
+            return str;
+          else
+            return str + " rotate(-90)";
+        })
+        .attr("dy", ".35em")
+        .style("font-size","9px")
+        .style("text-anchor", "middle")
+        .text(function(d,i) { return d; });
     }
 
   };

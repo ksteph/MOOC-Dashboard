@@ -157,7 +157,6 @@ for (var i=0; i<data.GradedItems.length; i++) {
     return xLabel[i];
   });
   top2.YAxis.tickFormat(function(d,i){
-    console.log(d);
     if (d < 0)
       return d3.format(",")(d*-1);
     else
@@ -190,13 +189,20 @@ for (var i=0; i<data.GradedItems.length; i++) {
       xSum = xSum + b.x;
       if (xSum>xMax) xMax = xSum;
 
-      b.y = e_j.y;
+      if (e_j.y > 10)
+        b.y = "10+"
+      else
+        b.y = e_j.y;
+
       b.percentage = e_j.percentage;
       f = d3.format("2f");
       if (e_j.y>10) b.label = data.GradedItems[parantI].itemTitles[i]+ " (10+ attempts:" + f(e_j.percentage*100) + "%)";
       else if (e_j.y==1) b.label = data.GradedItems[parantI].itemTitles[i] + " (" + e_j.y + " attempt: " + f(e_j.percentage*100) + "%)";
       else b.label = data.GradedItems[parantI].itemTitles[i] + " (" + e_j.y + " attempts: " + f(e_j.percentage*100) + "%)";
-      d.push(b);
+      
+      // If have attempts that are not zero don't need this one.
+      if (!((b.x == 0) && (e_i.length > 1)))
+        d.push(b);
     });
 
     attempt_data.push(d);

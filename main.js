@@ -156,6 +156,13 @@ for (var i=0; i<data.GradedItems.length; i++) {
   top2.XAxis.tickFormat(function(d,i){
     return xLabel[i];
   });
+  top2.YAxis.tickFormat(function(d,i){
+    console.log(d);
+    if (d < 0)
+      return d3.format(",")(d*-1);
+    else
+      return d3.format(",")(d);;
+  });
   svg = d3.select("#top-multiple"+i).append("svg").attr("display","none").attr("class","top-svg")
     .attr("viewBox", "0 0 "+width_multiple_top+" "+height_multiple_top);
   top2.DrawGraph(svg);

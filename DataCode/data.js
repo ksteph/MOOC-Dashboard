@@ -388,27 +388,27 @@ var data = {
                         }
                     ],
                     [{
-                            "x": 706,
+                            "x": 726,
                             "y": 1.0,
                             "percentage": 0.25
                         }, {
-                            "x": 720,
+                            "x": 729,
                             "y": 2.0,
                             "percentage": 0.25
                         }, {
-                            "x": 470,
+                            "x": 475,
                             "y": 3.0,
-                            "percentage": 0.17
+                            "percentage": 0.16
                         }, {
-                            "x": 288,
+                            "x": 290,
                             "y": 4.0,
                             "percentage": 0.1
                         }, {
-                            "x": 167,
+                            "x": 169,
                             "y": 5.0,
                             "percentage": 0.06
                         }, {
-                            "x": 104,
+                            "x": 105,
                             "y": 6.0,
                             "percentage": 0.04
                         }, {
@@ -420,7 +420,7 @@ var data = {
                             "y": 8.0,
                             "percentage": 0.02
                         }, {
-                            "x": 35,
+                            "x": 36,
                             "y": 9.0,
                             "percentage": 0.01
                         }, {
@@ -428,7 +428,7 @@ var data = {
                             "y": 10.0,
                             "percentage": 0.01
                         }, {
-                            "x": 199,
+                            "x": 204,
                             "y": 999,
                             "percentage": 0.07
                         }, {
@@ -439,144 +439,126 @@ var data = {
                     ]
                 ]
             }
-        },
-
-        {
-            "name": "homework practice",
-            "itemTitles": ["Pr1: Campus CSP", "Pr2: CSP Properties", "Pr3: 4-Queens", "Pr4: Tree-Structured CSPs", "Pr5: Solving Tree-Structured CSPs"],
-            "itemText": ["Pr1: Campus CSP", "Pr2: CSP Properties", "Pr3: 4-Queens", "Pr4: Tree-Structured CSPs", "Pr5: Solving Tree-Structured CSPs"],
-
-            "gradeDistroGraph": {
-                "x_range": [0, 100],
-                "y_range": [0, 3934],
-                "data": []
+        }, {
+            name: "homework practice",
+            itemTitles: ["Pr1: Campus CSP", "Pr2: CSP Properties", "Pr3: 4-Queens", "Pr4: Tree-Structured CSPs", "Pr5: Solving Tree-Structured CSPs"],
+            itemText: ["Pr1: Campus CSP", "Pr2: CSP Properties", "Pr3: 4-Queens", "Pr4: Tree-Structured CSPs", "Pr5: Solving Tree-Structured CSPs"],
+            gradeDistroGraph: {
+                x_range: [0, 100],
+                y_range: [0, 3934],
+                data: []
             },
-
-            "statusGraph": {
-                "y_range": [0, 3756],
-                "data": [
+            statusGraph: {
+                y_range: [0, 3756],
+                data: [
                     [{
-                            "label": "Submitted",
-                            "count": 0,
-                            "percentage": 0.0
+                            label: "Submitted",
+                            count: 0,
+                            percentage: 0
                         }, {
-                            "label": "In Progress",
-                            "count": 0,
-                            "percentage": 0.0
+                            label: "In Progress",
+                            count: 0,
+                            percentage: 0
                         }, {
-                            "label": "Not Started",
-                            "count": -7637,
-                            "percentage": 1.0
+                            label: "Not Started",
+                            count: -7637,
+                            percentage: 1
                         }
                     ],
-
                     [{
-                            "label": "Submitted",
-                            "count": 0,
-                            "percentage": 0.0
+                            label: "Submitted",
+                            count: 0,
+                            percentage: 0
                         }, {
-                            "label": "In Progress",
-                            "count": 0,
-                            "percentage": 0.0
+                            label: "In Progress",
+                            count: 0,
+                            percentage: 0
                         }, {
-                            "label": "Not Started",
-                            "count": -7637,
-                            "percentage": 1.0
+                            label: "Not Started",
+                            count: -7637,
+                            percentage: 1
                         }
                     ],
-
                     [{
-                            "label": "Submitted",
-                            "count": 0,
-                            "percentage": 0.0
+                            label: "Submitted",
+                            count: 0,
+                            percentage: 0
                         }, {
-                            "label": "In Progress",
-                            "count": 0,
-                            "percentage": 0.0
+                            label: "In Progress",
+                            count: 0,
+                            percentage: 0
                         }, {
-                            "label": "Not Started",
-                            "count": -7637,
-                            "percentage": 1.0
+                            label: "Not Started",
+                            count: -7637,
+                            percentage: 1
                         }
                     ],
-
                     [{
-                            "label": "Submitted",
-                            "count": 0,
-                            "percentage": 0.0
+                            label: "Submitted",
+                            count: 0,
+                            percentage: 0
                         }, {
-                            "label": "In Progress",
-                            "count": 0,
-                            "percentage": 0.0
+                            label: "In Progress",
+                            count: 0,
+                            percentage: 0
                         }, {
-                            "label": "Not Started",
-                            "count": -7637,
-                            "percentage": 1.0
+                            label: "Not Started",
+                            count: -7637,
+                            percentage: 1
                         }
                     ],
-
                     [{
-                            "label": "Submitted",
-                            "count": 0,
-                            "percentage": 0.0
+                            label: "Submitted",
+                            count: 0,
+                            percentage: 0
                         }, {
-                            "label": "In Progress",
-                            "count": 0,
-                            "percentage": 0.0
+                            label: "In Progress",
+                            count: 0,
+                            percentage: 0
                         }, {
-                            "label": "Not Started",
-                            "count": -7637,
-                            "percentage": 1.0
+                            label: "Not Started",
+                            count: -7637,
+                            percentage: 1
                         }
-                    ],
-
+                    ]
                 ]
             },
-
-            "attemptsGraph": {
-                "y_range": [0, 2666],
-                "data": [
-                                      [{
-                    "x": 0,
-                    "y": 0.0,
-                    "percentage": 0.0
-                  }
-                  ],
-
-                  [{
-                    "x": 0,
-                    "y": 0.0,
-                    "percentage": 0.0
-                  }
-                  ],
-
-                  [{
-                    "x": 0,
-                    "y": 0.0,
-                    "percentage": 0.0
-                  }
-                  ],
-
-                  [{
-                    "x": 0,
-                    "y": 0.0,
-                    "percentage": 0.0
-                  }
-                  ],
-                  [{
-                    "x": 0,
-                    "y": 0.0,
-                    "percentage": 0.0
-                  }
-                  ]
+            attemptsGraph: {
+                y_range: [0, 2666],
+                data: [
+                    [{
+                            x: 0,
+                            y: 0,
+                            percentage: 0
+                        }
+                    ],
+                    [{
+                            x: 0,
+                            y: 0,
+                            percentage: 0
+                        }
+                    ],
+                    [{
+                            x: 0,
+                            y: 0,
+                            percentage: 0
+                        }
+                    ],
+                    [{
+                            x: 0,
+                            y: 0,
+                            percentage: 0
+                        }
+                    ],
+                    [{
+                            x: 0,
+                            y: 0,
+                            percentage: 0
+                        }
                     ]
+                ]
             }
-
-        },
-
-
-
-        {
+        }, {
             "name": "quiz",
             "itemTitles": ["L4 Q1: Constraints", "L4 Q2: Constraint Graphs", "L4 Q3: Constraints", "L4 Q4: Backtracking Search", "L4 Q5: Forward Checking", "L4 Q6: Arc Consistency", "L4 Q7: Arc Consistency", "L4 Q8: Arc Consistency and Backtracking Search", "L4 Q9: Least Constraining Value", "L5 Q1: Tree-Structured CSPs", "L5 Q2: Smallest Cutset", "L5 Q3: Min-Conflicts", "L5 Q4: Hill Climbing"],
             "itemText": ["L4 Q1: Constraints", "L4 Q2: Constraint Graphs", "L4 Q3: Constraints", "L4 Q4: Backtracking Search", "L4 Q5: Forward Checking", "L4 Q6: Arc Consistency", "L4 Q7: Arc Consistency", "L4 Q8: Arc Consistency and Backtracking Search", "L4 Q9: Least Constraining Value", "L5 Q1: Tree-Structured CSPs", "L5 Q2: Smallest Cutset", "L5 Q3: Min-Conflicts", "L5 Q4: Hill Climbing"],

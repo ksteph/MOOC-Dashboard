@@ -120,7 +120,8 @@ for row in base_rows:
 		y_extra = 0
 		dattempt['data'] = []
 		dattempt['data'].append([])
-		attempt_query = "select count(distinct anon_student_id), attempt from week3 where done = 'true' and module_id = '" + row[2] + "' group by attempt"
+		#attempt_query = "select count(distinct anon_student_id), attempt from week3 where done = 'true' and module_id = '" + row[2] + "' group by attempt"
+		attempt_query = "select count(distinct anon_student_id), attempt from week3 where attempt > 0 and module_id = '" + row[2] + "' group by attempt"
 		cur.execute(attempt_query)
 		attemptrow = cur.fetchall()
 		attempt_student_count = 0
@@ -219,7 +220,8 @@ for row in base_rows:
 		x_extra = 0
 		y_extra = 0
 		dattempt['data'].append([])
-		attempt_query = "select count(distinct anon_student_id), attempt from week3 where done = 'true' and module_id = '" + row[2] + "' group by attempt"
+		#attempt_query = "select count(distinct anon_student_id), attempt from week3 where done = 'true' and module_id = '" + row[2] + "' group by attempt"
+		attempt_query = "select count(distinct anon_student_id), attempt from week3 where attempt > 0 and module_id = '" + row[2] + "' group by attempt"
 		cur.execute(attempt_query)
 		attemptrow = cur.fetchall()
 		attempt_student_count = 0
@@ -287,14 +289,27 @@ basearray_list.append(dbase)
 
 cur.close()
 
+# Special Code for HW Practice
+practice =', {name:"homework practice",itemTitles:["Pr1: Campus CSP","Pr2: CSP Properties","Pr3: 4-Queens","Pr4: Tree-Structured CSPs","Pr5: Solving Tree-Structured CSPs"],itemText:["Pr1: Campus CSP","Pr2: CSP Properties","Pr3: 4-Queens","Pr4: Tree-Structured CSPs","Pr5: Solving Tree-Structured CSPs"],gradeDistroGraph:{x_range:[0,100],y_range:[0,3934],data:[]},statusGraph:{y_range:[0,3756],data:[[{label:"Submitted",count:0,percentage:0},{label:"In Progress",count:0,percentage:0},{label:"Not Started",count:-7637,percentage:1}],[{label:"Submitted",count:0,percentage:0},{label:"In Progress",count:0,percentage:0},{label:"Not Started",count:-7637,percentage:1}],[{label:"Submitted",count:0,percentage:0},{label:"In Progress",count:0,percentage:0},{label:"Not Started",count:-7637,percentage:1}],[{label:"Submitted",count:0,percentage:0},{label:"In Progress",count:0,percentage:0},{label:"Not Started",count:-7637,percentage:1}],[{label:"Submitted",count:0,percentage:0},{label:"In Progress",count:0,percentage:0},{label:"Not Started",count:-7637,percentage:1}]]},attemptsGraph:{y_range:[0,2666],data:[[{x:0,y:0,percentage:0}],[{x:0,y:0,percentage:0}],[{x:0,y:0,percentage:0}],[{x:0,y:0,percentage:0}],[{x:0,y:0,percentage:0}]]}}'
+
+
 
 	
 j = json.dumps(basearray_list)
+
+j1 = 'var data =' + (j.lstrip('[')).rstrip(']')  ## Strip '[' and ']'
+pos = j1.find(', {"name": "quiz",')
+final = j1[:pos] + practice + j1[pos:]
+
+
 #print j
 
-
 f = open('data.js', 'w')
-print >> f, j
+print >> f, final
+
+
+#f = open('data.js', 'w')
+#print >> f, j
 
 
 # Connection Close

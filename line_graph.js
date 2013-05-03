@@ -132,10 +132,23 @@ funcCreateLineGraph = function(margin, height, width, data, tag) {
       .attr("r", 5)
       .on("mouseover", function(d){
         d3.select(this).attr("opacity", "0.6");
-        LineGraph.Tooltip.style("visibility", "visible")
-    	  .style("top", (event.pageY-10)+"px")
-          .style("left",(event.pageX+10)+"px")
-    	  .text(d.label);
+        
+        var top = event.pageY-10;
+        var left = event.pageX+10;
+        
+        graph.Tooltip.style("visibility", "visible")
+          .text(d.label);
+        
+        var height = $('#special-tooltip').height();
+        var width = $('#special-tooltip').width();
+        
+        if (top+height > $(window).height())
+          top -= height;
+        if (left+width+30 > $(window).width())
+          left -= (width+30);
+        
+        graph.Tooltip.style("top", top+"px")
+          .style("left", left+"px");
       })
       .on("mouseout", function(d){
         d3.select(this).attr("opacity", "1.0");

@@ -161,10 +161,23 @@ funcCreateMultiLineGraph = function(margin, height, width, data, tag,
       graph.Points
         .on("mouseover", function(d){
           d3.select(this).attr("opacity", "0.6");
+          
+          var top = event.pageY-10;
+          var left = event.pageX+10;
+          
           graph.Tooltip.style("visibility", "visible")
-    	    .style("top", (event.pageY-10)+"px")
-            .style("left",(event.pageX+10)+"px")
-    	    .text(d.label);
+            .text(d.label);
+          
+          var height = $('#special-tooltip').height();
+          var width = $('#special-tooltip').width();
+          
+          if (top+height > $(window).height())
+            top -= height;
+          if (left+width+30 > $(window).width())
+            left -= (width+30);
+          
+          graph.Tooltip.style("top", top+"px")
+            .style("left", left+"px");
           
           svg_id = "#"+d3.select(this).node().parentNode.parentNode.parentNode.id;
           

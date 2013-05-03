@@ -69,9 +69,11 @@ d3.select("#week-activity-y-axis").selectAll(".tick").selectAll("text")
 
 /* Overall Activity */
 var overallLineGraph = funcCreateLineGraph(margin_activity_overall, height_activity_overall, width_activity_overall, data.OverallActivity, "overall-activity");
-overallLineGraph.Scale.x.domain(
-  d3.extent(data.OverallActivity, function(d) { return d.x; }));
-overallLineGraph.XAxis.ticks(10)
+overallLineGraph.Scale.x.domain([
+  d3.min(data.OverallActivity, function(d) { return d.x; }),
+  1353304799 //Last day of the course
+]);
+overallLineGraph.XAxis.ticks(8)
   .tickFormat(function(d,i){
     var format = d3.time.format("%Y-%m-%d");
     return format(new Date(d*1000));

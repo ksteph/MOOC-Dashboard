@@ -1,4 +1,4 @@
-var margin_activity = {top: 20, right: 0, bottom: 25, left: 0};
+var margin_activity = {top: 20, right: 0, bottom: 25, left: -10};
 var width_activity = window.innerWidth/2.8;
 var height_activity = window.innerHeight/3.5;
 

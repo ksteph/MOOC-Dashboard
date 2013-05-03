@@ -27,7 +27,7 @@ Expected parameters:
 
 */
 funcCreateStackedBarGraph = function(margin, height, width, data, tag,
-                                     x_axis_range, y_axis_range) {
+                                     x_axis_range, y_axis_range, bVertical) {
   var graph = {};
   graph.Margin = margin;
   graph.Height = height;
@@ -36,17 +36,24 @@ funcCreateStackedBarGraph = function(margin, height, width, data, tag,
   graph.Tag = tag;
   graph.xRange = x_axis_range;
   graph.yRange = y_axis_range;
+  graph.bVertical = bVertical || false;
 
   graph.Mini = {
     Data: graph.Data,
     Tag: graph.Tag+"-mini",
     xRange: graph.xRange,
     yRange: graph.yRange,
+    bVertical: graph.bVertical,
   };
 
   graph.Margin.axisLeft = graph.Margin.left + 60;
   graph.Margin.axisBottom = graph.Margin.bottom + 50;
   graph.ZeroLineX2 = graph.Width-graph.Margin.axisLeft-graph.Margin.right;
+
+  if (graph.bVertical) {
+    graph.Margin.axisTop = graph.Margin.top + 50;
+    graph.Margin.axisLeft = graph.Margin.left + 25;
+  }
 
   // Loop through data to get what want
   /* Creating data:
@@ -135,6 +142,18 @@ funcCreateStackedBarGraph = function(margin, height, width, data, tag,
       .range(["#ffeeee","#ffebeb","#ffd8d8","#ffc4c4","#ffb1b1","#ff9d9d","#ff8989","#ff7676","#ff6262","#ff4e4e","#ff3b3b"])
   };
 
+  if (graph.bVertical) {
+    graph.Scale.x.rangeRoundBands([
+      0,
+      (graph.Height-graph.Margin.axisTop-graph.Margin.bottom)],
+                                  .3);
+
+    graph.Scale.y.range([
+      graph.Margin.axisLeft,
+      (graph.Width-graph.Margin.right)
+    ]);
+  }
+
   graph.Mini.Scale = {
     x: d3.scale.ordinal()
       .domain(graph.xRange),
@@ -148,12 +167,18 @@ funcCreateStackedBarGraph = function(margin, height, width, data, tag,
 
   // Setup axis
   graph.XAxis = d3.svg.axis()
-    .scale(graph.Scale.x)
-    .orient("bottom");
+    .scale(graph.Scale.x);
 
   graph.YAxis = d3.svg.axis()
-    .scale(graph.Scale.y)
-    .orient("left");
+    .scale(graph.Scale.y);
+
+  if (graph.bVertical) {
+    graph.XAxis.orient("left");
+    graph.YAxis.orient("top");
+  } else {
+    graph.XAxis.orient("bottom");
+    graph.YAxis.orient("left");
+  }
 
   graph.DrawBars = function(graph, bInteractive) {
     if (bInteractive) {
@@ -174,18 +199,35 @@ funcCreateStackedBarGraph = function(margin, height, width, data, tag,
       .enter().append("g")
       .attr("class", "stacked-bar")
       .attr("transform", function(d) {
-        return "translate("+graph.Scale.x(d.x)+",0)";
+        if (graph.bVertical)
+          return "translate(0,"+graph.Scale.x(d.x)+")";
+        else
+          return "translate("+graph.Scale.x(d.x)+",0)";
       });
     
     graph.Rects = graph.GStackedBars.selectAll("rect")
       .data(function(d) { return d.bars; })
       .enter().append("rect")
-      .attr("width", graph.Scale.x.rangeBand())
+      .attr("width", function(d) {
+        if (graph.bVertical)
+          return graph.Scale.y(d.y1) - graph.Scale.y(d.y0);
+        else
+          return graph.Scale.x.rangeBand()
+      })
       .attr("y", function(d) { return graph.Scale.y(d.y1); })
       .attr("height", function(d) {
-        return graph.Scale.y(d.y0) - graph.Scale.y(d.y1);
+        if (graph.bVertical)
+          return graph.Scale.x.rangeBand()
+        else
+          return graph.Scale.y(d.y0) - graph.Scale.y(d.y1);
       })
       .style("fill", function(d) { return graph.Scale.stackColor(d.color); });
+
+    if (graph.bVertical) {
+      graph.Rects
+        .attr("y", 0)
+        .attr("x", graph.Margin.axisLeft);
+    }
 
     if (bInteractive) {
       graph.Rects
@@ -201,35 +243,47 @@ funcCreateStackedBarGraph = function(margin, height, width, data, tag,
 
       // Add Legend
       var legendMarginLeft = 5;
+      var legendMarginTop = 5;
       var legendHeight = (graph.Height-graph.Margin.axisBottom-graph.Margin.top)/
         graph.StackColorDomain.length;
       var legendWidth = (graph.Margin.axisLeft-legendMarginLeft)/3.5;
       var isNumber = (typeof graph.StackColorDomain[0]) == "number";
 
+      if (graph.bVertical) {
+        legendMarginLeft = 0;
+        legendHeight = (graph.Margin.axisTop-legendMarginLeft)/3.5;
+        legendWidth = (graph.Width-graph.Margin.axisLeft-graph.Margin.right)/
+          graph.StackColorDomain.length;
+      }
+
       graph.Legend = graph.SvgGroup.append("g")
         .attr("class","g-legend")
-        .attr("transform","translate(-"+(graph.Margin.axisLeft)+",0)")
-        .selectAll(".legend")
+        .attr("transform","translate(-"+(graph.Margin.axisLeft-legendMarginLeft)+",0)");
+      graph.LegendGroups = graph.Legend.selectAll(".legend")
         .data(graph.StackColorDomain)
         .enter().append("g")
         .attr("class","legend")
         .attr("id",function(d,i) { return graph.Tag+"-legend-"+i; })
         .attr("transform", function(d,i) {
-          return "translate(" + legendMarginLeft + ","+
+          if (graph.bVertical)
+            return "translate("+
+            (i*legendWidth)+",0)";
+          else
+            return "translate(0,"+
             (graph.Height-graph.Margin.axisBottom-((i+1)*(legendHeight))) + ")";
         });
       
-      graph.Legend.append("rect")
+      graph.LegendGroups.append("rect")
         .attr("class","stacked-bar-graph-legend")
         .attr("height", legendHeight)
         .attr("width", legendWidth)
         .style("fill", graph.Scale.stackColor);
 
-      graph.Legend.append("text")
+      graph.LegendGroups.append("text")
         .attr("class","axis-label")
         .attr("transform", function(d) {
           var str = "translate("+(legendWidth/2)+","+(legendHeight/2)+")";
-          if (isNumber)
+          if (isNumber || graph.bVertical)
             return str;
           else
             return str + " rotate(-90)";
@@ -238,6 +292,11 @@ funcCreateStackedBarGraph = function(margin, height, width, data, tag,
         .style("font-size","9px")
         .style("text-anchor", "middle")
         .text(function(d,i) { return d; });
+
+      if (graph.bVertical) {
+        graph.Legend.attr("transform","translate("+graph.Margin.axisLeft+",-"+
+                          (graph.Margin.axisTop-legendMarginTop)+")")
+      }
     }
 
     // Add zero-line if needed
@@ -248,6 +307,10 @@ funcCreateStackedBarGraph = function(margin, height, width, data, tag,
         .attr("x2", graph.ZeroLineX2)
         .attr("y1", graph.Scale.y(0))
         .attr("y2", graph.Scale.y(0))
+
+      if (graph.bVertical) {
+        // TODO: Put code here as necessary
+      }
     }
   };
 
@@ -267,22 +330,34 @@ funcCreateStackedBarGraph = function(margin, height, width, data, tag,
 
     graph.DrawBars(graph,true);
 
-    graph.SvgGroup.append("g")
+    graph.XAxisG = graph.SvgGroup.append("g")
       .attr("class","axis")
       .attr("id",graph.Tag+"-x-axis")
       .attr("transform","translate(0,"+(graph.Height-graph.Margin.axisBottom)+")")
       .call(graph.XAxis);
 
-    graph.SvgGroup.append("g")
+    graph.YAxisLabel = graph.SvgGroup.append("g")
       .attr("class","axis")
       .attr("id",graph.Tag+"-y-axis")
       .call(graph.YAxis)
       .append("text")
-      .attr("transform","rotate(-90)")
       .attr("y",6)
       .attr("dy",".5em")
       .style("text-anchor","end")
       .text("Number of Students");
+
+    if (graph.bVertical) {
+      graph.SvgGroup.attr("transform",
+                          "translate("+graph.Margin.axisLeft+","+
+                          graph.Margin.axisTop+")");
+
+      graph.XAxisG.attr("transform","translate("+
+                        (graph.Margin.axisLeft)+",0)");
+
+      graph.YAxisLabel.attr("x", graph.Width);
+    } else {
+      graph.YAxisLabel.attr("transform","rotate(-90)");
+    }
 
   };
   

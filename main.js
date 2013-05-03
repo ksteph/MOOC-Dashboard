@@ -15,6 +15,46 @@ var height_multiple_down = window.innerHeight/12;
 /* Week Activity */
 // Make sure draw line in right order
 data.WeekActivity.sort(function(a,b){ return a.x-b.x; });
+
+// Convert line graph data into bar graph data
+var weekBarData = [];
+var weekXLabels = [];
+var weekYMax = 0;
+$.each(data.WeekActivity, function(i,e) {
+  var d = {};
+  d.x = e.y;
+
+  if (d.x > weekYMax)
+    weekYMax = d.x;
+  
+  if (e.label.match(/hw/i))
+    d.y = "Homework";
+  else if (e.label.match(/quiz/i))
+    d.y = "Quiz";
+  else if (e.x_label.match(/v\d/i))
+    d.y = "Video";
+  else
+    d.y = "Other";
+  
+  d.label = e.label + " (" + d3.format(",")(d.x) + " students)";
+  d.percentage = 100;
+  
+  weekBarData.push([d]);
+
+  weekXLabels.push(e.x_label);
+});
+
+// Commenting and leaving this code here as sample code on how to create the vertical bar graph.
+// var tmp = funcCreateStackedBarGraph(margin_activity, width_activity, height_activity, weekBarData, "tmp", weekXLabels, [0,weekYMax], true);
+// var svgTmp = d3.select("body").append("svg")
+// tmp.Scale.stackColor.range(["b72567","009fe2","77519a","898b8f"]);
+// tmp.DrawGraph(svgTmp);
+// d3.select("#tmp-y-axis").selectAll(".tick").selectAll("text")
+//   .attr("transform", "rotate(45) translate(-5,5)")
+//   .style("text-anchor", "end");
+
+
+     
 var weekLineGraph = funcCreateLineGraph(margin_activity, height_activity, width_activity, data.WeekActivity, "week-activity");
 weekLineGraph.XAxis.ticks(data.WeekActivity.length)
   .tickFormat(function(d,i){ 

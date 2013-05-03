@@ -169,17 +169,6 @@ funcCreateStackedBarGraph = function(margin, height, width, data, tag,
     }
 
     // Draw Graph
-
-    // Add zero-line if needed
-    if (graph.yRange[0] < 0) {
-      graph.SvgGroup.append("line")
-        .attr("class","axis")
-        .attr("x1", 0)
-        .attr("x2", graph.ZeroLineX2)
-        .attr("y1", graph.Scale.y(0))
-        .attr("y2", graph.Scale.y(0))
-    }
-
     graph.GStackedBars = graph.SvgGroup.selectAll(".stacked-bar")
       .data(graph.Data)
       .enter().append("g")
@@ -251,6 +240,15 @@ funcCreateStackedBarGraph = function(margin, height, width, data, tag,
         .text(function(d,i) { return d; });
     }
 
+    // Add zero-line if needed
+    if (graph.yRange[0] < 0) {
+      graph.SvgGroup.append("line")
+        .attr("class","axis")
+        .attr("x1", 0)
+        .attr("x2", graph.ZeroLineX2)
+        .attr("y1", graph.Scale.y(0))
+        .attr("y2", graph.Scale.y(0))
+    }
   };
 
   graph.DrawGraph = function(svg) {
@@ -266,6 +264,8 @@ funcCreateStackedBarGraph = function(margin, height, width, data, tag,
       .append("g")
       .attr("transform","translate("+ graph.Margin.axisLeft + "," +
             graph.Margin.top + ")");
+
+    graph.DrawBars(graph,true);
 
     graph.SvgGroup.append("g")
       .attr("class","axis")
@@ -284,7 +284,6 @@ funcCreateStackedBarGraph = function(margin, height, width, data, tag,
       .style("text-anchor","end")
       .text("Number of Students");
 
-    graph.DrawBars(graph,true);
   };
   
   // This scaling is not quite right, but the best can do for now.

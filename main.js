@@ -263,7 +263,7 @@ d3.selectAll('.down-multiple').each(function(parantD) {
         d3.select("svg#top_line"+parantD+"-line-graph").attr("display","none");
         d3.select("svg#top_status"+parantD+"-stacked-bar-graph").attr("display","none");
         d3.select("svg#top_attempt"+parantD+"-stacked-bar-graph").attr("display","block");
-        d3.select("#small-multiple"+parantD+" .small-multiple-title .right").text("Student Attempts (Submitted, In Progress)");
+        d3.select("#small-multiple"+parantD+" .small-multiple-title .right").text("Student Attempts (for attempts > 0)");
       }
       else {
         console.log("something is wrong");

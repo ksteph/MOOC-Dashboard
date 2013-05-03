@@ -124,58 +124,44 @@ var storage_matrix = []; //dirty code
 
 /* Draw line/status/attempt graph, but set display to block/none */
 for (var i=0; i<data.GradedItems.length; i++) { 
-  // line graph  
+  // Grade Distribution Graph
   var line_data = [];
-  var titles = data.GradedItems[i].itemTitles;
+  var titles = [];
   var parantI = i;
-
-  var tmpData = [];
-  var tmpXLabel = [];
 
   $.each(data.GradedItems[i].gradeDistroGraph.data, function(i2,e_i) {
     var d = [];
-    var tD = [];
 
     $.each(e_i, function(j, e_j) {
       var b = {};
-      b.x = e_j.x*100;
-      b.y = e_j.y;
-      b.percentage = e_j.percentage;
-      b.label = data.GradedItems[parantI].itemTitles[i] + " (" + e_j.label + ")";
-      d.push(b);
-
-      var tB = {};
-      tB.x = e_j.y;
-      tB.y = e_j.x*100;
-      tB.label = data.GradedItems[parantI].itemTitles[i] + " (" + e_j.label + 
+      b.x = e_j.y;
+      b.y = e_j.x*100;
+      b.label = data.GradedItems[parantI].itemTitles[i] + " (" + e_j.label + 
         " ["+d3.format(".0f")(e_j.percentage*100)+"%]"+")";
-      tB.percentage = e_j.percentage;
-      tD.push(tB);
+      b.percentage = e_j.percentage;
+      d.push(b);
     });
 
-    line_data.push(d);
-    tmpData.push(tD.sort(function(a,b){return a.y-b.y}));
-    tmpXLabel.push(data.GradedItems[i].itemTitles[i2].slice(0,2));
+    line_data.push(d.sort(function(a,b){return a.y-b.y}));
+    titles.push(data.GradedItems[i].itemTitles[i2].slice(0,5));
   });
 
-  var tmp = funcCreateStackedBarGraph(margin_multiple_top, height_multiple_top, width_multiple_top, tmpData, "tmp", tmpXLabel, data.GradedItems[i].gradeDistroGraph.y_range);
-  tmp.Scale.stackColor = d3.scale.linear()
+  var top1 = funcCreateStackedBarGraph(margin_multiple_top, height_multiple_top,
+                                       width_multiple_top, line_data,
+                                       "top_line"+i, titles,
+                                       data.GradedItems[i].gradeDistroGraph.y_range);
+
+  // Give it a proper scale based on grade distribution [0,100]
+  top1.Scale.stackColor = d3.scale.linear()
     .domain([0,50,100])
+  //TODO: Pick better colors of red, white, green
     .range(["#f00","#fff","#0f0"]);
-  tmp.Mini.Scale.stackColor = tmp.Scale.stackColor;
-  $.each(tmp.StackColorDomain, function(i2,e_i) {
-    tmp.StackColorDomain[i2] = i2*(100.0/tmp.StackColorDomain.length);
+  top1.Mini.Scale.stackColor = top1.Scale.stackColor;
+  top1.StackColorDomain.length = 11;
+  $.each(top1.StackColorDomain, function(i2,e_i) {
+    top1.StackColorDomain[i2] = i2*10;
   });
-  // tmp.StackColorDomain[0] = 0;
-  // tmp.StackColorDomain[tmp.StackColorDomain.length-1] = 100;
-  
-  var svgTmp = d3.select("body").append("svg")
-  tmp.DrawGraph(svgTmp);
-  
 
-  var top1 = funcCreateMultiLineGraph(margin_multiple_top, height_multiple_top, width_multiple_top, line_data, "top_line"+i, data.GradedItems[i].gradeDistroGraph.x_range, data.GradedItems[i].gradeDistroGraph.y_range);
-  top1.XAxis.ticks(10); // data.WeekActivity.length
-  top1.Scale.color.range(["#3D9AD1","#3D51D1","#733DD1","#3DD1BE","#3DD173","#E9BBA0","#D1BE3D","#D13D51","#D1733D","#A0CEE9","#D13D9B"]);
   svg = d3.select("#top-multiple"+i).append("svg").attr("class","top-svg")
     .attr("viewBox", "0 0 "+width_multiple_top+" "+height_multiple_top);
   top1.DrawGraph(svg);

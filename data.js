@@ -446,7 +446,38 @@ var data = {
             gradeDistroGraph: {
                 x_range: [0, 100],
                 y_range: [0, 3934],
-                data: []
+                data: [
+                  [{
+                    "x": 0,
+                    "y":0,
+                    "label": "",
+                    "percentage": 0
+                  }],
+                  [{
+                    "x": 0,
+                    "y":0,
+                    "label": "",
+                    "percentage": 0
+                  }],
+                  [{
+                    "x": 0,
+                    "y":0,
+                    "label": "",
+                    "percentage": 0
+                  }],
+                  [{
+                    "x": 0,
+                    "y":0,
+                    "label": "",
+                    "percentage": 0
+                  }],
+                  [{
+                    "x": 0,
+                    "y":0,
+                    "label": "",
+                    "percentage": 0
+                  }]
+                ]
             },
             statusGraph: {
                 y_range: [0, 3756],

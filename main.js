@@ -127,9 +127,17 @@ d3.select("#small-multiple-title-second2").append("div").attr("class","right").t
 ////
 
 var storage_matrix = []; //dirty code
+var xLabelSlice = 2;
 
 /* Draw line/status/attempt graph, but set display to block/none */
 for (var i=0; i<data.GradedItems.length; i++) { 
+
+  if (data.GradedItems[i].name.match(/practice/))
+    xLabelSlice = 3;
+  else if (data.GradedItems[i].name.match(/homework/))
+    xLabelSlice = 2;
+  else if (data.GradedItems[i].name.match(/quiz/))
+    xLabelSlice = 5;
 
   //status graph 
   var parantI = i;
@@ -142,7 +150,7 @@ for (var i=0; i<data.GradedItems.length; i++) {
     var d = [];
     var pos = 0;
     var neg = 0;
-    xLabel.push(data.GradedItems[parantI].itemTitles[i].slice(0,2));
+    xLabel.push(data.GradedItems[parantI].itemTitles[i].slice(0,xLabelSlice));
 
     $.each(e_i, function(j, e_j) {
       var b = {};
@@ -188,7 +196,11 @@ for (var i=0; i<data.GradedItems.length; i++) {
   top1.DrawGraph(svg);
   top1.Rects.attr("opacity",0.8);
   //storage_matrix.push(top1);
-  d3.select("#top_status"+i+"-x-axis").selectAll("text");
+  if (status_data.length > 8) {
+    d3.select("#top_status"+i+"-x-axis").selectAll("text")
+      .attr("transform", "rotate(-45)")
+      .style("text-anchor","end");
+  }
 
 
   // Top 2, attempt graph 
@@ -200,7 +212,7 @@ for (var i=0; i<data.GradedItems.length; i++) {
   $.each(data.GradedItems[i].attemptsGraph.data, function(i,e_i) {
     var d = [];
     xSum = 0;
-    xLabel.push(data.GradedItems[parantI].itemTitles[i].slice(0,2));
+    xLabel.push(data.GradedItems[parantI].itemTitles[i].slice(0,xLabelSlice));
 
     $.each(e_i, function(j, e_j) {
       var b = {};
@@ -239,7 +251,11 @@ for (var i=0; i<data.GradedItems.length; i++) {
   top2.DrawGraph(svg);
   top2.Rects.attr("opacity",0.8);
   storage_matrix.push(top2);
-  d3.select("#top_attempt"+i+"-x-axis").selectAll("text");
+  if (attempt_data.length > 8) {
+    d3.select("#top_attempt"+i+"-x-axis").selectAll("text")
+      .attr("transform", "rotate(-45)")
+      .style("text-anchor","end");
+  }
 
   // Top 3, grade, display none  
   // Grade Distribution Graph
@@ -261,7 +277,7 @@ for (var i=0; i<data.GradedItems.length; i++) {
     });
 
     line_data.push(d.sort(function(a,b){return a.y-b.y}));
-    titles.push(data.GradedItems[i].itemTitles[i2].slice(0,5));
+    titles.push(data.GradedItems[i].itemTitles[i2].slice(0,xLabelSlice));
   });
 
   var top3 = funcCreateStackedBarGraph(margin_multiple_top, height_multiple_top,
@@ -284,8 +300,11 @@ for (var i=0; i<data.GradedItems.length; i++) {
     .attr("viewBox", "0 0 "+width_multiple_top+" "+height_multiple_top);
   top3.DrawGraph(svg);
   storage_matrix.push(top3);
-  d3.select("#top_line"+i+"-x-axis").selectAll("text")
-  .style("font-size", "8px");
+  if (line_data.length > 8) {
+    d3.select("#top_line"+i+"-x-axis").selectAll("text")
+      .attr("transform", "rotate(-45)")
+      .style("text-anchor","end");
+  }
 }
   
 

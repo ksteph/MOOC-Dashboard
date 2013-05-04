@@ -114,11 +114,11 @@ smallMultiples.append("div")
     return "top-multiple"+i;
   });
 
-d3.select("#small-multiple-title0").append("div").attr("class","left").text("Homework: ");
+d3.select("#small-multiple-title0").append("div").attr("class","left").text("Homework ");
 d3.select("#small-multiple-title0").append("div").attr("class","right").text("Student Status");
-d3.select("#small-multiple-title1").append("div").attr("class","left").text("HW Practice: ");
+d3.select("#small-multiple-title1").append("div").attr("class","left").text("Homework Practice ");
 d3.select("#small-multiple-title1").append("div").attr("class","right").text("Student Status");
-d3.select("#small-multiple-title2").append("div").attr("class","left").text("Quiz: ");
+d3.select("#small-multiple-title2").append("div").attr("class","left").text("Quiz ");
 d3.select("#small-multiple-title2").append("div").attr("class","right").text("Student Status");
 d3.select("#small-multiple-title-second0").append("div").attr("class","right").text("Student Attempts (for attempts > 0)");
 d3.select("#small-multiple-title-second1").append("div").attr("class","right").text("Student Attempts (for attempts > 0)");

@@ -16,7 +16,7 @@ body {
     font-size: 8px;
 }
 .axis text {
-    font-size: 8px;
+    font-size: 10px;
     fill: #000;
     stroke-width: 0px;
 }
@@ -44,7 +44,6 @@ body {
 #container {
     width: 100%;
     height: 98%;
-    /*overflow: hidden;*/
 }
 
 
@@ -85,7 +84,6 @@ body {
     text-align: center;
     color: #333;
     padding-top: 10px;
-
     background-color: #EEE;
     border: 1px solid #aaa;
     border-bottom: 0px; 
@@ -93,80 +91,79 @@ body {
     -moz-box-shadow: 0 1px 2px rgba(0,0,0,0.1);
     box-shadow: 0 1px 2px rgba(0,0,0,0.1);
 }
+#activity-week .activity-title {
+    /*width: calc(100%-1px);*/
+}
 
-.small-multiple-title {
+.small-multiple-title,
+.small-multiple-title-second {
     padding-top: 2%;
-    padding-left: 4%;
-    width: 96%;
-    overflow: hidden;
-
-    background-color: #EEE;
-    border: 1px solid #aaa;
-    border-bottom: 0px; 
-    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.1);
-    -moz-box-shadow: 0 1px 2px rgba(0,0,0,0.1);
-    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    /*padding-left: 4%;*/
+    width: 100%;
+    /*overflow: hidden;*/
 }
 .small-multiple-title .left {
-    /*float: left;*/
-    text-align: center;
-    color: #666;
-    /*font-size: 10px;*/
-
-    /*padding: 5px;*/
-/*    background-color: #ddd;*/
-    /*border: 1px solid #aaa;*/
-/*    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.1);
-    -moz-box-shadow: 0 1px 2px rgba(0,0,0,0.1);
-    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;*/
-
-/*    transform:rotate(-20deg);
-    -ms-transform:rotate(-20deg);
-    -webkit-transform:rotate(-20deg);*/
-}
-.small-multiple-title .right {
-    /*float: left;*/
-    /*position: absolute;*/
-    padding-top: 3px;
     text-align: center;
     color: #333;
+    padding-bottom: 4px;
+}
+.small-multiple-title .right,
+.small-multiple-title-second .right {
+    width: 100%;
+    padding-top: 4px;
+    text-align: center;
+    color: #666;
     font-size: 10pt;
+
+    background-color: #EEE;
+    border: 1px solid #aaa;
+    border-bottom: 0px; 
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    -moz-box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
 }
 
 /* Activity */
 #container-upper {
     width: 100%;
-    height: 80%;
+    height: 75%;
 }
 #container-activity-overall {
     width: 100%;
-    height: 20%;
+    height: 15%;
 }
 #container-multiple {
     float: left;
-    width: 67%;
+    width: 77%;
     height: 85%;
     margin-top: 1%;
 }
 #activity-week {
     float: left;
-    width: 30%;
+    width: 20%;
     height: 100%;
     padding-top: 1%;
     padding-left: 1.5%;
     margin-right: 1%;
 }
 #activity-overall {
-    width: 100%;
+    width: 97%;
     height: 100%;
     margin-left: 1.5%;
+    margin-right: 1.5%;
 }
 
 #activity-week-container {
     height: 90%;
+    width: 100%;
+    overflow: hidden;
+
+    background-color: #EEE;
+    border: 1px solid #aaa;
+    border-top: 0px;
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    -moz-box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
 }
 #activity-overall-container {
     height: 90%;
@@ -194,8 +191,8 @@ body {
 .down {
     background-color: #c3c3c3;
     float: left;
-    width: 28%;
-    height: 58%;
+    width: 45%;
+    height: 65%;
     padding: 1% 1.5% 1% 1%;
     margin: 1%;
 }
@@ -219,7 +216,7 @@ body {
 
 
 /* SVGs */
-svg#week-activity-line-graph,
+
 svg#overall-activity-line-graph,
 svg.top-svg,
 svg.stacked-bar-graph {
@@ -230,11 +227,15 @@ svg.stacked-bar-graph {
     -moz-box-shadow: 0 1px 2px rgba(0,0,0,0.1);
     box-shadow: 0 1px 2px rgba(0,0,0,0.1);
 }
+svg#week-activity-stacked-bar-graph {
+    border: 0px;
+}
 
 svg {
     width: 100%;
     height: 100%;
 }
+
 /* Tooltip */
 #special-tooltip {
     width: 150px;

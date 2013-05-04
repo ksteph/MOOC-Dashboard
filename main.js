@@ -1,16 +1,16 @@
-var margin_activity_week = {top: 20, right: 0, bottom: 20, left: -20};
-var width_activity_week = window.innerWidth/3;
+var margin_activity_week = {top: 20, right: 0, bottom: 20, left: -35};
+var width_activity_week = window.innerWidth/5;
 var height_activity_week = window.innerHeight;
 
-var margin_activity_overall = {top: 0, right: 0, bottom: 25, left: -100};
-var width_activity_overall = window.innerWidth*1.5;
+var margin_activity_overall = {top: 0, right: 0, bottom: 0, left: 0};
+var width_activity_overall = window.innerWidth*2;
 var height_activity_overall = window.innerHeight/3.5;
 
-var margin_multiple_top = {top: 10, right: 20, bottom: 0, left: 0};
-var width_multiple_top = window.innerWidth/3.3;
+var margin_multiple_top = {top: 10, right: 10, bottom: 0, left: 20};
+var width_multiple_top = window.innerWidth/3.2;
 var height_multiple_top = window.innerHeight/3.5;
 
-var margin_multiple_down = {top: 0, right: 0, bottom: 0, left: 0};
+var margin_multiple_down = {top: 5, right: 0, bottom: 5, left: 0};
 var width_multiple_down = window.innerWidth/12;
 var height_multiple_down = window.innerHeight/12;
 
@@ -108,6 +108,11 @@ smallMultiples.append("div")
     return "fixed-multiple"+i;
   })
 smallMultiples.append("div")
+  .attr("class", "small-multiple-title-second")
+  .attr("id", function(d,i) {
+    return "small-multiple-title-second"+i;
+  })
+smallMultiples.append("div")
   .attr("class", "top-multiple")
   .attr("id", function(d,i) {
     return "top-multiple"+i;
@@ -119,6 +124,9 @@ d3.select("#small-multiple-title1").append("div").attr("class","left").text("HW 
 d3.select("#small-multiple-title1").append("div").attr("class","right").text("Student Status");
 d3.select("#small-multiple-title2").append("div").attr("class","left").text("Quiz: ");
 d3.select("#small-multiple-title2").append("div").attr("class","right").text("Student Status");
+d3.select("#small-multiple-title-second0").append("div").attr("class","right").text("Student Attempts (for attempts > 0)");
+d3.select("#small-multiple-title-second1").append("div").attr("class","right").text("Student Attempts (for attempts > 0)");
+d3.select("#small-multiple-title-second2").append("div").attr("class","right").text("Student Attempts (for attempts > 0)");
 
 ////
 
@@ -126,50 +134,6 @@ var storage_matrix = []; //dirty code
 
 /* Draw line/status/attempt graph, but set display to block/none */
 for (var i=0; i<data.GradedItems.length; i++) { 
-  // Grade Distribution Graph
-  var line_data = [];
-  var titles = [];
-  var parantI = i;
-
-  $.each(data.GradedItems[i].gradeDistroGraph.data, function(i2,e_i) {
-    var d = [];
-
-    $.each(e_i, function(j, e_j) {
-      var b = {};
-      b.x = e_j.y;
-      b.y = e_j.x*100;
-      b.label = data.GradedItems[parantI].itemTitles[i] + " (" + e_j.label + 
-        " ["+d3.format(".0f")(e_j.percentage*100)+"%]"+")";
-      b.percentage = e_j.percentage;
-      d.push(b);
-    });
-
-    line_data.push(d.sort(function(a,b){return a.y-b.y}));
-    titles.push(data.GradedItems[i].itemTitles[i2].slice(0,5));
-  });
-
-  var top1 = funcCreateStackedBarGraph(margin_multiple_top, height_multiple_top,
-                                       width_multiple_top, line_data,
-                                       "top_line"+i, titles,
-                                       data.GradedItems[i].gradeDistroGraph.y_range);
-
-  // Give it a proper scale based on grade distribution [0,100]
-  top1.Scale.stackColor = d3.scale.linear()
-    .domain([0,50,100])
-  //TODO: Pick better colors of red, white, green
-    .range(["#f00","#fff","#0f0"]);
-  top1.Mini.Scale.stackColor = top1.Scale.stackColor;
-  top1.StackColorDomain.length = 11;
-  $.each(top1.StackColorDomain, function(i2,e_i) {
-    top1.StackColorDomain[i2] = i2*10;
-  });
-
-  svg = d3.select("#top-multiple"+i).append("svg").attr("class","top-svg")
-    .attr("viewBox", "0 0 "+width_multiple_top+" "+height_multiple_top);
-  top1.DrawGraph(svg);
-  storage_matrix.push(top1);
-  d3.select("#top_line"+i+"-x-axis").selectAll("text")
-  .style("font-size", "8px");
 
   //status graph 
   var parantI = i;
@@ -212,7 +176,7 @@ for (var i=0; i<data.GradedItems.length; i++) {
   });
 
   // Top 1, status, fixed
-  var top1 = funcCreateStackedBarGraph({top: 10, right: 20, bottom: 0, left: 0}, height_multiple_top, width_multiple_top, status_data, "top_status"+i, data.GradedItems[i].itemTitles, [min,max])
+  var top1 = funcCreateStackedBarGraph(margin_multiple_top, height_multiple_top, width_multiple_top, status_data, "top_status"+i, data.GradedItems[i].itemTitles, [min,max])
   top1.Scale.stackColor.range(["#ff9b8e","#8EC6E8","#FFE796"]);
   top1.XAxis.tickFormat(function(d,i){
     return xLabel[i];
@@ -269,7 +233,7 @@ for (var i=0; i<data.GradedItems.length; i++) {
     attempt_data.push(d);
   });
 
-  var top2 = funcCreateStackedBarGraph({top: 10, right: 20, bottom: 0, left: 0}, height_multiple_top, width_multiple_top, attempt_data, "top_attempt"+i, data.GradedItems[i].itemTitles, [0, xMax])
+  var top2 = funcCreateStackedBarGraph(margin_multiple_top, height_multiple_top, width_multiple_top, attempt_data, "top_attempt"+i, data.GradedItems[i].itemTitles, [0, xMax])
   svg = d3.select("#top-multiple"+i).append("svg").attr("display","block").attr("class","top-svg")
     .attr("viewBox", "0 0 "+width_multiple_top+" "+height_multiple_top);
   top2.Scale.stackColor.range(["#ffebeb","#ffd6d6","#ffc2c2","#ffadad","#ff9999","#ff8585","#ff7070","#ff5c5c","#ff4747","#ff3333","#ff1f1f"]);
@@ -278,31 +242,49 @@ for (var i=0; i<data.GradedItems.length; i++) {
   });
   top2.DrawGraph(svg);
   top2.Rects.attr("opacity",0.8);
+  //console.log("top2:"+top2);
   storage_matrix.push(top2);
   d3.select("#top_attempt"+i+"-x-axis").selectAll("text");
 
   // Top 3, grade, display none  
+  // Grade Distribution Graph
   var line_data = [];
-  var titles = data.GradedItems[i].itemTitles;
-  
-  $.each(data.GradedItems[i].gradeDistroGraph.data, function(i,e_i) {
+  var titles = [];
+  var parantI = i;
+
+  $.each(data.GradedItems[i].gradeDistroGraph.data, function(i2,e_i) {
     var d = [];
 
     $.each(e_i, function(j, e_j) {
       var b = {};
-      b.x = e_j.x*100;
-      b.y = e_j.y;
+      b.x = e_j.y;
+      b.y = e_j.x*100;
+      b.label = data.GradedItems[parantI].itemTitles[i] + " (" + e_j.label + 
+        " ["+d3.format(".0f")(e_j.percentage*100)+"%]"+")";
       b.percentage = e_j.percentage;
-      b.label = data.GradedItems[parantI].itemTitles[i] + " (" + e_j.label + ")";
       d.push(b);
     });
 
-    line_data.push(d);
+    line_data.push(d.sort(function(a,b){return a.y-b.y}));
+    titles.push(data.GradedItems[i].itemTitles[i2].slice(0,5));
   });
 
-  var top3 = funcCreateMultiLineGraph(margin_multiple_top, height_multiple_top, width_multiple_top, line_data, "top_line"+i, data.GradedItems[i].gradeDistroGraph.x_range, data.GradedItems[i].gradeDistroGraph.y_range);
-  top3.XAxis.ticks(10); // data.WeekActivity.length
-  top3.Scale.color.range(["#3D9AD1","#3D51D1","#733DD1","#3DD1BE","#3DD173","#E9BBA0","#D1BE3D","#D13D51","#D1733D","#A0CEE9","#D13D9B"]);
+  var top3 = funcCreateStackedBarGraph(margin_multiple_top, height_multiple_top,
+                                       width_multiple_top, line_data,
+                                       "top_line"+i, titles,
+                                       data.GradedItems[i].gradeDistroGraph.y_range);
+
+  // Give it a proper scale based on grade distribution [0,100]
+  top3.Scale.stackColor = d3.scale.linear()
+    .domain([0,50,100])
+  //TODO: Pick better colors of red, white, green
+    .range(["#f00","#fff","#0f0"]);
+  top3.Mini.Scale.stackColor = top3.Scale.stackColor;
+  top3.StackColorDomain.length = 11;
+  $.each(top3.StackColorDomain, function(i2,e_i) {
+    top3.StackColorDomain[i2] = i2*10;
+  });
+
   svg = d3.select("#top-multiple"+i).append("svg").attr("display","none").attr("class","top-svg")
     .attr("viewBox", "0 0 "+width_multiple_top+" "+height_multiple_top);
   top3.DrawGraph(svg);
@@ -334,25 +316,17 @@ d3.selectAll('.down-multiple').each(function(parantD) {
       if (i==0) {
         $("#down-multiple"+parantD+" .down").removeClass("active");
         $("#down-multiple"+parantD+" #down"+parantD+i).addClass("active");
-        d3.select("svg#top_line"+parantD+"-line-graph").attr("display","none");
+        d3.select("svg#top_line"+parantD+"-stacked-bar-graph").attr("display","none");
         d3.select("svg#top_attempt"+parantD+"-stacked-bar-graph").attr("display","block");
-        d3.select("#small-multiple"+parantD+" .small-multiple-title .right").text("Grade Distribution (Submitted)");  
+        d3.select("#small-multiple"+parantD+" .small-multiple-title-second .right").text("Student Attempts (for attempts > 0)");  
       }
       else if (i==1) {
         $("#down-multiple"+parantD+" .down").removeClass("active");
         $("#down-multiple"+parantD+" #down"+parantD+i).addClass("active");
-        d3.select("svg#top_line"+parantD+"-line-graph").attr("display","block");
+        d3.select("svg#top_line"+parantD+"-stacked-bar-graph").attr("display","block");
         d3.select("svg#top_attempt"+parantD+"-stacked-bar-graph").attr("display","none");
-        d3.select("#small-multiple"+parantD+" .small-multiple-title .right").text("Student Attempts (for attempts > 0)");
+        d3.select("#small-multiple"+parantD+" .small-multiple-title-second .right").text("Grade Distribution (Submitted)");
       }
-      // else if (i==2) {
-      //   $("#down-multiple"+parantD+" .down").removeClass("active");
-      //   $("#down-multiple"+parantD+" #down"+parantD+i).addClass("active");
-      //   d3.select("svg#top_line"+parantD+"-line-graph").attr("display","none");
-      //   d3.select("svg#top_status"+parantD+"-stacked-bar-graph").attr("display","none");
-      //   d3.select("svg#top_attempt"+parantD+"-stacked-bar-graph").attr("display","block");
-      //   d3.select("#small-multiple"+parantD+" .small-multiple-title .right").text("Student Attempts (for attempts > 0)");
-      // }
       else {
         console.log("something is wrong");
       }
@@ -363,12 +337,13 @@ $("#down00").addClass("active");
 $("#down10").addClass("active");
 $("#down20").addClass("active");
 
+
 for (var i=0; i<3; i++) {
   for (var k=0; k<2; k++) {
     svg = d3.select("#down-multiple"+i+" #down"+i+k+" svg")
       .attr("viewBox", "0 0 "+width_multiple_down+" "+height_multiple_down)
       .attr("display","block");
-    storage_matrix[i*3+k].DrawMiniGraph(svg, height_multiple_down, width_multiple_down, margin_multiple_down);
+    storage_matrix[i*2+k].DrawMiniGraph(svg, height_multiple_down, width_multiple_down, margin_multiple_down);
     svg.selectAll("rect").attr("opacity", 0.8);
   }
 }

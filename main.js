@@ -60,7 +60,7 @@ $.each(data.WeekActivity, function(i,e) {
 var weekBarGraph = funcCreateStackedBarGraph(margin_activity_week, height_activity_week, width_activity_week, weekBarData, "week-activity", weekXLabels, [0,weekYMax], true);
 svg = d3.select("#activity-week-container").append("svg")
   .attr("viewBox", "0 0 "+width_activity_week+" "+height_activity_week);
-weekBarGraph.Scale.stackColor.range(["b72567","009fe2","77519a","898b8f"]);
+weekBarGraph.Scale.stackColor.range(["989EEC","6CC9F1","FFD56C","ccc"]);
 weekBarGraph.DrawGraph(svg);
 d3.select("#week-activity-y-axis").selectAll(".tick").selectAll("text")
   .attr("transform", "rotate(45) translate(-5,5)")
@@ -82,10 +82,6 @@ overallLineGraph.XAxis.ticks(8)
 svg = d3.select("#activity-overall-container").append("svg")
   .attr("viewBox", "0 0 "+width_activity_overall+" "+height_activity_overall);
 overallLineGraph.DrawGraph(svg);
-d3.select("#overall-activity-x-axis").selectAll("text")
-  .attr("transform", function(d){
-    return "rotate(-20) translate(-12,0)"
-  });
 
 /////////////////////
 
@@ -242,7 +238,6 @@ for (var i=0; i<data.GradedItems.length; i++) {
   });
   top2.DrawGraph(svg);
   top2.Rects.attr("opacity",0.8);
-  //console.log("top2:"+top2);
   storage_matrix.push(top2);
   d3.select("#top_attempt"+i+"-x-axis").selectAll("text");
 
@@ -278,7 +273,7 @@ for (var i=0; i<data.GradedItems.length; i++) {
   top3.Scale.stackColor = d3.scale.linear()
     .domain([0,50,100])
   //TODO: Pick better colors of red, white, green
-    .range(["#f00","#fff","#0f0"]);
+    .range(["#ff9b8e","#fff","#8EC6E8"]);
   top3.Mini.Scale.stackColor = top3.Scale.stackColor;
   top3.StackColorDomain.length = 11;
   $.each(top3.StackColorDomain, function(i2,e_i) {

@@ -46,7 +46,7 @@ funcCreateStackedBarGraph = function(margin, height, width, data, tag,
     bVertical: graph.bVertical,
   };
 
-  graph.Margin.axisLeft = graph.Margin.left + 60;
+  graph.Margin.axisLeft = graph.Margin.left + 50;
   graph.Margin.axisBottom = graph.Margin.bottom + 50;
   graph.ZeroLineX2 = graph.Width-graph.Margin.axisLeft-graph.Margin.right;
 
@@ -254,7 +254,7 @@ funcCreateStackedBarGraph = function(margin, height, width, data, tag,
         });
 
       // Add Legend
-      var legendMarginLeft = 5;
+      var legendMarginLeft = 15;
       var legendMarginTop = 5;
       var legendHeight = (graph.Height-graph.Margin.axisBottom-graph.Margin.top)/
         graph.StackColorDomain.length;

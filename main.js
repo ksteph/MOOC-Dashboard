@@ -4,7 +4,7 @@ var height_activity_week = window.innerHeight;
 
 var margin_activity_overall = {top: 0, right: 0, bottom: 0, left: 0};
 var width_activity_overall = window.innerWidth*2;
-var height_activity_overall = window.innerHeight/3.5;
+var height_activity_overall = window.innerHeight/4;
 
 var margin_multiple_top = {top: 10, right: 10, bottom: 0, left: 20};
 var width_multiple_top = window.innerWidth/3.2;

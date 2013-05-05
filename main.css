@@ -10,7 +10,6 @@ body {
     fill: none;
     stroke: #000;
     stroke-width: 1px;
-    shape-rendering: crispEdges;
 }
 .axis-label {
     font-size: 10px;
@@ -91,29 +90,31 @@ body {
     -moz-box-shadow: 0 1px 2px rgba(0,0,0,0.1);
     box-shadow: 0 1px 2px rgba(0,0,0,0.1);
 }
-#activity-week .activity-title {
-    /*width: calc(100%-1px);*/
-}
-
 .small-multiple-title,
 .small-multiple-title-second {
-    padding-top: 2%;
-    /*padding-left: 4%;*/
     width: 100%;
-    /*overflow: hidden;*/
 }
 .small-multiple-title .left {
+    width: 100%;
     text-align: center;
     color: #333;
-    padding-bottom: 4px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+
+    background-color: #ddd;
+    border: 1px solid #aaa;
+    border-bottom: 1px; 
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    -moz-box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
 }
 .small-multiple-title .right,
 .small-multiple-title-second .right {
     width: 100%;
-    padding-top: 4px;
+    padding-top: 8px;
     text-align: center;
     color: #666;
-    font-size: 10pt;
+    font-size: 11pt;
 
     background-color: #EEE;
     border: 1px solid #aaa;
@@ -121,6 +122,9 @@ body {
     -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.1);
     -moz-box-shadow: 0 1px 2px rgba(0,0,0,0.1);
     box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+.small-multiple-title .right {
+    border-top: 0px;
 }
 
 /* Activity */

@@ -60,7 +60,7 @@ $.each(data.WeekActivity, function(i,e) {
 var weekBarGraph = funcCreateStackedBarGraph(margin_activity_week, height_activity_week, width_activity_week, weekBarData, "week-activity", weekXLabels, [0,weekYMax], true);
 svg = d3.select("#activity-week-container").append("svg")
   .attr("viewBox", "0 0 "+width_activity_week+" "+height_activity_week);
-weekBarGraph.Scale.stackColor.range(["989EEC","6CC9F1","FFD56C","ccc"]);
+weekBarGraph.Scale.stackColor.range(["989EEC","6CC9F1","FFCB90","ccc"]);
 weekBarGraph.DrawGraph(svg);
 d3.select("#week-activity-y-axis").selectAll(".tick").selectAll("text")
   .attr("transform", "rotate(45) translate(-5,5)")

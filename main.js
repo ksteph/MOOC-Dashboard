@@ -85,7 +85,6 @@ overallLineGraph.DrawGraph(svg);
 
 /////////////////////
 
-/* Top 1 */
 var smallMultiples = d3.select("#container-multiple").selectAll(".small-multiple")
   .data([0,1,2])
   .enter().append("div")
@@ -261,7 +260,7 @@ for (var i=0; i<data.GradedItems.length; i++) {
   // Grade Distribution Graph
   var line_data = [];
   var titles = [];
-  var parantI = i;
+  // var parantI = i;
 
   $.each(data.GradedItems[i].gradeDistroGraph.data, function(i2,e_i) {
     var d = [];
@@ -270,7 +269,7 @@ for (var i=0; i<data.GradedItems.length; i++) {
       var b = {};
       b.x = e_j.y;
       b.y = e_j.x*100;
-      b.label = data.GradedItems[parantI].itemTitles[i] + " (" + e_j.label + 
+      b.label = data.GradedItems[parantI].itemTitles[i2] + " (" + e_j.label + 
         " ["+d3.format(".0f")(e_j.percentage*100)+"%]"+")";
       b.percentage = e_j.percentage;
       d.push(b);

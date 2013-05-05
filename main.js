@@ -82,6 +82,8 @@ overallLineGraph.XAxis.ticks(8)
 svg = d3.select("#activity-overall-container").append("svg")
   .attr("viewBox", "0 0 "+width_activity_overall+" "+height_activity_overall);
 overallLineGraph.DrawGraph(svg);
+d3.select("#overall-activity-line-graph").selectAll(".axis").selectAll("text")
+  .style("font-size","18px");
 
 /////////////////////
 

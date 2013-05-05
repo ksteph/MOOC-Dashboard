@@ -1,8 +1,18 @@
 body {
     font-family: 'Open Sans', Verdana, Geneva, sans-serif;
-    background-color: rgb(214, 214, 214);
+    /*background-color: rgb(210, 210, 210);*/
     margin: 0;
     font: 1.5em;
+
+    -webkit-background-clip: border-box;
+    -webkit-background-origin: padding-box;
+    -webkit-background-size: auto;
+    background-attachment: scroll;
+    background-clip: border-box;
+    background-color: rgb(214, 214, 214);
+    background-image: url(https://www.edx.org/static/images/bg-texture.ae64887d36d1.png);
+    background-origin: padding-box;
+    background-size: auto;
 }
 
 .axis path,
@@ -105,7 +115,7 @@ body {
     padding-bottom: 6px;
     margin-bottom: 3px;
 
-    background-color: #ddd;
+    background-color: rgb(248, 248, 248);
     border: 1px solid #aaa;
     -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.1);
     -moz-box-shadow: 0 1px 2px rgba(0,0,0,0.1);

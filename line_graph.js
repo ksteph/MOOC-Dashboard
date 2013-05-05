@@ -136,7 +136,7 @@ funcCreateLineGraph = function(margin, height, width, data, tag) {
         var top = event.pageY-10;
         var left = event.pageX+10;
         
-        graph.Tooltip.style("visibility", "visible")
+        LineGraph.Tooltip.style("visibility", "visible")
           .text(d.label);
         
         var height = $('#special-tooltip').height();
@@ -147,7 +147,7 @@ funcCreateLineGraph = function(margin, height, width, data, tag) {
         if (left+width+30 > $(window).width())
           left -= (width+30);
         
-        graph.Tooltip.style("top", top+"px")
+        LineGraph.Tooltip.style("top", top+"px")
           .style("left", left+"px");
       })
       .on("mouseout", function(d){

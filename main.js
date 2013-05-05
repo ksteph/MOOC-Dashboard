@@ -79,9 +79,6 @@ overallLineGraph.XAxis.ticks(8)
     return format(new Date(d*1000));
   });
 
-//d3.select("#activity-overall").append("div").attr("class", "activity-title").text("Overall Active Students");
-// svg = d3.select("#activity-overall").append("div").attr("id","#activity-overall-container").append("svg")
-//   .attr("viewBox", "0 0 "+width_activity_overall+" "+height_activity_overall);
 svg = d3.select("#activity-overall-container").append("svg")
   .attr("viewBox", "0 0 "+width_activity_overall+" "+height_activity_overall);
 overallLineGraph.DrawGraph(svg);
